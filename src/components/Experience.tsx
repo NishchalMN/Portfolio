@@ -5,8 +5,9 @@ import { Building2, Calendar } from 'lucide-react';
 const experiences = [
   {
     title: 'Machine Learning Engineer II',
-    company: 'Entrupy',
-    location: 'Remote',
+    company: 'Entrupy Inc.',
+    logo: '/entrupy-icon.webp',
+    location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
     achievements: [
       'Built production ML pipelines achieving 96% TPR and 0.3% FPR using PyTorch and Docker',
@@ -20,8 +21,9 @@ const experiences = [
   {
     title: 'AI Intern',
     company: 'Connyct',
-    location: 'Remote',
-    period: 'May 2021 - Jul 2021',
+    logo: '/connyct.jpeg',
+    location: 'New York, NY (Remote)',
+    period: 'Jun 2025 - Aug 2025',
     achievements: [
       'Developed custom search algorithms to enhance resume matching accuracy',
       'Built recommendation systems improving candidate-job fit by 30%',
@@ -30,10 +32,37 @@ const experiences = [
     featured: false,
   },
   {
-    title: 'Cloud ML Intern',
+    title: 'Software Development Intern',
     company: 'IBM',
+    logo: '/ibm.webp',
     location: 'Bangalore, India',
     period: 'Jan 2021 - May 2021',
+    achievements: [
+      'Developed cloud-based ML solutions on IBM Watson platform',
+      'Created automated ML pipelines reducing deployment time by 40%',
+      'Collaborated with cross-functional teams on enterprise AI projects',
+    ],
+    featured: false,
+  },
+  {
+    title: 'Software Engineering Intern',
+    company: 'SLK Software',
+    logo: '/slk.jpeg',
+    location: 'Bangalore, India',
+    period: 'May 2020 - Jul 2020',
+    achievements: [
+      'Developed cloud-based ML solutions on IBM Watson platform',
+      'Created automated ML pipelines reducing deployment time by 40%',
+      'Collaborated with cross-functional teams on enterprise AI projects',
+    ],
+    featured: false,
+  },
+  {
+    title: 'Machine Learning Intern',
+    company: 'PathPartner Technologies',
+    logo: '/pathpartner_logo.jpeg',
+    location: 'Bangalore, India',
+    period: 'May 2019 - Jul 2019',
     achievements: [
       'Developed cloud-based ML solutions on IBM Watson platform',
       'Created automated ML pipelines reducing deployment time by 40%',
@@ -59,35 +88,51 @@ const Experience = () => {
                 exp.featured ? 'border-primary shadow-glow' : ''
               }`}
             >
-              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
-                <div className="mb-4 sm:mb-0">
-                  <h3 className="text-2xl font-bold mb-2">
-                    {exp.title}
-                    {exp.featured && (
-                      <Badge className="ml-3 gradient-primary">Featured</Badge>
-                    )}
-                  </h3>
-                  <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                    <Building2 size={16} />
-                    <span className="font-semibold">{exp.company}</span>
-                    <span>•</span>
-                    <span>{exp.location}</span>
+              <div className="flex flex-col sm:flex-row gap-6">
+                {/* Logo */}
+                <div className="flex-shrink-0">
+                  <div className="w-20 h-20 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
+                    <img
+                      src={exp.logo}
+                      alt={`${exp.company} logo`}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Calendar size={16} />
-                  <span>{exp.period}</span>
+
+                {/* Content */}
+                <div className="flex-grow">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
+                    <div className="mb-4 sm:mb-0">
+                      <h3 className="text-2xl font-bold mb-2">
+                        {exp.title}
+                        {exp.featured && (
+                          <Badge className="ml-3 gradient-primary">Featured</Badge>
+                        )}
+                      </h3>
+                      <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                        <Building2 size={16} />
+                        <span className="font-semibold">{exp.company}</span>
+                        <span>•</span>
+                        <span>{exp.location}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <Calendar size={16} />
+                      <span>{exp.period}</span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2">
+                    {exp.achievements.map((achievement, i) => (
+                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                        <span className="text-primary mt-1.5">▹</span>
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-              
-              <ul className="space-y-2">
-                {exp.achievements.map((achievement, i) => (
-                  <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                    <span className="text-primary mt-1.5">▹</span>
-                    <span>{achievement}</span>
-                  </li>
-                ))}
-              </ul>
             </Card>
           ))}
         </div>

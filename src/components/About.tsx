@@ -1,5 +1,4 @@
 import { Card } from '@/components/ui/card';
-import { MapPin, GraduationCap, Briefcase } from 'lucide-react';
 
 const About = () => {
   return (
@@ -8,47 +7,69 @@ const About = () => {
         <h2 className="text-4xl font-bold mb-12 text-center">
           About <span className="gradient-text">Me</span>
         </h2>
-        
-        <Card className="p-8 shadow-glow">
-          <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-            Machine Learning Engineer with over 3 years of experience building and deploying 
-            production-grade ML systems at scale. Currently pursuing MS in Machine Learning at 
-            University of Maryland, College Park, specializing in computer vision, deep learning, 
-            and distributed ML systems.
-          </p>
-          
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            At Entrupy, I developed high-performance ML pipelines that achieved 96% true positive 
-            rate and improved OCR accuracy by 23%. I'm passionate about solving complex problems 
-            with elegant, scalable solutions and bringing cutting-edge research into production.
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="flex items-start gap-3">
-              <MapPin className="text-primary mt-1" size={20} />
-              <div>
-                <h3 className="font-semibold mb-1">Location</h3>
-                <p className="text-sm text-muted-foreground">College Park, MD</p>
+
+        <div className="relative lg:ml-32">
+          {/* Horizontal text labels - hidden on mobile, visible on larger screens */}
+          <div className="hidden lg:block absolute -left-36 top-1 w-28 pt-8">
+            <div className="space-y-8">
+              <div className="h-[130px] flex items-start">
+                <span className="text-xs font-mono gradient-text opacity-30 tracking-wider text-right w-full">
+                  PRE-TRAINING
+                </span>
               </div>
-            </div>
-            
-            <div className="flex items-start gap-3">
-              <GraduationCap className="text-primary mt-1" size={20} />
-              <div>
-                <h3 className="font-semibold mb-1">Education</h3>
-                <p className="text-sm text-muted-foreground">MS in ML at UMD</p>
+              <div className="h-[130px] flex items-start">
+                <span className="text-xs font-mono gradient-text opacity-30 tracking-wider text-right w-full">
+                  FINE-TUNING
+                </span>
               </div>
-            </div>
-            
-            <div className="flex items-start gap-3">
-              <Briefcase className="text-primary mt-1" size={20} />
-              <div>
-                <h3 className="font-semibold mb-1">Experience</h3>
-                <p className="text-sm text-muted-foreground">3+ Years Production ML</p>
+              <div className="h-[105px] flex items-start">
+                <span className="text-xs font-mono gradient-text opacity-30 tracking-wider text-right w-full">
+                  RLHF
+                </span>
+              </div>
+              <div className="h-[55px] flex items-start">
+                <span className="text-xs font-mono gradient-text opacity-30 tracking-wider text-right w-full">
+                  REGULARIZATION
+                </span>
+              </div>
+              <div className="h-[64px] flex items-start">
+                <span className="text-xs font-mono gradient-text opacity-30 tracking-wider text-right w-full">
+                  INFERENCE
+                </span>
               </div>
             </div>
           </div>
-        </Card>
+
+          <Card className="p-8 shadow-glow">
+            <div className="space-y-8">
+              <p className="text-base text-muted-foreground leading-relaxed">
+                I've been building ML systems since 2019, back when deep learning meant ResNets and Math, not just prompt engineering and API calls.
+                Built real-time gaze tracking at PathPartner, ETL using Node.js and ELK stack at SLK, and optimized ML runtimes at IBM.
+                Trained myself through these internships and projects in different domains during my undergrad in computer science at PES University in Bangalore.
+              </p>
+
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Joined Entrupy as an early ML engineer in 2021 and did it all: scraped and cleaned data, built synthetic pipelines in Blender,
+                experimented with architectures, deployed models to production, optimized on-device inference.
+                Three years of end-to-end ownership from a laptop experiment to systems processing 10K+ luxury items monthly at 96% TPR.
+              </p>
+
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Currently pursuing MS in Machine Learning at University of Maryland, College Park,
+                specializing in agentic LLM architectures, multimodal models, advanced computer vision, and distributed ML systems.
+                Worked on projects involving multimodal transformers, federated learning, 3D vision, robotics, and reinforcement learning.
+              </p>
+
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Outside of work and academics, I love playing basketball, singing, cooking amazing Indian food, and exploring new tech trends.
+              </p>
+
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Looking for full-time roles where I can build ML systems that scale and solve real problems.
+              </p>
+            </div>
+          </Card>
+        </div>
       </div>
     </section>
   );

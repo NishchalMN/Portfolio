@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Mail, Linkedin, Github, Download } from 'lucide-react';
+import { Mail, Github, Download } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -39,7 +39,7 @@ const Contact = () => {
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
             >
-              <Linkedin size={20} />
+              <span className="font-bold text-xl leading-none" style={{ fontFamily: 'system-ui, -apple-system, sans-serif', fontWeight: 700 }}>in</span>
               <span>LinkedIn</span>
             </a>
             <a

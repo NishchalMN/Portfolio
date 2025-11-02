@@ -8,40 +8,40 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 222 47% 11%;
+    --background: 222 17% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 222 40% 15%;
+    --card: 222 25% 15%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222 40% 15%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
+    --primary: 210 85% 40%;
     --primary-foreground: 222 47% 11%;
 
-    --secondary: 270 70% 65%;
+    --secondary: 155 55% 50%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 210 35% 17%;
+    --muted-foreground: 210 20% 65%;
 
-    --accent: 270 70% 65%;
+    --accent: 155 55% 50%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217 33% 20%;
-    --input: 217 33% 20%;
-    --ring: 217 91% 60%;
+    --border: 210 33% 20%;
+    --input: 210 33% 20%;
+    --ring: 210 85% 40%;
 
     --radius: 0.75rem;
-    
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(270 70% 65%) 100%);
+
+    --gradient-primary: linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%);
     --gradient-subtle: linear-gradient(180deg, hsl(222 47% 11%) 0%, hsl(222 40% 8%) 100%);
-    
-    --shadow-glow: 0 0 40px hsl(217 91% 60% / 0.15);
+
+    --shadow-glow: 0 0 40px hsl(210 85% 40% / 0.15);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
@@ -85,15 +85,45 @@ All colors MUST be HSL.
   .gradient-primary {
     background: var(--gradient-primary);
   }
-  
+
   .gradient-text {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  
+
   .shadow-glow {
     box-shadow: var(--shadow-glow);
+  }
+
+  .animate-slide-fade-enter {
+    animation: slide-fade-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-slide-fade-exit {
+    animation: slide-fade-exit 0.4s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+  }
+
+  @keyframes slide-fade-enter {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-fade-exit {
+    0% {
+      transform: translateY(0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-30px) scale(0.8) rotate(-5deg);
+      opacity: 0;
+    }
   }
 }
