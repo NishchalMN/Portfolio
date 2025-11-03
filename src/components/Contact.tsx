@@ -42,7 +42,7 @@ const Contact = () => {
             </Button>
           </div>
           
-          <div className="flex gap-6 justify-center pt-6 border-t border-border">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center pt-6 border-t border-border">
             <a
               href="https://linkedin.com/in/nishchal-mn"
               target="_blank"
@@ -66,7 +66,7 @@ const Contact = () => {
               className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
             >
               <Mail size={20} />
-              <span>nmarur21@umd.edu</span>
+              <span className="text-sm sm:text-base">nmarur21@umd.edu</span>
             </a>
           </div>
         </Card>

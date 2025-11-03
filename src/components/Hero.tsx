@@ -27,9 +27,13 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 bg-center bg-no-repeat relative hero-background"
+      className="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 relative hero-background"
+      style={{
+        WebkitBackgroundSize: 'cover',
+        backgroundAttachment: 'scroll'
+      }}
     >
-      <div className="absolute inset-0 bg-background/80 sm:bg-background/70"></div>
+      <div className="absolute inset-0 bg-background/85 sm:bg-background/75"></div>
       <div className="container mx-auto text-center animate-fade-in relative z-10">
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
           Hi, I'm <span className="gradient-text">Nishchal!</span>
