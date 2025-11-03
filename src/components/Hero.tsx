@@ -56,7 +56,17 @@ const Hero = () => {
           <Button size="lg" className="gradient-primary shadow-glow" asChild>
             <a href="#experience">View My Work</a>
           </Button>
-          <Button size="lg" variant="outline" asChild>
+          <Button
+            size="lg"
+            variant="outline"
+            asChild
+            className="border-transparent"
+            style={{
+              backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
+              backgroundOrigin: 'border-box',
+              backgroundClip: 'padding-box, border-box',
+            }}
+          >
             <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
               <Download className="mr-2 h-5 w-5" />
               Download Resume

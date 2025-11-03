@@ -12,7 +12,7 @@ const Contact = () => {
         
         <Card className="p-8 shadow-glow text-center">
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm actively seeking full-time Machine Learning Engineer positions starting May 2026. 
+            I'm actively seeking full-time Machine Learning related positions starting May 2026. 
             Feel free to reach out if you'd like to discuss opportunities, collaborate on projects, 
             or just connect!
           </p>
@@ -24,7 +24,17 @@ const Contact = () => {
                 Email Me
               </a>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              asChild
+              className="border-transparent"
+              style={{
+                backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
+                backgroundOrigin: 'border-box',
+                backgroundClip: 'padding-box, border-box',
+              }}
+            >
               <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume

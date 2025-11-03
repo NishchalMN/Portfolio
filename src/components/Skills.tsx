@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 const skillCategories = [
   {
     title: 'Languages',
-    skills: ['Python', 'C++', 'SQL', 'Go', 'Scala', 'JavaScript', 'TypeScript'],
+    skills: ['Python', 'C++', 'SQL', 'Go', 'Scala', 'JavaScript', 'Node.js'],
   },
   {
     title: 'ML Tools & Frameworks',
@@ -17,6 +17,7 @@ const skillCategories = [
       'OpenCV',
       'ONNX',
       'MLflow',
+      'CoreML',
     ],
   },
   {
@@ -36,12 +37,12 @@ const skillCategories = [
     title: 'Specializations',
     skills: [
       'Computer Vision',
+      'Large Language Models',
       'Deep Learning',
-      'NLP',
+      'Data Science',
       'MLOps',
-      'Distributed Systems',
       'Model Optimization',
-      'RAG Systems',
+      'Agentic RAG',
       'Federated Learning',
     ],
   },
@@ -63,13 +64,18 @@ const Skills = () => {
               </h3>
               <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, i) => (
-                  <Badge
+                  <span
                     key={i}
-                    variant="secondary"
-                    className="text-sm px-3 py-1"
+                    className="relative text-sm px-3 py-1.5 rounded-full bg-background/50 text-muted-foreground hover:scale-105 transition-transform"
+                    style={{
+                      border: '1px solid transparent',
+                      backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
+                      backgroundOrigin: 'border-box',
+                      backgroundClip: 'padding-box, border-box',
+                    }}
                   >
                     {skill}
-                  </Badge>
+                  </span>
                 ))}
               </div>
             </Card>
