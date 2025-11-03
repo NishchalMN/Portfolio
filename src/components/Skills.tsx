@@ -18,6 +18,8 @@ const skillCategories = [
       'ONNX',
       'MLflow',
       'CoreML',
+      'Open3D',
+      'WandB',
     ],
   },
   {
@@ -31,6 +33,8 @@ const skillCategories = [
       'Elasticsearch',
       'PostgreSQL',
       'Redis',
+      'Airflow',
+      'Apache Spark',
     ],
   },
   {
@@ -38,11 +42,12 @@ const skillCategories = [
     skills: [
       'Computer Vision',
       'Large Language Models',
-      'Deep Learning',
-      'Data Science',
       'MLOps',
       'Model Optimization',
       'Agentic RAG',
+      'Deep Learning',
+      'Data Science',
+      'Reinforcement Learning',
       'Federated Learning',
     ],
   },

@@ -67,7 +67,7 @@ const Hero = () => {
               backgroundClip: 'padding-box, border-box',
             }}
           >
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a href="/Nishchal_Resume.pdf" target="_blank" rel="noopener noreferrer">
               <Download className="mr-2 h-5 w-5" />
               Download Resume
             </a>

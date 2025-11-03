@@ -12,7 +12,7 @@ const Contact = () => {
         
         <Card className="p-8 shadow-glow text-center">
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm actively seeking full-time Machine Learning related positions starting May 2026. 
+            I'm actively seeking full-time Machine Learning related roles starting May 2026. 
             Feel free to reach out if you'd like to discuss opportunities, collaborate on projects, 
             or just connect!
           </p>
@@ -35,7 +35,7 @@ const Contact = () => {
                 backgroundClip: 'padding-box, border-box',
               }}
             >
-              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+              <a href="/Nishchal_Resume.pdf" target="_blank" rel="noopener noreferrer">
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </a>
