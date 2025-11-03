@@ -126,4 +126,33 @@ All colors MUST be HSL.
       opacity: 0;
     }
   }
+
+  /* Hero background - responsive */
+  .hero-background {
+    background-image: url('/main_bg.png');
+  }
+
+  /* Mobile: Cover the screen, centered */
+  @media (max-width: 640px) {
+    .hero-background {
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  /* Tablet: Slightly adjust for better view */
+  @media (min-width: 641px) and (max-width: 1024px) {
+    .hero-background {
+      background-size: cover;
+      background-position: center;
+    }
+  }
+
+  /* Desktop: Show full width */
+  @media (min-width: 1025px) {
+    .hero-background {
+      background-size: 100% auto;
+      background-position: center;
+    }
+  }
 }
