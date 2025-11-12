@@ -2,12 +2,6 @@
 
 A minimalist, responsive portfolio website showcasing production ML experience and projects.
 
-## 🚀 Live Site
-
-This portfolio is deployed on Lovable's platform with instant updates and optimized hosting.
-
-**Lovable URL**: https://lovable.dev/projects/e03e292e-086e-45a1-962e-09045cfb7985
-
 ## 📋 Features
 
 - **Responsive Design**: Optimized for all screen sizes
@@ -24,7 +18,7 @@ This portfolio is deployed on Lovable's platform with instant updates and optimi
 - **UI Components**: shadcn/ui
 - **Icons**: Lucide React
 - **Build Tool**: Vite
-- **Deployment**: Lovable Platform (easier than GitHub Pages!)
+- **Deployment**: Cloudflare
 
 ## 📁 Project Structure
 
@@ -45,17 +39,6 @@ src/
 ├── index.css            # Design system & global styles
 └── App.tsx              # App configuration
 ```
-
-## 🎨 Design System
-
-The portfolio uses a professional tech aesthetic with:
-- **Primary Color**: Deep blue (#3b82f6 / hsl(217, 91%, 60%))
-- **Accent Color**: Purple (#a78bfa / hsl(270, 70%, 65%))
-- **Background**: Dark theme (hsl(222, 47%, 11%))
-- **Typography**: Inter font family
-- **Animations**: Subtle fade-ins on scroll
-
-All colors use HSL and semantic tokens defined in `src/index.css`.
 
 ## 📝 Adding Your Content
 
@@ -84,18 +67,6 @@ All colors use HSL and semantic tokens defined in `src/index.css`.
 - **Contact Links**: Update links in `src/components/Contact.tsx`
 
 ## 🚀 Deployment
-
-### Deploy on Lovable (Recommended)
-1. Click "Publish" in the Lovable editor
-2. Your site is live instantly with optimized hosting
-3. Get a lovable.app subdomain automatically
-4. Free SSL certificate included
-
-### Connect Custom Domain
-1. Go to Project Settings → Domains in Lovable
-2. Enter your domain name
-3. Follow DNS configuration instructions
-4. SSL certificate auto-provisioned
 
 ### Deploy to GitHub Pages (Alternative)
 If you prefer GitHub Pages:
@@ -132,4 +103,4 @@ This project is open source and available for personal use.
 
 ---
 
-Built with ❤️ using React, Tailwind CSS, and Lovable
+Built with React and Tailwind CSS
