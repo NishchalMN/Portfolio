@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Mail, Github, Download } from 'lucide-react';
+import { Mail, Github, Download, Phone } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -12,13 +12,13 @@ const Contact = () => {
         
         <Card className="p-8 shadow-glow text-center">
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm actively seeking full-time Machine Learning related roles starting May 2026. 
-            Feel free to reach out if you'd like to discuss opportunities, collaborate on projects, 
+            I'm actively seeking full-time Machine Learning related roles starting May 2026.
+            Feel free to reach out if you'd like to discuss opportunities, collaborate on projects,
             or just connect!
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Button size="lg" className="gradient-primary shadow-glow" asChild>
+            <Button size="lg" className="gradient-primary shadow-glow gradient-hover" asChild>
               <a href="mailto:nmarur21@umd.edu">
                 <Mail className="mr-2 h-5 w-5" />
                 Email Me
@@ -28,11 +28,12 @@ const Contact = () => {
               size="lg"
               variant="outline"
               asChild
-              className="border-transparent"
+              className="border-transparent gradient-hover transition-all"
               style={{
-                backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
+                backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(90deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 50%, hsl(163, 64%, 60%) 100%)',
                 backgroundOrigin: 'border-box',
                 backgroundClip: 'padding-box, border-box',
+                backgroundSize: '200% 100%',
               }}
             >
               <a href="/Nishchal_Resume.pdf" target="_blank" rel="noopener noreferrer">
@@ -67,6 +68,13 @@ const Contact = () => {
             >
               <Mail size={20} />
               <span className="text-sm sm:text-base">nmarur21@umd.edu</span>
+            </a>
+            <a
+              href="tel:+12404381916"
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Phone size={20} />
+              <span className="text-sm sm:text-base">(240) 438-1916</span>
             </a>
           </div>
         </Card>

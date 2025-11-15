@@ -1,9 +1,10 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 
-const projects = [
+const allProjects = [
   {
     title: 'CAFBrain: Multimodal LLM Platform',
     description: 'Top 3 winner multimodal GenAI platform enabling contextual search and Q&A across diverse data types including video, audio, images, and PDFs. Built with RAG architecture and deployed on AWS.',
@@ -31,21 +32,48 @@ const projects = [
     demo: null,
     featured: true,
   },
+  // Add more projects here that will be hidden initially
+  {
+    title: 'Project 4',
+    description: 'Description for project 4. This is a placeholder for additional projects.',
+    tech: ['Tech1', 'Tech2', 'Tech3'],
+    image: '/placeholder.png',
+    github: 'https://github.com/NishchalMN',
+    demo: null,
+    featured: false,
+  },
+  {
+    title: 'Project 5',
+    description: 'Description for project 5. This is a placeholder for additional projects.',
+    tech: ['Tech1', 'Tech2', 'Tech3'],
+    image: '/placeholder.png',
+    github: 'https://github.com/NishchalMN',
+    demo: null,
+    featured: false,
+  },
 ];
 
 const Projects = () => {
+  const [showAll, setShowAll] = useState(false);
+  const displayedProjects = showAll ? allProjects : allProjects.slice(0, 3);
+
   return (
     <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto max-w-6xl">
         <h2 className="text-4xl font-bold mb-12 text-center">
           Featured <span className="gradient-text">Projects</span>
         </h2>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <Card
+          {displayedProjects.map((project, index) => (
+            <a
               key={index}
-              className="p-6 flex flex-col transition-all hover:shadow-glow group"
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block transition-all hover:-translate-y-2 cursor-pointer"
+            >
+              <Card className="p-6 flex flex-col transition-all hover:shadow-glow group h-full"
             >
               {/* Image/Video Placeholder */}
               <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden bg-muted">
@@ -101,9 +129,24 @@ const Projects = () => {
                   </Button>
                 )}
               </div>
-            </Card>
+              </Card>
+            </a>
           ))}
         </div>
+
+        {allProjects.length > 3 && (
+          <div className="flex justify-center mt-12">
+            <Button
+              onClick={() => setShowAll(!showAll)}
+              variant="outline"
+              size="lg"
+              className="gradient-hover transition-all"
+            >
+              {showAll ? 'Show Less' : 'Show More'}
+              <ChevronDown className={`ml-2 h-5 w-5 transition-transform ${showAll ? 'rotate-180' : ''}`} />
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

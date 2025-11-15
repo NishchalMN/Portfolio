@@ -48,7 +48,7 @@ const skillCategories = [
       'Deep Learning',
       'Data Science',
       'Reinforcement Learning',
-      'Federated Learning',
+      'Federated Learning'
     ],
   },
 ];

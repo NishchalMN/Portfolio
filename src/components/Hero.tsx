@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button';
-import { ArrowDown, Download, Github, Mail } from 'lucide-react';
+import { ArrowDown, Download, Github, Mail, MapPin, Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const Hero = () => {
   const titles = [
     'Machine Learning Engineer',
     'Data Scientist',
-    'AI Engineer',
+    'MLOps Engineer',
     'Applied Scientist'
   ];
 
@@ -20,7 +20,7 @@ const Hero = () => {
         setTitleIndex((prev) => (prev + 1) % titles.length);
         setIsExiting(false);
       }, 300); // Exit animation duration
-    }, 3500); // Total duration for each title
+    }, 3100); // Total duration for each title
     return () => clearInterval(interval);
   }, [titles.length]);
 
@@ -51,33 +51,43 @@ const Hero = () => {
         </h2>
         
         <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-          Building ML systems from research to production <br />
-          3+ Years ML Experience | MS in ML at UMD | Graduating May 2026
+          Building efficient AI systems that scale from research to production.<br />
+          Specializing in Multimodal LLMs, Advanced Computer Vision, and MLOps.<br />
+          Open to full-time Machine Learning related roles starting May 2026. <br /><br />
+          4+ Years ML Experience | MS in ML at University of Maryland
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <Button size="lg" className="gradient-primary shadow-glow" asChild>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+          <Button size="lg" className="gradient-primary shadow-glow gradient-hover" asChild>
             <a href="#experience">View My Work</a>
           </Button>
           <Button
             size="lg"
             variant="outline"
             asChild
-            className="border-transparent"
+            className="border-transparent gradient-hover transition-all"
             style={{
-              backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
+              backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(90deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 50%, hsl(163, 64%, 60%) 100%)',
               backgroundOrigin: 'border-box',
               backgroundClip: 'padding-box, border-box',
+              backgroundSize: '200% 100%',
             }}
           >
             <a href="/Nishchal_Resume.pdf" target="_blank" rel="noopener noreferrer">
               <Download className="mr-2 h-5 w-5" />
-              Download Resume
+               Resume
             </a>
           </Button>
         </div>
-        
-        <div className="flex gap-6 justify-center">
+
+        <div className="flex gap-6 justify-center mb-4">
+          <a
+            href="tel:+12404381916"
+            className="text-muted-foreground hover:text-primary transition-colors"
+            aria-label="Phone"
+          >
+            <Phone size={24} />
+          </a>
           <a
             href="mailto:nmarur21@umd.edu"
             className="text-muted-foreground hover:text-primary transition-colors"
@@ -103,6 +113,11 @@ const Hero = () => {
           >
             <Github size={24} />
           </a>
+        </div>
+
+        <div className="flex items-center justify-center gap-2 text-muted-foreground">
+          <MapPin size={20} className="text-primary" />
+          <span className="text-sm">College Park, MD, USA</span>
         </div>
         
         <a

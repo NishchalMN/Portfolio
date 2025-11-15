@@ -10,6 +10,7 @@ const education = [
     period: 'Aug 2024 - May 2026',
     gpa: '3.7/4.0',
     logo: '/umd.svg',
+    website: 'https://www.umd.edu',
     details: [
       'Specialization: Multimodal Models, Large Language Models, Computer Vision',
       'Relevant Coursework: Advanced ML, Multimodal Foundational Models, Computer Vision, Robotics, NLP, MLOps',
@@ -23,6 +24,7 @@ const education = [
     period: 'Aug 2017 - May 2021',
     gpa: '8.4/10.0',
     logo: '/pes-logo.webp',
+    website: 'https://www.pes.edu',
     details: [
       'Graduated with First Class Honors, and Data Science specialization',
       'Relevant Coursework: Data Structures, Algorithms, Data Science, Data Analytics, Machine Learning, Cloud Computing',
@@ -50,13 +52,19 @@ const Education = () => {
               <div className="flex flex-col sm:flex-row gap-6">
                 {/* Logo */}
                 <div className="flex-shrink-0">
-                  <div className="w-20 h-20 rounded-lg bg-white flex items-center justify-center overflow-hidden p-2">
+                  <a
+                    href={edu.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-20 h-20 rounded-lg bg-white flex items-center justify-center overflow-hidden p-2 transition-all hover:scale-110 hover:shadow-lg cursor-pointer"
+                    aria-label={`Visit ${edu.school} website`}
+                  >
                     <img
                       src={edu.logo}
                       alt={`${edu.school} logo`}
                       className="w-full h-full object-contain"
                     />
-                  </div>
+                  </a>
                 </div>
 
                 {/* Content */}

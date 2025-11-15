@@ -7,6 +7,7 @@ const experiences = [
     title: 'Machine Learning Engineer II',
     company: 'Entrupy Inc.',
     logo: '/entrupy-icon.webp',
+    website: 'https://www.entrupy.com',
     location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
     achievements: [
@@ -22,6 +23,7 @@ const experiences = [
     title: 'AI Intern',
     company: 'Connyct',
     logo: '/connyct.jpeg',
+    website: 'https://www.connyct.com',
     location: 'New York, NY (Remote)',
     period: 'Jun 2025 - Aug 2025',
     achievements: [
@@ -32,9 +34,10 @@ const experiences = [
     featured: false,
   },
   {
-    title: 'Cloud ML Intern',
+    title: 'MLOps Intern',
     company: 'IBM',
     logo: '/ibm.webp',
+    website: 'https://www.ibm.com',
     location: 'Bangalore, India',
     period: 'Jan 2021 - Jul 2021',
     achievements: [
@@ -48,6 +51,7 @@ const experiences = [
     title: 'Software Engineering Intern',
     company: 'SLK Software',
     logo: '/slk.jpeg',
+    website: 'https://slksoftware.com/',
     location: 'Bangalore, India',
     period: 'May 2020 - Jul 2020',
     achievements: [
@@ -60,6 +64,7 @@ const experiences = [
     title: 'Machine Learning Intern',
     company: 'PathPartner Technology',
     logo: '/pathpartner_logo.jpeg',
+    website: 'https://www.linkedin.com/company/pathpartnertechnology',
     location: 'Bangalore, India',
     period: 'May 2019 - Jul 2019',
     achievements: [
@@ -89,13 +94,19 @@ const Experience = () => {
               <div className="flex flex-col sm:flex-row gap-6">
                 {/* Logo */}
                 <div className="flex-shrink-0">
-                  <div className="w-20 h-20 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
+                  <a
+                    href={exp.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-20 h-20 rounded-lg bg-muted flex items-center justify-center overflow-hidden transition-all hover:scale-110 hover:shadow-lg cursor-pointer"
+                    aria-label={`Visit ${exp.company} website`}
+                  >
                     <img
                       src={exp.logo}
                       alt={`${exp.company} logo`}
                       className="w-full h-full object-cover"
                     />
-                  </div>
+                  </a>
                 </div>
 
                 {/* Content */}
