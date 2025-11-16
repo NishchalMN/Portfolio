@@ -1,29 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { ArrowDown, Download, Github, Mail, MapPin, Phone } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 const Hero = () => {
-  const titles = [
-    'Machine Learning Engineer',
-    'Data Scientist',
-    'MLOps Engineer',
-    'Applied Scientist'
-  ];
-
-  const [titleIndex, setTitleIndex] = useState(0);
-  const [isExiting, setIsExiting] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsExiting(true);
-      setTimeout(() => {
-        setTitleIndex((prev) => (prev + 1) % titles.length);
-        setIsExiting(false);
-      }, 300); // Exit animation duration
-    }, 3100); // Total duration for each title
-    return () => clearInterval(interval);
-  }, [titles.length]);
-
   return (
     <section
       id="hero"
@@ -38,16 +16,9 @@ const Hero = () => {
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
           Hi, I'm <span className="gradient-text">Nishchal!</span>
         </h1>
-        
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl text-muted-foreground mb-5 min-h-[2.5rem] flex items-center justify-center overflow-hidden">
-          <span className="relative inline-block">
-            <span
-              key={titleIndex}
-              className={`inline-block ${isExiting ? 'animate-slide-fade-exit' : 'animate-slide-fade-enter'}`}
-            >
-              {titles[titleIndex]}
-            </span>
-          </span>
+
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl text-muted-foreground mb-5">
+          Machine Learning Engineer II
         </h2>
         
         <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
