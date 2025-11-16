@@ -91,7 +91,7 @@ const Education = () => {
                         <MapPin size={14} />
                         <span>{edu.location}</span>
                       </div>
-                      <div className="text-primary font-semibold">
+                      <div className="text-secondary font-semibold">
                         GPA: {edu.gpa}
                       </div>
                     </div>

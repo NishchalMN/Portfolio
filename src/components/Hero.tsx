@@ -51,13 +51,12 @@ const Hero = () => {
         </h2>
         
         <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-          Building efficient AI systems that scale from research to production.<br />
-          Specializing in Multimodal LLMs, Advanced Computer Vision, and MLOps.<br />
-          Open to full-time Machine Learning related roles starting May 2026. <br /><br />
-          4+ Years ML Experience | MS in ML at University of Maryland
+          Multimodal LLMs • Computer Vision • MLOps<br />
+          4+ Years ML Experience | MS in ML at University of Maryland<br /> 
+          Open to full-time roles starting May 2026 
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-9">
           <Button size="lg" className="gradient-primary shadow-glow gradient-hover" asChild>
             <a href="#experience">View My Work</a>
           </Button>
