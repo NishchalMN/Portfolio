@@ -27,8 +27,8 @@ const experiences = [
     location: 'New York, NY (Remote)',
     period: 'Jun 2025 - Aug 2025',
     achievements: [
-      'Built hybrid recommendation system using two-tower architecture with sentence transformers, achieving 85% semantic relevance and 15% personalized profile boosting',
-      'Implemented multi-factor scoring with Redis caching, achieving <1.5s response times on recommendations',
+      'Built hybrid recommendation system using two-tower architecture with sentence transformers, achieving <42ms average latency for personalized event recommendations.',
+      'Implemented multi-factor reranking with Redis caching, supporting 50+ RPS with A/B testing framework to continuously improve CTR and recommendation quality.',
       'Integrated system as MCP tool for LLM agents, enabling adaptive querying and real-time semantic similarity scoring',
     ],
     featured: false,
