@@ -1,128 +1,78 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Tooltip } from 'recharts';
 
-const skillCategories = [
-  {
-    title: 'Languages',
-    skills: ['Python', 'C++', 'SQL', 'Go', 'Scala', 'JavaScript', 'Node.js'],
-  },
-  {
-    title: 'ML Tools & Frameworks',
-    skills: [
-      'PyTorch',
-      'TensorFlow',
-      'Langchain',
-      'HuggingFace',
-      'scikit-learn',
-      'OpenCV',
-      'ONNX',
-      'MLflow',
-      'CoreML',
-      'Open3D',
-      'WandB',
-    ],
-  },
-  {
-    title: 'Infrastructure & Cloud',
-    skills: [
-      'Docker',
-      'Kubernetes',
-      'AWS',
-      'Azure',
-      'Ray',
-      'Elasticsearch',
-      'PostgreSQL',
-      'Redis',
-      'Airflow',
-      'Apache Spark',
-    ],
-  },
-  {
-    title: 'Specializations',
-    skills: [
-      'Computer Vision',
-      'Large Language Models',
-      'MLOps',
-      'Model Optimization',
-      'Agentic RAG',
-      'Deep Learning',
-      'Data Science',
-      'Reinforcement Learning',
-      'Federated Learning'
-    ],
-  },
+const skillData = [
+  { subject: 'Computer Vision', A: 120, fullMark: 150 },
+  { subject: 'LLMs & NLP', A: 110, fullMark: 150 },
+  { subject: 'MLOps', A: 90, fullMark: 150 },
+  { subject: 'Data Science', A: 130, fullMark: 150 },
+  { subject: 'Backend Eng', A: 85, fullMark: 150 },
+  { subject: 'Cloud Infra', A: 95, fullMark: 150 },
 ];
 
-const softSkills = [
-  'Team Leadership',
-  'Cross-functional Collaboration',
-  'Technical Communication',
-  'Problem Solving',
-  'Mentoring',
-  'Agile Development',
-  'Research & Innovation',
-  'Project Management',
-];
+const technicalSkills = {
+  "Languages": ['Python', 'C++', 'SQL', 'Go', 'Scala', 'JavaScript', 'Node.js'],
+  "Frameworks": ['PyTorch', 'TensorFlow', 'Langchain', 'HuggingFace', 'scikit-learn', 'OpenCV', 'ONNX'],
+  "Infrastructure": ['Docker', 'Kubernetes', 'AWS', 'Azure', 'Ray', 'Elasticsearch', 'PostgreSQL', 'Apache Spark'],
+};
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
+    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div className="absolute inset-0 bg-muted/20 -z-10" />
       <div className="container mx-auto max-w-6xl">
-        {/* Technical Skills */}
-        <div className="mb-12">
-          <h2 className="text-4xl font-bold mb-6 text-center">
-            <span className="gradient-text">Technical Skills</span>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {skillCategories.map((category, index) => (
-              <Card key={index} className="p-6">
-                <h4 className="text-lg font-bold mb-4 text-muted-foreground">
-                  {category.title}
+        <h2 className="text-4xl font-bold mb-16 text-center">
+          Technical <span className="gradient-text">Proficiency</span>
+        </h2>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column: Data Viz */}
+          <div className="w-full h-[400px] bg-card/50 backdrop-blur-sm rounded-2xl border border-border p-4 shadow-xl">
+            <h3 className="text-center text-lg font-semibold mb-4 text-muted-foreground">Area of Expertise</h3>
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart cx="50%" cy="50%" outerRadius="70%" data={skillData}>
+                <PolarGrid stroke="hsl(var(--border))" />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }} />
+                <PolarRadiusAxis angle={30} domain={[0, 150]} tick={false} axisLine={false} />
+                <Radar
+                  name="Skill Level"
+                  dataKey="A"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth={3}
+                  fill="hsl(var(--primary))"
+                  fillOpacity={0.3}
+                />
+                <Tooltip 
+                    contentStyle={{ backgroundColor: 'hsl(var(--popover))', borderColor: 'hsl(var(--border))', color: 'hsl(var(--foreground))' }}
+                    itemStyle={{ color: 'hsl(var(--primary))' }}
+                />
+              </RadarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Right Column: Detailed Tags */}
+          <div className="space-y-8">
+            {Object.entries(technicalSkills).map(([category, skills]) => (
+              <div key={category}>
+                <h4 className="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-primary inline-block" />
+                    {category}
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="relative text-sm px-3 py-1.5 rounded-full bg-background/50 text-muted-foreground hover:scale-105 transition-transform"
-                      style={{
-                        border: '1px solid transparent',
-                        backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
-                        backgroundOrigin: 'border-box',
-                        backgroundClip: 'padding-box, border-box',
-                      }}
+                  {skills.map((skill) => (
+                    <Badge 
+                        key={skill} 
+                        variant="secondary" 
+                        className="px-3 py-1.5 text-sm bg-background border border-border hover:border-primary transition-colors"
                     >
                       {skill}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
-        </div>
-
-        {/* Soft Skills */}
-        <div>
-          <h2 className="text-4xl font-bold mb-6 text-center">
-            <span className="gradient-text">Soft Skills</span>
-          </h2>
-          <Card className="p-6">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {softSkills.map((skill, i) => (
-                <span
-                  key={i}
-                  className="relative text-sm px-3 py-1.5 rounded-full bg-background/50 text-muted-foreground hover:scale-105 transition-transform"
-                  style={{
-                    border: '1px solid transparent',
-                    backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
-                    backgroundOrigin: 'border-box',
-                    backgroundClip: 'padding-box, border-box',
-                  }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </Card>
         </div>
       </div>
     </section>

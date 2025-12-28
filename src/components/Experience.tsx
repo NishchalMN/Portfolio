@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Building2, Calendar } from 'lucide-react';
+import { Building2, Calendar, ArrowUpRight } from 'lucide-react';
 
 const experiences = [
   {
@@ -11,12 +11,11 @@ const experiences = [
     location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
     achievements: [
-      'Built end-to-end luxury authentication system achieving 96% TPR at 5% FPR, processing 10K+ items monthly in production',
-      'Trained monocular depth estimation and semantic segmentation models using SAM for automated quality inspection',
-      'Developed 3D document unwarping pipeline with DenseNet, boosting OCR accuracy by 23% and achieving 0.84 SSIM',
-      'Optimized on-device CoreML inference with dynamic overlays, delivering 2x faster real-time processing',
-      'Built synthetic data pipelines using Blender and python simulating camera variations and 3D distortions',
+      'Built end-to-end luxury authentication system achieving 96% TPR at 5% FPR, processing 10K+ items monthly in production.',
+      'Developed 3D document unwarping pipeline with DenseNet, boosting OCR accuracy by 23% and achieving 0.84 SSIM.',
+      'Optimized on-device CoreML inference with dynamic overlays, delivering 2x faster real-time processing.',
     ],
+    tech: ['PyTorch', 'CoreML', 'Ray Serve', 'AWS'],
     featured: true,
   },
   {
@@ -27,10 +26,10 @@ const experiences = [
     location: 'New York, NY (Remote)',
     period: 'Jun 2025 - Aug 2025',
     achievements: [
-      'Built hybrid recommendation system using two-tower architecture with sentence transformers, achieving <42ms average latency for personalized event recommendations.',
-      'Implemented multi-factor reranking with Redis caching, supporting 50+ RPS with A/B testing framework to continuously improve CTR and recommendation quality.',
-      'Integrated system as MCP tool for LLM agents, enabling adaptive querying and real-time semantic similarity scoring',
+      'Built hybrid recommendation system using two-tower architecture with sentence transformers, achieving <42ms average latency.',
+      'Implemented multi-factor reranking with Redis caching, supporting 50+ RPS.',
     ],
+    tech: ['Python', 'Redis', 'Transformers', 'LLMs'],
     featured: false,
   },
   {
@@ -41,10 +40,10 @@ const experiences = [
     location: 'Bangalore, India',
     period: 'Jan 2021 - Jul 2021',
     achievements: [
-      'Developed cloud-based ML deployment pipelines on IBM Watson platform, optimizing model serving workflows',
-      'Optimized batch prediction pipelines using GoLang concurrency and chunking, reducing inference latency by 15ms',
-      'Benchmarked TensorFlow, PyTorch, and ONNX runtimes for production migration and performance evaluation',
+      'Optimized batch prediction pipelines using GoLang concurrency, reducing inference latency by 15ms.',
+      'Benchmarked TensorFlow, PyTorch, and ONNX runtimes for production migration.',
     ],
+    tech: ['Go', 'Kubernetes', 'TensorFlow', 'ONNX'],
     featured: false,
   },
   {
@@ -55,9 +54,9 @@ const experiences = [
     location: 'Bangalore, India',
     period: 'May 2020 - Jul 2020',
     achievements: [
-      'Built centralized ELK Stack log aggregation system using Filebeat and Node.js APIs across 5+ components',
-      'Saved developers 10+ hours per week on log retrieval and debugging efforts through automated aggregation',
+        'Built centralized ELK Stack log aggregation system using Filebeat and Node.js APIs across 5+ components.',
     ],
+    tech: ['ELK Stack', 'Node.js'],
     featured: false,
   },
   {
@@ -68,81 +67,68 @@ const experiences = [
     location: 'Bangalore, India',
     period: 'May 2019 - Jul 2019',
     achievements: [
-      'Developed real-time CNN-based gaze tracking using transposed convolutions and Gaussian heatmap regression',
-      'Achieved mean error rate of 1.3px across diverse lighting and occlusion scenarios with high accuracy',
+      'Developed real-time CNN-based gaze tracking using transposed convolutions and Gaussian heatmap regression.',
     ],
+    tech: ['CNN', 'Computer Vision'],
     featured: false,
   },
 ];
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl font-bold mb-12 text-center">
-          Work <span className="gradient-text">Experience</span>
+    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-5xl">
+        <h2 className="text-4xl font-bold mb-16 text-center">
+          Professional <span className="gradient-text">Journey</span>
         </h2>
         
-        <div className="space-y-6">
+        <div className="relative border-l-2 border-primary/20 ml-4 md:ml-12 space-y-12">
           {experiences.map((exp, index) => (
-            <Card
-              key={index}
-              className={`p-6 sm:p-8 transition-all hover:shadow-glow ${
-                exp.featured ? 'border-primary shadow-glow' : ''
-              }`}
-            >
-              <div className="flex flex-col sm:flex-row gap-6">
-                {/* Logo */}
-                <div className="flex-shrink-0">
-                  <a
-                    href={exp.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-20 h-20 rounded-lg bg-muted flex items-center justify-center overflow-hidden transition-all hover:scale-110 hover:shadow-lg cursor-pointer"
-                    aria-label={`Visit ${exp.company} website`}
-                  >
-                    <img
-                      src={exp.logo}
-                      alt={`${exp.company} logo`}
-                      className="w-full h-full object-cover"
-                    />
-                  </a>
-                </div>
-
-                {/* Content */}
-                <div className="flex-grow">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
-                    <div className="mb-4 sm:mb-0">
-                      <h3 className="text-2xl font-bold mb-2">
-                        {exp.title}
-                        {exp.featured && (
-                          <Badge className="ml-3 gradient-primary">Featured</Badge>
-                        )}
-                      </h3>
-                      <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                        <Building2 size={16} />
-                        <span className="font-semibold">{exp.company}</span>
-                        <span>•</span>
-                        <span>{exp.location}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar size={16} />
-                      <span>{exp.period}</span>
-                    </div>
+            <div key={index} className="relative pl-8 md:pl-12">
+              {/* Timeline Dot */}
+              <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 bg-background ${index === 0 ? 'border-primary animate-pulse' : 'border-muted-foreground'}`} />
+              
+              <Card className={`p-6 transition-all hover:border-primary/50 group ${exp.featured ? 'shadow-lg border-primary/30 bg-primary/5' : ''}`}>
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold flex items-center gap-2">
+                      {exp.title}
+                      {exp.featured && <Badge variant="default" className="text-[10px] h-5">Latest</Badge>}
+                    </h3>
+                    <a href={exp.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-primary hover:underline mt-1 font-medium">
+                      <Building2 size={14} />
+                      {exp.company}
+                      <ArrowUpRight size={14} />
+                    </a>
                   </div>
-
-                  <ul className="space-y-2">
-                    {exp.achievements.map((achievement, i) => (
-                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                        <span className="text-primary mt-1.5">▹</span>
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="text-sm text-muted-foreground flex flex-col md:items-end gap-1">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={14} />
+                      {exp.period}
+                    </div>
+                    <span>{exp.location}</span>
+                  </div>
                 </div>
-              </div>
-            </Card>
+
+                <ul className="space-y-2 mb-4">
+                  {exp.achievements.map((item, i) => (
+                    <li key={i} className="text-muted-foreground text-sm leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-2 before:w-1.5 before:h-1.5 before:bg-primary/40 before:rounded-full">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                {exp.tech && (
+                  <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border/50">
+                    {exp.tech.map((t) => (
+                      <Badge key={t} variant="secondary" className="text-xs font-normal bg-secondary/10 text-secondary-foreground hover:bg-secondary/20">
+                        {t}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </Card>
+            </div>
           ))}
         </div>
       </div>
