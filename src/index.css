@@ -138,38 +138,50 @@ All colors MUST be HSL.
     }
   }
 
-  /* Hero background - responsive and mobile-optimized */
-  .hero-background {
-    background-image: url('/main_bg.png');
-    background-repeat: no-repeat;
-    background-attachment: scroll; /* Changed from fixed for mobile compatibility */
+  /* Hero animated gradient mesh background */
+  .hero-mesh-bg {
+    background-color: hsl(222 17% 11%);
+    background-image:
+      radial-gradient(at 20% 30%, hsl(210 85% 40% / 0.15) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, hsl(163 64% 60% / 0.1) 0px, transparent 50%),
+      radial-gradient(at 70% 80%, hsl(220 74% 39% / 0.12) 0px, transparent 50%),
+      radial-gradient(at 10% 90%, hsl(155 55% 50% / 0.08) 0px, transparent 50%);
+    animation: mesh-shift 20s ease-in-out infinite;
   }
 
-  /* Mobile: Cover the screen, centered - optimized for Android */
-  @media (max-width: 640px) {
-    .hero-background {
-      background-size: cover;
-      background-position: center center;
-      /* Ensure proper rendering on Android */
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
+  @keyframes mesh-shift {
+    0%, 100% {
+      background-position:
+        20% 30%,
+        80% 20%,
+        70% 80%,
+        10% 90%;
+    }
+    25% {
+      background-position:
+        30% 20%,
+        70% 30%,
+        80% 70%,
+        20% 80%;
+    }
+    50% {
+      background-position:
+        40% 40%,
+        60% 40%,
+        60% 60%,
+        30% 70%;
+    }
+    75% {
+      background-position:
+        25% 35%,
+        75% 25%,
+        75% 75%,
+        15% 85%;
     }
   }
 
-  /* Tablet: Slightly adjust for better view */
-  @media (min-width: 641px) and (max-width: 1024px) {
-    .hero-background {
-      background-size: cover;
-      background-position: center center;
-    }
-  }
-
-  /* Desktop: Show full width */
-  @media (min-width: 1025px) {
-    .hero-background {
-      background-size: 100% auto;
-      background-position: center top;
-    }
+  /* Radial gradient utility */
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
   }
 }

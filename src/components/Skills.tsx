@@ -1,129 +1,193 @@
+import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Code2, Brain, Cloud, Database } from 'lucide-react';
+import {
+  staggerContainer,
+  staggerItem,
+  viewportConfig,
+} from '@/lib/animations';
 
-const skillCategories = [
+interface SkillCategory {
+  title: string;
+  icon: typeof Code2;
+  color: string;
+  skills: string[];
+}
+
+const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
+    icon: Code2,
+    color: 'text-blue-400',
     skills: ['Python', 'C++', 'SQL', 'Go', 'Scala', 'JavaScript', 'Node.js'],
   },
   {
-    title: 'ML Tools & Frameworks',
+    title: 'ML Frameworks',
+    icon: Brain,
+    color: 'text-emerald-400',
     skills: [
       'PyTorch',
       'TensorFlow',
-      'Langchain',
+      'Keras',
+      'Transformers',
       'HuggingFace',
-      'scikit-learn',
+      'LangChain',
+      'LangGraph',
+      'Ray',
       'OpenCV',
-      'ONNX',
-      'MLflow',
+      'CLIP',
+      'LoRA',
+      'SAM',
+      'LoFTR',
       'CoreML',
-      'Open3D',
-      'WandB',
+      'ONNX',
+      'Scikit-Learn',
     ],
   },
   {
-    title: 'Infrastructure & Cloud',
+    title: 'MLOps & Cloud',
+    icon: Cloud,
+    color: 'text-orange-400',
     skills: [
-      'Docker',
-      'Kubernetes',
       'AWS',
       'Azure',
-      'Ray',
-      'Elasticsearch',
-      'PostgreSQL',
-      'Redis',
+      'GCP',
+      'Docker',
+      'Kubernetes',
+      'Ray Serve',
+      'MLflow',
+      'WandB',
       'Airflow',
-      'Apache Spark',
+      'Triton',
+      'CI/CD',
     ],
   },
   {
-    title: 'Specializations',
+    title: 'Data & Tools',
+    icon: Database,
+    color: 'text-purple-400',
     skills: [
-      'Computer Vision',
-      'Large Language Models',
-      'MLOps',
-      'Model Optimization',
-      'Agentic RAG',
-      'Deep Learning',
-      'Data Science',
-      'Reinforcement Learning',
-      'Federated Learning'
+      'Redis',
+      'Elasticsearch',
+      'FAISS',
+      'Pinecone',
+      'MongoDB',
+      'PostgreSQL',
+      'Apache Spark',
+      'Pandas',
+      'Git',
+      'Blender',
+      'Open3D',
+      'AirSim',
     ],
   },
 ];
 
-const softSkills = [
-  'Team Leadership',
-  'Cross-functional Collaboration',
-  'Technical Communication',
-  'Problem Solving',
-  'Mentoring',
-  'Agile Development',
-  'Research & Innovation',
-  'Project Management',
-];
+// Skill Chip Component
+const SkillChip = ({ skill, delay }: { skill: string; delay: number }) => (
+  <motion.span
+    className="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-muted/50 text-muted-foreground border border-border/50 hover:border-primary/30 hover:text-foreground hover:bg-muted transition-all duration-200"
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ delay, duration: 0.3 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -2 }}
+  >
+    {skill}
+  </motion.span>
+);
+
+// Category Card Component
+const CategoryCard = ({
+  category,
+  index,
+}: {
+  category: SkillCategory;
+  index: number;
+}) => {
+  const Icon = category.icon;
+
+  return (
+    <motion.div variants={staggerItem}>
+      <Card className="p-5 h-full border-border/50 hover:border-border transition-colors">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-4">
+          <div className={`w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center ${category.color}`}>
+            <Icon size={20} />
+          </div>
+          <h3 className="text-lg font-bold text-foreground">{category.title}</h3>
+        </div>
+
+        {/* Skills */}
+        <div className="flex flex-wrap gap-2">
+          {category.skills.map((skill, i) => (
+            <SkillChip
+              key={skill}
+              skill={skill}
+              delay={0.1 + i * 0.03}
+            />
+          ))}
+        </div>
+      </Card>
+    </motion.div>
+  );
+};
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
-      <div className="container mx-auto max-w-6xl">
-        {/* Technical Skills */}
-        <div className="mb-12">
-          <h2 className="text-4xl font-bold mb-6 text-center">
-            <span className="gradient-text">Technical Skills</span>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {skillCategories.map((category, index) => (
-              <Card key={index} className="p-6">
-                <h4 className="text-lg font-bold mb-4 text-muted-foreground">
-                  {category.title}
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="relative text-sm px-3 py-1.5 rounded-full bg-background/50 text-muted-foreground hover:scale-105 transition-transform"
-                      style={{
-                        border: '1px solid transparent',
-                        backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
-                        backgroundOrigin: 'border-box',
-                        backgroundClip: 'padding-box, border-box',
-                      }}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
+    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 relative">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/5 to-transparent pointer-events-none" />
 
-        {/* Soft Skills */}
-        <div>
-          <h2 className="text-4xl font-bold mb-6 text-center">
-            <span className="gradient-text">Soft Skills</span>
+      <div className="container mx-auto max-w-6xl relative">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <motion.span
+            className="inline-block text-sm font-mono text-primary mb-3"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {'<skills>'}
+          </motion.span>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Technical <span className="gradient-text">Skills</span>
           </h2>
-          <Card className="p-6">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {softSkills.map((skill, i) => (
-                <span
-                  key={i}
-                  className="relative text-sm px-3 py-1.5 rounded-full bg-background/50 text-muted-foreground hover:scale-105 transition-transform"
-                  style={{
-                    border: '1px solid transparent',
-                    backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
-                    backgroundOrigin: 'border-box',
-                    backgroundClip: 'padding-box, border-box',
-                  }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </Card>
-        </div>
+          <p className="text-muted-foreground mt-3 max-w-lg mx-auto">
+            Tools and technologies I use to build production ML systems
+          </p>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          className="grid md:grid-cols-2 gap-5"
+        >
+          {skillCategories.map((category, index) => (
+            <CategoryCard key={category.title} category={category} index={index} />
+          ))}
+        </motion.div>
+
+        {/* Closing tag */}
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <span className="text-sm font-mono text-primary/50">{'</skills>'}</span>
+        </motion.div>
       </div>
     </section>
   );
