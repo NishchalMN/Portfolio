@@ -179,7 +179,7 @@ const Hero = () => {
                   <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
                 </motion.a>
                 <motion.a
-                  href="/Nishchal_resume.pdf"
+                  href="/Nishchal_Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:border-primary/50 hover:text-primary transition-colors"
