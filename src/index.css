@@ -2,68 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/*
+  DESIGN SYSTEM: "Data Visualization"
+  Clean, metrics-focused portfolio for an ML Engineer
+  Numbers tell the story, subtle viz elements as decoration
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @layer base {
   :root {
-    --background: 222 17% 11%;
-    --foreground: 210 40% 98%;
+    /* Deep slate background */
+    --background: 222 47% 6%;
+    --foreground: 210 20% 95%;
 
-    --card: 222 25% 15%;
-    --card-foreground: 210 40% 98%;
+    /* Teal/Cyan as primary - data viz classic */
+    --primary: 173 80% 50%;
+    --primary-foreground: 222 47% 6%;
 
-    --popover: 222 40% 15%;
-    --popover-foreground: 210 40% 98%;
+    /* Warm orange for contrast metrics */
+    --secondary: 25 95% 60%;
+    --secondary-foreground: 222 47% 6%;
 
-    --primary: 210 85% 40%;
-    --primary-foreground: 222 47% 11%;
+    /* Soft violet for tertiary */
+    --accent: 260 60% 65%;
+    --accent-foreground: 222 47% 6%;
 
-    --secondary: 155 55% 50%;
-    --secondary-foreground: 210 40% 98%;
+    /* Success green for positive metrics */
+    --success: 152 70% 50%;
+    --success-foreground: 222 47% 6%;
 
-    --muted: 210 35% 17%;
-    --muted-foreground: 210 20% 65%;
+    /* Card surfaces */
+    --card: 222 47% 9%;
+    --card-foreground: 210 20% 95%;
 
-    --accent: 155 55% 50%;
-    --accent-foreground: 210 40% 98%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 20% 95%;
+
+    /* Muted */
+    --muted: 222 30% 15%;
+    --muted-foreground: 215 20% 55%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 210 20% 95%;
 
-    --border: 210 33% 20%;
-    --input: 210 33% 20%;
-    --ring: 210 85% 40%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 173 80% 50%;
 
     --radius: 0.75rem;
-
-    --gradient-primary: linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(222 47% 11%) 0%, hsl(222 40% 8%) 100%);
-
-    --shadow-glow: 0 0 40px hsl(210 85% 40% / 0.15);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
   }
 }
 
@@ -72,116 +59,328 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground font-inter;
-  }
-  
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  /* Clean typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 }
 
 @layer utilities {
-  .gradient-primary {
-    background: var(--gradient-primary);
+  /* Dot grid background - classic data viz pattern */
+  .dot-grid {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      hsl(var(--muted-foreground) / 0.15) 1px,
+      transparent 0
+    );
+    background-size: 24px 24px;
   }
 
+  /* Subtle line chart pattern */
+  .chart-lines {
+    background-image:
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 60px 40px;
+  }
+
+  /* Axis lines decoration */
+  .axis-lines {
+    position: relative;
+  }
+
+  .axis-lines::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg,
+      hsl(var(--primary) / 0.5) 0%,
+      hsl(var(--border)) 100%
+    );
+  }
+
+  .axis-lines::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg,
+      hsl(var(--primary) / 0.5) 0%,
+      hsl(var(--border)) 100%
+    );
+  }
+
+  /* Gradient text */
   .gradient-text {
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
+  /* Metric card styling */
+  .metric-card {
+    @apply relative overflow-hidden;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card)) 0%,
+      hsl(var(--card) / 0.8) 100%
+    );
   }
 
-  .gradient-hover {
-    background-size: 200% 100%;
-    transition: background-position 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 100%
+    );
   }
 
-  .gradient-hover:hover {
-    background-position: 100% 0;
-    transform: translateY(-2px);
-    box-shadow: 0 0 50px hsl(210 85% 40% / 0.3);
+  /* Metric value styling */
+  .metric-value {
+    @apply text-4xl md:text-5xl font-bold;
+    font-variant-numeric: tabular-nums;
+    background: linear-gradient(180deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--foreground) / 0.7) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .animate-slide-fade-enter {
-    animation: slide-fade-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  /* Subtle glow for important elements */
+  .glow-primary {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.15);
   }
 
-  .animate-slide-fade-exit {
-    animation: slide-fade-exit 0.4s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+  .glow-secondary {
+    box-shadow: 0 0 40px hsl(var(--secondary) / 0.15);
   }
 
-  @keyframes slide-fade-enter {
-    0% {
-      transform: translateY(30px);
-      opacity: 0;
+  /* Bar chart decorative element */
+  .bar-decoration {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 40px;
+  }
+
+  .bar-decoration span {
+    width: 4px;
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 2px 2px 0 0;
+    transition: all 0.3s ease;
+  }
+
+  .bar-decoration:hover span {
+    background: hsl(var(--primary) / 0.6);
+  }
+
+  /* Data point dot */
+  .data-point {
+    @apply w-2 h-2 rounded-full bg-primary;
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.5);
+  }
+
+  /* Trend line animation */
+  .trend-line {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: draw-line 2s ease forwards;
+  }
+
+  @keyframes draw-line {
+    to {
+      stroke-dashoffset: 0;
     }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
   }
 
-  @keyframes slide-fade-exit {
-    0% {
-      transform: translateY(0) scale(1) rotate(0deg);
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(-30px) scale(0.8) rotate(-5deg);
-      opacity: 0;
-    }
+  /* Status indicator */
+  .status-active {
+    @apply relative flex items-center gap-2;
   }
 
-  /* Hero animated gradient mesh background */
-  .hero-mesh-bg {
-    background-color: hsl(222 17% 11%);
-    background-image:
-      radial-gradient(at 20% 30%, hsl(210 85% 40% / 0.15) 0px, transparent 50%),
-      radial-gradient(at 80% 20%, hsl(163 64% 60% / 0.1) 0px, transparent 50%),
-      radial-gradient(at 70% 80%, hsl(220 74% 39% / 0.12) 0px, transparent 50%),
-      radial-gradient(at 10% 90%, hsl(155 55% 50% / 0.08) 0px, transparent 50%);
-    animation: mesh-shift 20s ease-in-out infinite;
+  .status-active::before {
+    content: '';
+    @apply w-2 h-2 rounded-full bg-emerald-400;
+    animation: pulse-dot 2s ease-in-out infinite;
   }
 
-  @keyframes mesh-shift {
+  @keyframes pulse-dot {
     0%, 100% {
-      background-position:
-        20% 30%,
-        80% 20%,
-        70% 80%,
-        10% 90%;
-    }
-    25% {
-      background-position:
-        30% 20%,
-        70% 30%,
-        80% 70%,
-        20% 80%;
+      opacity: 1;
+      transform: scale(1);
     }
     50% {
-      background-position:
-        40% 40%,
-        60% 40%,
-        60% 60%,
-        30% 70%;
-    }
-    75% {
-      background-position:
-        25% 35%,
-        75% 25%,
-        75% 75%,
-        15% 85%;
+      opacity: 0.5;
+      transform: scale(1.2);
     }
   }
 
-  /* Radial gradient utility */
-  .bg-gradient-radial {
-    background: radial-gradient(circle, var(--tw-gradient-stops));
+  /* Section divider with chart aesthetic */
+  .section-divider {
+    @apply relative h-px w-full;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      hsl(var(--border)) 10%,
+      hsl(var(--primary) / 0.5) 50%,
+      hsl(var(--border)) 90%,
+      transparent 100%
+    );
   }
+
+  /* Card hover effect */
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-1;
+    box-shadow:
+      0 10px 40px hsl(var(--primary) / 0.1),
+      0 0 0 1px hsl(var(--primary) / 0.1);
+  }
+
+  /* Tag/chip styling */
+  .tag {
+    @apply px-3 py-1 text-xs font-mono rounded-full;
+    @apply bg-muted/50 text-muted-foreground border border-border/50;
+    @apply transition-colors duration-200;
+  }
+
+  .tag:hover {
+    @apply border-primary/30 text-foreground;
+  }
+
+  /* Highlight number */
+  .highlight-number {
+    @apply font-mono font-bold text-primary;
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    @apply h-1 rounded-full bg-muted overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full;
+    background: linear-gradient(90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--accent)) 100%
+    );
+  }
+
+  /* Floating label */
+  .float-label {
+    @apply absolute -top-3 left-4 px-2 text-xs font-mono;
+    @apply bg-background text-muted-foreground;
+  }
+
+  /* Grid pattern overlay */
+  .grid-overlay {
+    background-image:
+      linear-gradient(hsl(var(--primary) / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.03) 1px, transparent 1px);
+    background-size: 100px 100px;
+  }
+
+  /* Subtle noise texture */
+  .noise-texture {
+    position: relative;
+  }
+
+  .noise-texture::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg,
+      hsl(var(--primary) / 0.5) 0%,
+      transparent 50%,
+      hsl(var(--accent) / 0.5) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Counter animation utility */
+  .counter {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* Selection color */
+::selection {
+  background: hsl(var(--primary) / 0.3);
+  color: hsl(var(--foreground));
 }

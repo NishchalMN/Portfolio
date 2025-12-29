@@ -1,16 +1,9 @@
 import { motion } from 'framer-motion';
-import { Card } from '@/components/ui/card';
 import { Code2, Brain, Cloud, Database } from 'lucide-react';
-import {
-  staggerContainer,
-  staggerItem,
-  viewportConfig,
-} from '@/lib/animations';
 
 interface SkillCategory {
   title: string;
   icon: typeof Code2;
-  color: string;
   skills: string[];
 }
 
@@ -18,176 +11,103 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
     icon: Code2,
-    color: 'text-blue-400',
     skills: ['Python', 'C++', 'SQL', 'Go', 'Scala', 'JavaScript', 'Node.js'],
   },
   {
     title: 'ML Frameworks',
     icon: Brain,
-    color: 'text-emerald-400',
     skills: [
-      'PyTorch',
-      'TensorFlow',
-      'Keras',
-      'Transformers',
-      'HuggingFace',
-      'LangChain',
-      'LangGraph',
-      'Ray',
-      'OpenCV',
-      'CLIP',
-      'LoRA',
-      'SAM',
-      'LoFTR',
-      'CoreML',
-      'ONNX',
-      'Scikit-Learn',
+      'PyTorch', 'TensorFlow', 'Keras', 'Transformers', 'HuggingFace',
+      'LangChain', 'LangGraph', 'Ray', 'OpenCV', 'CLIP', 'LoRA',
+      'SAM', 'LoFTR', 'CoreML', 'ONNX', 'Scikit-Learn',
     ],
   },
   {
     title: 'MLOps & Cloud',
     icon: Cloud,
-    color: 'text-orange-400',
     skills: [
-      'AWS',
-      'Azure',
-      'GCP',
-      'Docker',
-      'Kubernetes',
-      'Ray Serve',
-      'MLflow',
-      'WandB',
-      'Airflow',
-      'Triton',
-      'CI/CD',
+      'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes',
+      'Ray Serve', 'MLflow', 'WandB', 'Airflow', 'Triton', 'CI/CD',
     ],
   },
   {
     title: 'Data & Tools',
     icon: Database,
-    color: 'text-purple-400',
     skills: [
-      'Redis',
-      'Elasticsearch',
-      'FAISS',
-      'Pinecone',
-      'MongoDB',
-      'PostgreSQL',
-      'Apache Spark',
-      'Pandas',
-      'Git',
-      'Blender',
-      'Open3D',
-      'AirSim',
+      'Redis', 'Elasticsearch', 'FAISS', 'Pinecone', 'MongoDB',
+      'PostgreSQL', 'Apache Spark', 'Pandas', 'Git', 'Blender', 'Open3D', 'AirSim',
     ],
   },
 ];
 
-// Skill Chip Component
-const SkillChip = ({ skill, delay }: { skill: string; delay: number }) => (
-  <motion.span
-    className="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-muted/50 text-muted-foreground border border-border/50 hover:border-primary/30 hover:text-foreground hover:bg-muted transition-all duration-200"
-    initial={{ opacity: 0, scale: 0.9 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    transition={{ delay, duration: 0.3 }}
-    viewport={{ once: true }}
-    whileHover={{ y: -2 }}
-  >
-    {skill}
-  </motion.span>
-);
-
-// Category Card Component
-const CategoryCard = ({
-  category,
-  index,
-}: {
-  category: SkillCategory;
-  index: number;
-}) => {
-  const Icon = category.icon;
-
-  return (
-    <motion.div variants={staggerItem}>
-      <Card className="p-5 h-full border-border/50 hover:border-border transition-colors">
-        {/* Header */}
-        <div className="flex items-center gap-3 mb-4">
-          <div className={`w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center ${category.color}`}>
-            <Icon size={20} />
-          </div>
-          <h3 className="text-lg font-bold text-foreground">{category.title}</h3>
-        </div>
-
-        {/* Skills */}
-        <div className="flex flex-wrap gap-2">
-          {category.skills.map((skill, i) => (
-            <SkillChip
-              key={skill}
-              skill={skill}
-              delay={0.1 + i * 0.03}
-            />
-          ))}
-        </div>
-      </Card>
-    </motion.div>
-  );
-};
-
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 relative">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/5 to-transparent pointer-events-none" />
+    <section id="skills" className="py-24 px-6 lg:px-12 relative">
+      <div className="absolute inset-0 chart-lines opacity-30" />
 
       <div className="container mx-auto max-w-6xl relative">
         {/* Section Header */}
         <motion.div
+          className="mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
         >
-          <motion.span
-            className="inline-block text-sm font-mono text-primary mb-3"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            {'<skills>'}
-          </motion.span>
-          <h2 className="text-3xl md:text-4xl font-bold">
-            Technical <span className="gradient-text">Skills</span>
+          <span className="text-sm font-mono text-primary mb-2 block">04</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Technical Skills
           </h2>
-          <p className="text-muted-foreground mt-3 max-w-lg mx-auto">
+          <p className="text-muted-foreground max-w-lg">
             Tools and technologies I use to build production ML systems
           </p>
         </motion.div>
 
         {/* Skills Grid */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-          className="grid md:grid-cols-2 gap-5"
-        >
-          {skillCategories.map((category, index) => (
-            <CategoryCard key={category.title} category={category} index={index} />
-          ))}
-        </motion.div>
+        <div className="grid md:grid-cols-2 gap-6">
+          {skillCategories.map((category, categoryIndex) => {
+            const Icon = category.icon;
+            return (
+              <motion.div
+                key={category.title}
+                className="p-6 bg-card/50 rounded-xl border border-border/50 card-hover"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: categoryIndex * 0.1 }}
+              >
+                {/* Category Header */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {category.title}
+                  </h3>
+                  <span className="ml-auto text-xs font-mono text-muted-foreground">
+                    {category.skills.length} skills
+                  </span>
+                </div>
 
-        {/* Closing tag */}
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <span className="text-sm font-mono text-primary/50">{'</skills>'}</span>
-        </motion.div>
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.span
+                      key={skill}
+                      className="tag"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.02 }}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

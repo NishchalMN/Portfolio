@@ -1,573 +1,265 @@
-import { useEffect, useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { ArrowDown, Download, Github, Mail, MapPin, Phone } from 'lucide-react';
-import {
-  staggerContainer,
-  staggerItem,
-  fadeInLeft,
-  fadeInRight,
-  hoverScale,
-  tapScale
-} from '@/lib/animations';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowDown, TrendingUp, Activity, BarChart3 } from 'lucide-react';
 
-const TYPING_STRINGS = [
-  'Multimodal LLMs',
-  'Computer Vision',
-  'Production ML',
-  'MLOps',
-];
-
-const TYPING_SPEED = 80;
-const DELETE_SPEED = 40;
-const PAUSE_DURATION = 2000;
-
-// Neural Network Node Component
-const NeuralNode = ({
-  cx,
-  cy,
-  delay,
-  size = 4
-}: {
-  cx: number;
-  cy: number;
-  delay: number;
-  size?: number;
-}) => (
-  <motion.circle
-    cx={cx}
-    cy={cy}
-    r={size}
-    fill="url(#nodeGradient)"
-    initial={{ opacity: 0, scale: 0 }}
-    animate={{
-      opacity: [0.4, 0.9, 0.4],
-      scale: [1, 1.2, 1],
-    }}
-    transition={{
-      duration: 3,
-      delay,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }}
-  />
-);
-
-// Neural Network Connection Component
-const NeuralConnection = ({
-  x1,
-  y1,
-  x2,
-  y2,
-  delay
-}: {
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-  delay: number;
-}) => (
-  <motion.line
-    x1={x1}
-    y1={y1}
-    x2={x2}
-    y2={y2}
-    stroke="url(#lineGradient)"
-    strokeWidth="1"
-    initial={{ pathLength: 0, opacity: 0 }}
-    animate={{
-      pathLength: 1,
-      opacity: [0.1, 0.4, 0.1],
-    }}
-    transition={{
-      pathLength: { duration: 1.5, delay, ease: "easeOut" },
-      opacity: { duration: 4, delay, repeat: Infinity, ease: "easeInOut" }
-    }}
-  />
-);
-
-// Data Pulse Component - represents data flowing through the network
-const DataPulse = ({
-  startX,
-  startY,
-  endX,
-  endY,
-  delay
-}: {
-  startX: number;
-  startY: number;
-  endX: number;
-  endY: number;
-  delay: number;
-}) => (
-  <motion.circle
-    r="2"
-    fill="hsl(163, 64%, 60%)"
-    filter="url(#glow)"
-    initial={{ cx: startX, cy: startY, opacity: 0 }}
-    animate={{
-      cx: [startX, endX],
-      cy: [startY, endY],
-      opacity: [0, 1, 0],
-    }}
-    transition={{
-      duration: 2,
-      delay,
-      repeat: Infinity,
-      ease: "linear",
-      repeatDelay: 3,
-    }}
-  />
-);
-
-// Neural Network Visualization SVG
-const NeuralNetworkVisualization = () => {
-  // Define neural network layers
-  const layers = useMemo(() => [
-    // Input layer
-    [
-      { x: 50, y: 80 },
-      { x: 50, y: 160 },
-      { x: 50, y: 240 },
-      { x: 50, y: 320 },
-    ],
-    // Hidden layer 1
-    [
-      { x: 150, y: 60 },
-      { x: 150, y: 130 },
-      { x: 150, y: 200 },
-      { x: 150, y: 270 },
-      { x: 150, y: 340 },
-    ],
-    // Hidden layer 2
-    [
-      { x: 250, y: 100 },
-      { x: 250, y: 180 },
-      { x: 250, y: 260 },
-      { x: 250, y: 340 },
-    ],
-    // Hidden layer 3
-    [
-      { x: 350, y: 120 },
-      { x: 350, y: 200 },
-      { x: 350, y: 280 },
-    ],
-    // Output layer
-    [
-      { x: 450, y: 160 },
-      { x: 450, y: 240 },
-    ],
-  ], []);
-
-  // Generate connections between layers
-  const connections = useMemo(() => {
-    const conns: { x1: number; y1: number; x2: number; y2: number; delay: number }[] = [];
-    for (let i = 0; i < layers.length - 1; i++) {
-      const currentLayer = layers[i];
-      const nextLayer = layers[i + 1];
-      currentLayer.forEach((node, nodeIdx) => {
-        nextLayer.forEach((nextNode, nextIdx) => {
-          // Only connect some nodes for cleaner visualization
-          if (Math.abs(nodeIdx - nextIdx) <= 2) {
-            conns.push({
-              x1: node.x,
-              y1: node.y,
-              x2: nextNode.x,
-              y2: nextNode.y,
-              delay: (i * 0.3) + (nodeIdx * 0.1),
-            });
-          }
-        });
-      });
-    }
-    return conns;
-  }, [layers]);
-
-  // Generate data pulses
-  const pulses = useMemo(() => {
-    const p: { startX: number; startY: number; endX: number; endY: number; delay: number }[] = [];
-    // Select key paths through the network
-    const paths = [
-      [0, 1, 2, 3, 4], // Path through middle
-      [1, 2, 1, 1, 0], // Path through top
-      [3, 4, 3, 2, 1], // Path through bottom
-    ];
-
-    paths.forEach((path, pathIdx) => {
-      for (let i = 0; i < layers.length - 1; i++) {
-        const currentNode = layers[i][Math.min(path[i], layers[i].length - 1)];
-        const nextNode = layers[i + 1][Math.min(path[i + 1], layers[i + 1].length - 1)];
-        p.push({
-          startX: currentNode.x,
-          startY: currentNode.y,
-          endX: nextNode.x,
-          endY: nextNode.y,
-          delay: pathIdx * 1.5 + i * 0.5,
-        });
-      }
-    });
-    return p;
-  }, [layers]);
-
+// Mini bar chart decoration
+const MiniChart = ({ values, color = 'primary' }: { values: number[]; color?: string }) => {
+  const colorClass = color === 'primary' ? 'bg-primary' : color === 'secondary' ? 'bg-secondary' : 'bg-accent';
   return (
-    <motion.svg
-      viewBox="0 0 500 400"
-      className="w-full h-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, delay: 0.5 }}
-    >
-      <defs>
-        {/* Gradient for nodes */}
-        <radialGradient id="nodeGradient" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="hsl(163, 64%, 60%)" />
-          <stop offset="100%" stopColor="hsl(220, 74%, 39%)" />
-        </radialGradient>
-
-        {/* Gradient for lines */}
-        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="hsl(163, 64%, 60%)" stopOpacity="0.3" />
-          <stop offset="50%" stopColor="hsl(210, 85%, 40%)" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="hsl(220, 74%, 39%)" stopOpacity="0.3" />
-        </linearGradient>
-
-        {/* Glow filter */}
-        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-
-      {/* Connections */}
-      {connections.map((conn, idx) => (
-        <NeuralConnection key={`conn-${idx}`} {...conn} />
+    <div className="flex items-end gap-0.5 h-8">
+      {values.map((v, i) => (
+        <motion.div
+          key={i}
+          className={`w-1 rounded-t ${colorClass}`}
+          style={{ opacity: 0.3 + (v / 100) * 0.7 }}
+          initial={{ height: 0 }}
+          animate={{ height: `${v}%` }}
+          transition={{ delay: 1.5 + i * 0.05, duration: 0.4 }}
+        />
       ))}
-
-      {/* Nodes */}
-      {layers.map((layer, layerIdx) =>
-        layer.map((node, nodeIdx) => (
-          <NeuralNode
-            key={`node-${layerIdx}-${nodeIdx}`}
-            cx={node.x}
-            cy={node.y}
-            delay={layerIdx * 0.2 + nodeIdx * 0.1}
-            size={layerIdx === 0 || layerIdx === layers.length - 1 ? 6 : 4}
-          />
-        ))
-      )}
-
-      {/* Data pulses */}
-      {pulses.map((pulse, idx) => (
-        <DataPulse key={`pulse-${idx}`} {...pulse} />
-      ))}
-
-      {/* Layer labels */}
-      <motion.text
-        x="50"
-        y="370"
-        textAnchor="middle"
-        className="fill-muted-foreground text-[10px] font-mono"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 2 }}
-      >
-        INPUT
-      </motion.text>
-      <motion.text
-        x="250"
-        y="370"
-        textAnchor="middle"
-        className="fill-muted-foreground text-[10px] font-mono"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 2.2 }}
-      >
-        HIDDEN
-      </motion.text>
-      <motion.text
-        x="450"
-        y="370"
-        textAnchor="middle"
-        className="fill-muted-foreground text-[10px] font-mono"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 2.4 }}
-      >
-        OUTPUT
-      </motion.text>
-    </motion.svg>
+    </div>
   );
 };
 
-// Typing Effect Hook
-const useTypingEffect = (strings: string[]) => {
-  const [displayText, setDisplayText] = useState('');
-  const [stringIndex, setStringIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentString = strings[stringIndex];
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayText.length < currentString.length) {
-          setDisplayText(currentString.slice(0, displayText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), PAUSE_DURATION);
-        }
-      } else {
-        if (displayText.length > 0) {
-          setDisplayText(displayText.slice(0, -1));
-        } else {
-          setIsDeleting(false);
-          setStringIndex((prev) => (prev + 1) % strings.length);
-        }
-      }
-    }, isDeleting ? DELETE_SPEED : TYPING_SPEED);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, stringIndex, isDeleting, strings]);
-
-  return displayText;
-};
-
-// Stats Data
-const stats = [
-  { value: '4+', label: 'Years Experience' },
-  { value: '50K+', label: 'Items Authenticated' },
-  { value: '96%', label: 'TPR Achieved' },
-];
+// Animated trend line SVG
+const TrendLine = () => (
+  <svg className="absolute bottom-0 left-0 w-full h-16 opacity-20" preserveAspectRatio="none">
+    <motion.path
+      d="M0 60 Q 100 40, 200 45 T 400 30 T 600 35 T 800 20"
+      fill="none"
+      stroke="hsl(var(--primary))"
+      strokeWidth="2"
+      className="trend-line"
+    />
+  </svg>
+);
 
 const Hero = () => {
-  const typedText = useTypingEffect(TYPING_STRINGS);
+  const [currentWord, setCurrentWord] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const words = ['Multimodal LLMs', 'Computer Vision', 'Production ML', 'MLOps'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const metrics = [
+    { value: '96%', label: 'TPR Achieved', sub: 'Luxury Authentication', icon: TrendingUp, color: 'primary' },
+    { value: '50K+', label: 'Items/Month', sub: 'Production Scale', icon: BarChart3, color: 'secondary' },
+    { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent' },
+  ];
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center relative overflow-hidden"
+      ref={containerRef}
+      className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Animated Gradient Mesh Background */}
-      <div className="absolute inset-0 hero-mesh-bg" />
+      {/* Dot grid background */}
+      <div className="absolute inset-0 dot-grid" />
 
-      {/* Grid overlay for tech aesthetic */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(hsl(210 85% 40% / 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(210 85% 40% / 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-        }}
-      />
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
 
-      {/* Content Container */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 lg:pt-0">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-5rem)]">
+      {/* Trend line decoration */}
+      <TrendLine />
 
-          {/* Left Side - Text Content */}
+      {/* Main content */}
+      <motion.div
+        className="container mx-auto px-6 lg:px-12 relative z-10"
+        style={{ y, opacity }}
+      >
+        <div className="max-w-6xl mx-auto">
+          {/* Top row - status */}
           <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="text-center lg:text-left order-2 lg:order-1"
+            className="flex items-center gap-4 mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            {/* Terminal-style greeting */}
-            <motion.div
-              variants={staggerItem}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/50 backdrop-blur-sm mb-6"
-            >
-              <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-              <span className="text-sm font-mono text-muted-foreground">Available for opportunities</span>
-            </motion.div>
-
-            {/* Name */}
-            <motion.h1
-              variants={staggerItem}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 tracking-tight"
-            >
-              <span className="text-foreground">Hi, I'm </span>
-              <span className="gradient-text">Nishchal</span>
-            </motion.h1>
-
-            {/* Title */}
-            <motion.h2
-              variants={staggerItem}
-              className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground mb-6 font-medium"
-            >
-              Machine Learning Engineer II
-            </motion.h2>
-
-            {/* Typing Effect */}
-            <motion.div
-              variants={staggerItem}
-              className="h-12 mb-6 flex items-center justify-center lg:justify-start"
-            >
-              <span className="text-lg sm:text-xl font-mono">
-                <span className="text-muted-foreground">specializing in </span>
-                <span className="text-secondary">{typedText}</span>
-                <motion.span
-                  className="inline-block w-0.5 h-6 bg-secondary ml-1"
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "steps(1)" }}
-                />
+            <div className="status-active">
+              <span className="text-sm font-mono text-muted-foreground">
+                Available May 2026
               </span>
-            </motion.div>
-
-            {/* Subtitle */}
-            <motion.p
-              variants={staggerItem}
-              className="text-muted-foreground mb-8 text-base sm:text-lg max-w-xl mx-auto lg:mx-0"
-            >
-              MS in Machine Learning @ University of Maryland
-              <br />
-              <span className="text-foreground/70">Open to full-time roles starting May 2026</span>
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              variants={staggerItem}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
-            >
-              <motion.div whileHover={hoverScale} whileTap={tapScale}>
-                <Button size="lg" className="gradient-primary shadow-glow text-base" asChild>
-                  <a href="#experience">View My Work</a>
-                </Button>
-              </motion.div>
-              <motion.div whileHover={hoverScale} whileTap={tapScale}>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="border-transparent text-base group"
-                  style={{
-                    backgroundImage: 'linear-gradient(hsl(222 17% 11%), hsl(222 17% 11%)), linear-gradient(90deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 50%, hsl(163, 64%, 60%) 100%)',
-                    backgroundOrigin: 'border-box',
-                    backgroundClip: 'padding-box, border-box',
-                    backgroundSize: '200% 100%',
-                  }}
-                >
-                  <a href="/Nishchal_Resume.pdf" target="_blank" rel="noopener noreferrer">
-                    <Download className="mr-2 h-5 w-5 group-hover:animate-bounce" />
-                    Resume
-                  </a>
-                </Button>
-              </motion.div>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div
-              variants={staggerItem}
-              className="flex gap-4 justify-center lg:justify-start mb-6"
-            >
-              {[
-                { href: "tel:+12404381916", icon: Phone, label: "Phone" },
-                { href: "mailto:nmarur21@umd.edu", icon: Mail, label: "Email" },
-                { href: "https://linkedin.com/in/nishchal-mn", icon: null, label: "LinkedIn", isLinkedIn: true },
-                { href: "https://github.com/NishchalMN", icon: Github, label: "GitHub" },
-              ].map((link) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith('http') ? "_blank" : undefined}
-                  rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
-                  className="w-10 h-10 rounded-lg bg-card/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
-                  aria-label={link.label}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {link.isLinkedIn ? (
-                    <span className="font-bold text-lg leading-none">in</span>
-                  ) : link.icon ? (
-                    <link.icon size={20} />
-                  ) : null}
-                </motion.a>
-              ))}
-            </motion.div>
-
-            {/* Location */}
-            <motion.div
-              variants={staggerItem}
-              className="flex items-center justify-center lg:justify-start gap-2 text-muted-foreground"
-            >
-              <MapPin size={16} className="text-primary" />
-              <span className="text-sm">College Park, MD, USA</span>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Side - Neural Network Visualization */}
-          <motion.div
-            variants={fadeInRight}
-            initial="hidden"
-            animate="visible"
-            className="order-1 lg:order-2 flex items-center justify-center"
-          >
-            <div className="relative w-full max-w-lg aspect-square">
-              {/* Glow effect behind visualization */}
-              <div className="absolute inset-0 bg-gradient-radial from-primary/20 via-transparent to-transparent blur-3xl" />
-
-              {/* Neural Network */}
-              <div className="relative z-10 w-full h-full p-4">
-                <NeuralNetworkVisualization />
-              </div>
-
-              {/* Decorative elements */}
-              <motion.div
-                className="absolute -top-4 -right-4 w-24 h-24 border border-primary/20 rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="absolute -bottom-4 -left-4 w-32 h-32 border border-secondary/20 rounded-full"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              />
             </div>
+            <span className="text-muted-foreground/30">|</span>
+            <span className="text-sm font-mono text-muted-foreground">
+              College Park, MD
+            </span>
           </motion.div>
-        </div>
 
-        {/* Stats Bar */}
-        <motion.div
-          variants={fadeInLeft}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-2xl px-4"
-        >
-          <div className="flex items-center justify-center gap-6 sm:gap-12 py-4 px-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/30">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="text-center"
+          {/* Main heading */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            <div>
+              <motion.h1
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <span className="text-foreground">Nishchal</span>
+                <br />
+                <span className="gradient-text">Marur</span>
+              </motion.h1>
+
+              <motion.p
+                className="text-xl text-muted-foreground mb-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <div className="text-2xl sm:text-3xl font-bold gradient-text">{stat.value}</div>
-                <div className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                Machine Learning Engineer II
+              </motion.p>
 
-        {/* Scroll Indicator */}
-        <motion.a
-          href="#about"
-          className="absolute bottom-24 left-1/2 -translate-x-1/2 text-muted-foreground hover:text-primary transition-colors"
-          aria-label="Scroll to about section"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, 8, 0] }}
-          transition={{
-            opacity: { delay: 1.5 },
-            y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
-          }}
+              {/* Rotating specialization */}
+              <motion.div
+                className="h-10 mb-8 overflow-hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <span className="text-sm font-mono text-muted-foreground mr-2">Focus:</span>
+                <div className="inline-block relative h-8">
+                  {words.map((word, index) => (
+                    <motion.span
+                      key={word}
+                      className="absolute left-0 text-lg font-semibold text-primary whitespace-nowrap"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{
+                        opacity: currentWord === index ? 1 : 0,
+                        y: currentWord === index ? 0 : -20,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Description */}
+              <motion.p
+                className="text-muted-foreground text-lg leading-relaxed max-w-lg mb-10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                Building production ML systems that scale. Currently pursuing MS in Machine Learning
+                at University of Maryland, previously at Entrupy authenticating luxury goods at scale.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div
+                className="flex flex-wrap gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <motion.a
+                  href="#experience"
+                  className="px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  View Experience
+                </motion.a>
+                <motion.a
+                  href="/Nishchal_resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:border-primary/50 hover:text-primary transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Resume
+                </motion.a>
+              </motion.div>
+
+              {/* Quick links */}
+              <motion.div
+                className="flex gap-6 mt-10 pt-8 border-t border-border/50"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                {[
+                  { href: 'https://github.com/NishchalMN', label: 'GitHub' },
+                  { href: 'https://linkedin.com/in/nishchal-mn', label: 'LinkedIn' },
+                  { href: 'mailto:nmarur21@umd.edu', label: 'Email' },
+                ].map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.label !== 'Email' ? '_blank' : undefined}
+                    rel={link.label !== 'Email' ? 'noopener noreferrer' : undefined}
+                    className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Right side - Metrics cards */}
+            <div className="space-y-4">
+              {metrics.map((metric, index) => {
+                const Icon = metric.icon;
+                return (
+                  <motion.div
+                    key={metric.label}
+                    className="metric-card p-6 rounded-xl border border-border/50 card-hover"
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.8 + index * 0.15 }}
+                  >
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <div className="metric-value">{metric.value}</div>
+                        <div className="text-foreground font-medium mt-1">{metric.label}</div>
+                        <div className="text-sm text-muted-foreground">{metric.sub}</div>
+                      </div>
+                      <div className="flex flex-col items-end gap-2">
+                        <Icon className="w-5 h-5 text-muted-foreground" />
+                        <MiniChart
+                          values={[40, 65, 45, 80, 55, 90, 70, 95, 85, 100]}
+                          color={metric.color}
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.a
+        href="#about"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <ArrowDown size={24} />
-        </motion.a>
-      </div>
+          <ArrowDown size={20} />
+        </motion.div>
+      </motion.a>
     </section>
   );
 };
