@@ -89,7 +89,7 @@ const Navbar = () => {
             {/* Resume Button */}
             <div className="hidden md:block">
               <motion.a
-                href="/Nishchal_resume.pdf"
+                href="/Nishchal_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 text-sm font-medium text-primary border border-primary/30 rounded-lg hover:bg-primary/10 transition-colors"
@@ -144,7 +144,7 @@ const Navbar = () => {
                 </motion.a>
               ))}
               <motion.a
-                href="/Nishchal_resume.pdf"
+                href="/Nishchal_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block px-4 py-3 text-lg font-medium text-primary"
