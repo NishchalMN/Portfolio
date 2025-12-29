@@ -1,8 +1,20 @@
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Building2, Calendar } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Calendar, ChevronDown, ExternalLink, TrendingUp } from 'lucide-react';
 
-const experiences = [
+interface Experience {
+  title: string;
+  company: string;
+  logo: string;
+  website: string;
+  location: string;
+  period: string;
+  achievements: string[];
+  featured: boolean;
+  metrics?: { value: string; label: string }[];
+}
+
+const experiences: Experience[] = [
   {
     title: 'Machine Learning Engineer II',
     company: 'Entrupy Inc.',
@@ -10,12 +22,20 @@ const experiences = [
     website: 'https://www.entrupy.com',
     location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
+    metrics: [
+      { value: '96%', label: 'TPR' },
+      { value: '50K+', label: 'Items/mo' },
+      { value: '2x', label: 'Speedup' },
+    ],
     achievements: [
-      'Built end-to-end luxury authentication system achieving 96% TPR at 5% FPR, processing 10K+ items monthly in production',
-      'Trained monocular depth estimation and semantic segmentation models using SAM for automated quality inspection',
+      'Built end-to-end luxury authentication system achieving 96% TPR at 5% FPR, processing 50K+ items monthly in production',
       'Developed 3D document unwarping pipeline with DenseNet, boosting OCR accuracy by 23% and achieving 0.84 SSIM',
       'Optimized on-device CoreML inference with dynamic overlays, delivering 2x faster real-time processing',
-      'Built synthetic data pipelines using Blender and python simulating camera variations and 3D distortions',
+      'Reduced cloud infrastructure costs by 40% through automated monitoring and alerts to shut down idle GPU resources',
+      'Improved macro fingerprinting TPR by 15% for return fraud detection using patch embedding similarity',
+      'Built pose-estimation models for sneaker pre-alignment, increasing LoFTR+RANSAC inlier ratio by 18%',
+      'Trained monocular depth estimation and semantic segmentation models using SAM for automated quality inspection',
+      'Built synthetic data pipelines using Blender Python simulating camera intrinsics, lighting, and material textures',
     ],
     featured: true,
   },
@@ -26,10 +46,14 @@ const experiences = [
     website: 'https://www.connyct.com',
     location: 'New York, NY (Remote)',
     period: 'Jun 2025 - Aug 2025',
+    metrics: [
+      { value: '<42ms', label: 'Latency' },
+      { value: '50+', label: 'RPS' },
+    ],
     achievements: [
-      'Built hybrid recommendation system using two-tower architecture with sentence transformers, achieving <42ms average latency for personalized event recommendations.',
-      'Implemented multi-factor reranking with Redis caching, supporting 50+ RPS with A/B testing framework to continuously improve CTR and recommendation quality.',
-      'Integrated system as MCP tool for LLM agents, enabling adaptive querying and real-time semantic similarity scoring',
+      'Built Two-Tower hybrid recommendation system using sentence transformers, achieving Recall@10 of 0.85 at <40ms latency',
+      'Implemented multi-factor reranking with Redis caching, supporting 50+ RPS with A/B testing framework',
+      'Integrated system as MCP tool for LLM orchestrator, enabling adaptive querying and real-time semantic scoring',
     ],
     featured: false,
   },
@@ -40,10 +64,13 @@ const experiences = [
     website: 'https://www.ibm.com',
     location: 'Bangalore, India',
     period: 'Jan 2021 - Jul 2021',
+    metrics: [
+      { value: '15ms', label: 'Latency Drop' },
+    ],
     achievements: [
-      'Developed cloud-based ML deployment pipelines on IBM Watson platform, optimizing model serving workflows',
-      'Optimized batch prediction pipelines using GoLang concurrency and chunking, reducing inference latency by 15ms',
-      'Benchmarked TensorFlow, PyTorch, and ONNX runtimes for production migration and performance evaluation',
+      'Reduced inference latency by 15ms in IBM Watson Cloud by optimizing batch prediction pipelines using Go concurrency',
+      'Benchmarked TensorFlow, PyTorch, and ONNX runtimes to evaluate performance trade-offs for production migration',
+      'Contributed to the design of a new internal ML serving architecture based on benchmark findings',
     ],
     featured: false,
   },
@@ -54,9 +81,12 @@ const experiences = [
     website: 'https://slksoftware.com/',
     location: 'Bangalore, India',
     period: 'May 2020 - Jul 2020',
+    metrics: [
+      { value: '10+', label: 'hrs/week saved' },
+    ],
     achievements: [
-      'Built centralized ELK Stack log aggregation system using Filebeat and Node.js APIs across 5+ components',
-      'Saved developers 10+ hours per week on log retrieval and debugging efforts through automated aggregation',
+      'Saved developers 10+ hours weekly by building centralized log aggregation using ELK Stack and Filebeat',
+      'Built Node.js APIs for log retrieval across 5+ distributed components with automated aggregation',
     ],
     featured: false,
   },
@@ -67,82 +97,162 @@ const experiences = [
     website: 'https://www.linkedin.com/company/pathpartnertechnology',
     location: 'Bangalore, India',
     period: 'May 2019 - Jul 2019',
+    metrics: [
+      { value: '1.3px', label: 'Error Rate' },
+    ],
     achievements: [
       'Developed real-time CNN-based gaze tracking using transposed convolutions and Gaussian heatmap regression',
-      'Achieved mean error rate of 1.3px across diverse lighting and occlusion scenarios with high accuracy',
+      'Achieved mean error rate of 1.3px across diverse lighting and occlusion scenarios',
     ],
     featured: false,
   },
 ];
 
+const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const visibleAchievements = isExpanded ? exp.achievements : exp.achievements.slice(0, 3);
+  const hasMore = exp.achievements.length > 3;
+
+  return (
+    <motion.div
+      className={`p-6 rounded-xl border transition-all duration-300 ${
+        exp.featured
+          ? 'bg-card border-primary/20 glow-primary'
+          : 'bg-card/50 border-border/50 hover:border-border'
+      }`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+    >
+      {/* Header */}
+      <div className="flex gap-4 mb-4">
+        <motion.a
+          href={exp.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative flex-shrink-0 w-12 h-12 rounded-lg bg-muted/30 overflow-hidden group"
+          whileHover={{ scale: 1.05 }}
+        >
+          <img
+            src={exp.logo}
+            alt={`${exp.company} logo`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <ExternalLink size={14} className="text-primary" />
+          </div>
+        </motion.a>
+
+        <div className="flex-grow">
+          <div className="flex items-start justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
+              <p className="text-base text-muted-foreground">{exp.company}</p>
+            </div>
+            {exp.featured && (
+              <span className="px-2 py-0.5 text-xs font-mono bg-primary/10 text-primary rounded">
+                Featured
+              </span>
+            )}
+          </div>
+          <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <MapPin size={14} />
+              {exp.location}
+            </span>
+            <span className="flex items-center gap-1">
+              <Calendar size={14} />
+              {exp.period}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Metrics */}
+      {exp.metrics && exp.metrics.length > 0 && (
+        <div className="flex flex-wrap gap-3 mb-4">
+          {exp.metrics.map((metric, i) => (
+            <motion.div
+              key={i}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/5 border border-primary/20"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 + i * 0.1 }}
+            >
+              <TrendingUp size={12} className="text-primary" />
+              <span className="text-sm font-mono font-semibold text-primary">{metric.value}</span>
+              <span className="text-xs text-muted-foreground">{metric.label}</span>
+            </motion.div>
+          ))}
+        </div>
+      )}
+
+      {/* Achievements */}
+      <ul className="space-y-2">
+        <AnimatePresence mode="sync">
+          {visibleAchievements.map((achievement, i) => (
+            <motion.li
+              key={i}
+              className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ delay: i * 0.03 }}
+            >
+              <span className="text-primary mt-1.5 flex-shrink-0">•</span>
+              <span>{achievement}</span>
+            </motion.li>
+          ))}
+        </AnimatePresence>
+      </ul>
+
+      {/* Expand button */}
+      {hasMore && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="mt-4 flex items-center gap-1 text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+        >
+          {isExpanded ? 'Show less' : `+${exp.achievements.length - 3} more`}
+          <motion.span
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ChevronDown size={14} />
+          </motion.span>
+        </button>
+      )}
+    </motion.div>
+  );
+};
+
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl font-bold mb-12 text-center">
-          Work <span className="gradient-text">Experience</span>
-        </h2>
-        
+    <section id="experience" className="py-24 px-6 lg:px-12 relative">
+      <div className="absolute inset-0 grid-overlay" />
+
+      <div className="container mx-auto max-w-4xl relative">
+        {/* Section Header */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="text-sm font-mono text-primary mb-2 block">02</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Work Experience
+          </h2>
+          <p className="text-muted-foreground max-w-lg">
+            4+ years building production ML systems across computer vision, NLP, and MLOps
+          </p>
+        </motion.div>
+
+        {/* Experience Cards */}
         <div className="space-y-6">
           {experiences.map((exp, index) => (
-            <Card
-              key={index}
-              className={`p-6 sm:p-8 transition-all hover:shadow-glow ${
-                exp.featured ? 'border-primary shadow-glow' : ''
-              }`}
-            >
-              <div className="flex flex-col sm:flex-row gap-6">
-                {/* Logo */}
-                <div className="flex-shrink-0">
-                  <a
-                    href={exp.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-20 h-20 rounded-lg bg-muted flex items-center justify-center overflow-hidden transition-all hover:scale-110 hover:shadow-lg cursor-pointer"
-                    aria-label={`Visit ${exp.company} website`}
-                  >
-                    <img
-                      src={exp.logo}
-                      alt={`${exp.company} logo`}
-                      className="w-full h-full object-cover"
-                    />
-                  </a>
-                </div>
-
-                {/* Content */}
-                <div className="flex-grow">
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4">
-                    <div className="mb-4 sm:mb-0">
-                      <h3 className="text-2xl font-bold mb-2">
-                        {exp.title}
-                        {exp.featured && (
-                          <Badge className="ml-3 gradient-primary">Featured</Badge>
-                        )}
-                      </h3>
-                      <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                        <Building2 size={16} />
-                        <span className="font-semibold">{exp.company}</span>
-                        <span>•</span>
-                        <span>{exp.location}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar size={16} />
-                      <span>{exp.period}</span>
-                    </div>
-                  </div>
-
-                  <ul className="space-y-2">
-                    {exp.achievements.map((achievement, i) => (
-                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
-                        <span className="text-primary mt-1.5">▹</span>
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Card>
+            <ExperienceCard key={index} exp={exp} index={index} />
           ))}
         </div>
       </div>

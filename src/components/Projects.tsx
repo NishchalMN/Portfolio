@@ -1,160 +1,258 @@
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Github, ExternalLink, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, ChevronDown, Trophy, Cpu, Brain, Database, Mic, Satellite, Plane, Search, TrendingUp } from 'lucide-react';
 
-const allProjects = [
+type ProjectCategory = 'llm' | 'cv' | 'systems' | 'audio' | 'robotics' | 'nlp';
+
+interface Project {
+  title: string;
+  shortTitle?: string;
+  description: string;
+  metric?: { value: string; label: string };
+  tech: string[];
+  github: string;
+  featured: boolean;
+  category: ProjectCategory;
+  icon: typeof Brain;
+}
+
+const categoryConfig: Record<ProjectCategory, { label: string; color: string }> = {
+  llm: { label: 'LLM/RAG', color: 'text-primary' },
+  cv: { label: 'Computer Vision', color: 'text-secondary' },
+  systems: { label: 'Systems', color: 'text-accent' },
+  audio: { label: 'Audio', color: 'text-purple-400' },
+  robotics: { label: 'Robotics', color: 'text-red-400' },
+  nlp: { label: 'NLP', color: 'text-cyan-400' },
+};
+
+const allProjects: Project[] = [
   {
     title: 'CAFBrain: Multimodal LLM Platform',
-    description: 'Top 3 winner multimodal GenAI platform enabling contextual search and Q&A across diverse data types including video, audio, images, and PDFs. Built with RAG architecture and deployed on AWS.',
-    tech: ['LangChain', 'RAG', 'AWS', 'FastAPI', 'React', 'Vector DB'],
-    image: '/cafbrain.png',
+    shortTitle: 'CAFBrain',
+    description: 'LangGraph-based Agentic RAG workflow handling 5000+ multimodal documents (PDFs, Videos) via FAISS, reducing grant proposal creation time from hours to under a minute.',
+    metric: { value: 'Top 3', label: 'Hackathon Winner' },
+    tech: ['LangGraph', 'RAG', 'FAISS', 'FastAPI', 'AWS'],
     github: 'https://github.com/NishchalMN/CAFBrain',
-    demo: null,
     featured: true,
+    category: 'llm',
+    icon: Trophy,
   },
   {
-    title: 'FedMedVision: Privacy-Preserving Federated Learning',
-    description: 'Developed a federated learning system for medical image classification preserving patient privacy. Implemented advanced aggregation algorithms and achieved 94% accuracy across distributed datasets.',
-    tech: ['PyTorch', 'Federated Learning', 'Medical Imaging', 'Privacy ML'],
-    image: '/fedmed.png',
+    title: 'Temporal Change Retrieval',
+    shortTitle: 'Change Detection',
+    description: 'Achieved 64% Recall@10 on satellite imagery by adapting RemoteCLIP with LoRA, multi-scale frequency analysis, and difference attention mechanisms for vision-language alignment.',
+    metric: { value: '64%', label: 'Recall@10' },
+    tech: ['RemoteCLIP', 'LoRA', 'PyTorch', 'Satellite Imagery'],
+    github: 'https://github.com/NishchalMN/temporal-change-retrieval',
+    featured: true,
+    category: 'cv',
+    icon: Satellite,
+  },
+  {
+    title: 'In-Context Learning for Drone Racing',
+    shortTitle: 'Drone Racing AI',
+    description: 'Transformer-based In-Context Learning policy with cross-attention enabling zero-shot drone adaptation to new tracks using only 3 demonstrations, achieving 0.118 MSE at 60Hz real-time inference.',
+    metric: { value: '60Hz', label: 'Real-time' },
+    tech: ['Transformers', 'RL', 'AirSim', 'PyTorch'],
+    github: 'https://github.com/NishchalMN/drone-icl',
+    featured: true,
+    category: 'robotics',
+    icon: Plane,
+  },
+  {
+    title: 'FedMedVision: Privacy-Preserving Medical Platform',
+    shortTitle: 'FedMedVision',
+    description: 'Improved global F1 score by 12-15% on class-skewed X-ray data by developing a federated learning system training across 4+ client nodes using MLflow and Docker.',
+    metric: { value: '+15%', label: 'F1 Score' },
+    tech: ['Federated Learning', 'PyTorch', 'MLflow', 'Docker'],
     github: 'https://github.com/NishchalMN/FedMedVision',
-    demo: null,
-    featured: true,
+    featured: false,
+    category: 'cv',
+    icon: Brain,
   },
   {
-    title: 'Magic Filler: Image Inpainting with Deep Learning',
-    description: 'Developed a U-Net-based image inpainting model which restores occlusions such as window panes, fencing, or dirt on the images with realistic textures, closely matching the surrounding areas with an average SSIM score of 0.92',
-    tech: ['CNN', 'TensorFlow', 'Image Processing', 'Deep Learning'],
-    image: '/image_inpainting.png',
+    title: 'HyDE Retrieval System',
+    shortTitle: 'HyDE RAG',
+    description: 'Achieved 13.6% improvement in mean retrieval rate over dense baselines by implementing Hypothetical Document Embeddings using Mistral-7B for zero-shot retrieval on MS MARCO.',
+    metric: { value: '+13.6%', label: 'Retrieval' },
+    tech: ['Mistral-7B', 'HyDE', 'MS MARCO', 'Embeddings'],
+    github: 'https://github.com/NishchalMN/hyde-retrieval',
+    featured: false,
+    category: 'nlp',
+    icon: Search,
+  },
+  {
+    title: 'Magic Filler: Image Inpainting',
+    shortTitle: 'Magic Filler',
+    description: 'Restored complex image occlusions with realistic textures by developing a U-Net based inpainting model with transposed convolutions that reached 0.92 SSIM.',
+    metric: { value: '0.92', label: 'SSIM' },
+    tech: ['U-Net', 'TensorFlow', 'Image Processing'],
     github: 'https://github.com/NishchalMN/Image-Inpainting',
-    demo: null,
-    featured: true,
+    featured: false,
+    category: 'cv',
+    icon: Cpu,
   },
   {
-    title: 'Scalable DBaaS for Rideshare Application',
-    description: 'Built a distributed database-as-a-service system supporting high-throughput rideshare operations. Implemented sharding, replication, and load balancing for 10K+ concurrent users.',
-    tech: ['PostgreSQL', 'Docker', 'Kubernetes', 'Go', 'Microservices'],
-    image: '/dbaas.png',
+    title: 'Scalable DBaaS for RideShare',
+    shortTitle: 'DBaaS',
+    description: 'Designed fault-tolerant Database-as-a-Service on AWS EC2 using RabbitMQ RPC queues with custom orchestrator for read/write routing, multi-node replication, and leader election.',
+    tech: ['AWS EC2', 'RabbitMQ', 'Docker', 'PostgreSQL'],
     github: 'https://github.com/NishchalMN/Rideshare-Application',
-    demo: null,
     featured: false,
+    category: 'systems',
+    icon: Database,
   },
-  // Add more projects here that will be hidden initially
   {
-    title: 'Voice Cloning Using Deep Learning',
-    description: 'Developed a few-shot voice cloning system that replicates a speaker\'s voice from a short audio clip and text, using speaker embeddings from GE2E, and text-to-Mel synthesis using Tacotron 2, achieving a MOS of 3.2/5 for Female American speakers',
-    tech: ['PyTorch', 'NLP', 'Librosa', 'Audio Processing', 'Spectrograms', 'Speech Synthesis'],
-    image: '/voice_cloning.png',
+    title: 'Voice Cloning System',
+    shortTitle: 'Voice Clone',
+    description: 'Developed a few-shot voice cloning system using GE2E speaker embeddings and Tacotron 2, optimizing inference with a fine-tuned WaveNet vocoder.',
+    tech: ['GE2E', 'Tacotron 2', 'WaveNet', 'PyTorch'],
     github: 'https://github.com/NishchalMN/Voice-Cloning-Using-Deep-Learning',
-    demo: null,
     featured: false,
-  },
-  {
-    title: 'Heart disease detection website with live COVID-19 updates',
-    description: 'A web application that assesses the risk of heart disease and diabetes based on user inputs and provides real-time COVID-19 updates via email. The application is built using Flask in Python.',
-    tech: ['Flask', 'Machine Learning', 'Random Forest', 'Web Scraping', 'APIs'],
-    image: '/heart_disease.png',
-    github: 'https://github.com/NishchalMN/Heart-disease-diabetes-detection-website-with-live-covid-updates',
-    demo: null,
-    featured: false,
+    category: 'audio',
+    icon: Mic,
   },
 ];
 
-const Projects = () => {
-  const [showAll, setShowAll] = useState(false);
-  const displayedProjects = showAll ? allProjects : allProjects.slice(0, 3);
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const Icon = project.icon;
+  const categoryInfo = categoryConfig[project.category];
 
   return (
-    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl font-bold mb-12 text-center">
-          Featured <span className="gradient-text">Projects</span>
-        </h2>
+    <motion.a
+      href={project.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group block p-5 rounded-xl border transition-all duration-300 card-hover ${
+        project.featured
+          ? 'bg-card border-primary/20'
+          : 'bg-card/50 border-border/50'
+      }`}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.05 }}
+    >
+      {/* Top row */}
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <div className={`w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center ${categoryInfo.color}`}>
+            <Icon size={16} />
+          </div>
+          <span className={`text-xs font-mono ${categoryInfo.color}`}>
+            {categoryInfo.label}
+          </span>
+        </div>
+        {project.metric && (
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-primary/5 border border-primary/20">
+            <TrendingUp size={10} className="text-primary" />
+            <span className="text-xs font-mono font-semibold text-primary">{project.metric.value}</span>
+            <span className="text-xs text-muted-foreground">{project.metric.label}</span>
+          </div>
+        )}
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedProjects.map((project, index) => (
-            <a
-              key={index}
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block transition-all hover:-translate-y-2 cursor-pointer"
-            >
-              <Card className="p-6 flex flex-col transition-all hover:shadow-glow group h-full"
-            >
-              {/* Image/Video Placeholder */}
-              <div className="relative w-full h-48 mb-4 rounded-lg overflow-hidden bg-muted">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                />
-                {project.featured && (
-                  <Badge className="absolute top-3 right-3 gradient-primary">
-                    Featured
-                  </Badge>
-                )}
-              </div>
-              
-              <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-              
-              <p className="text-muted-foreground mb-4 flex-grow">
-                {project.description}
-              </p>
-              
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech, i) => (
-                  <Badge key={i} variant="outline" className="text-xs">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-              
-              <div className="flex gap-3">
-                {project.github && (
-                  <Button variant="outline" size="sm" asChild>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="mr-2 h-4 w-4" />
-                      Code
-                    </a>
-                  </Button>
-                )}
-                {project.demo && (
-                  <Button size="sm" asChild>
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Demo
-                    </a>
-                  </Button>
-                )}
-              </div>
-              </Card>
-            </a>
+      {/* Title */}
+      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors mb-2">
+        {project.shortTitle || project.title}
+      </h3>
+
+      {/* Description */}
+      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+        {project.description}
+      </p>
+
+      {/* Tech stack */}
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {project.tech.slice(0, 4).map((tech, i) => (
+          <span key={i} className="tag text-xs py-0.5">{tech}</span>
+        ))}
+        {project.tech.length > 4 && (
+          <span className="text-xs text-muted-foreground">+{project.tech.length - 4}</span>
+        )}
+      </div>
+
+      {/* GitHub link */}
+      <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors">
+        <Github size={14} />
+        <span>View on GitHub</span>
+        <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+      </div>
+    </motion.a>
+  );
+};
+
+const Projects = () => {
+  const [showAll, setShowAll] = useState(false);
+  const featuredProjects = allProjects.filter(p => p.featured);
+  const otherProjects = allProjects.filter(p => !p.featured);
+  const displayedOther = showAll ? otherProjects : otherProjects.slice(0, 2);
+
+  return (
+    <section id="projects" className="py-24 px-6 lg:px-12 relative">
+      <div className="absolute inset-0 dot-grid opacity-30" />
+
+      <div className="container mx-auto max-w-6xl relative">
+        {/* Section Header */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="text-sm font-mono text-primary mb-2 block">03</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Featured Projects
+          </h2>
+          <p className="text-muted-foreground max-w-lg">
+            Research and applied ML projects spanning LLMs, computer vision, robotics, and distributed systems
+          </p>
+        </motion.div>
+
+        {/* Featured Projects */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+          {featuredProjects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
 
-        {allProjects.length > 3 && (
-          <div className="flex justify-center mt-12">
-            <Button
-              onClick={() => setShowAll(!showAll)}
-              variant="outline"
-              size="lg"
-              className="gradient-hover transition-all"
+        {/* Other Projects */}
+        <AnimatePresence mode="sync">
+          {displayedOther.length > 0 && (
+            <motion.div
+              className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              {showAll ? 'Show Less' : 'Show More'}
-              <ChevronDown className={`ml-2 h-5 w-5 transition-transform ${showAll ? 'rotate-180' : ''}`} />
-            </Button>
-          </div>
+              {displayedOther.map((project, index) => (
+                <ProjectCard key={project.title} project={project} index={index + featuredProjects.length} />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Show More Button */}
+        {otherProjects.length > 2 && (
+          <motion.div
+            className="flex justify-center mt-10"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="flex items-center gap-2 px-5 py-2.5 font-mono text-sm text-muted-foreground border border-border/50 rounded-lg hover:border-primary/50 hover:text-primary transition-all"
+            >
+              {showAll ? 'Show Less' : `View ${otherProjects.length - 2} More`}
+              <motion.span
+                animate={{ rotate: showAll ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <ChevronDown size={16} />
+              </motion.span>
+            </button>
+          </motion.div>
         )}
       </div>
     </section>

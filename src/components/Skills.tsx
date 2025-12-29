@@ -1,128 +1,112 @@
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { motion } from 'framer-motion';
+import { Code2, Brain, Cloud, Database } from 'lucide-react';
 
-const skillCategories = [
+interface SkillCategory {
+  title: string;
+  icon: typeof Code2;
+  skills: string[];
+}
+
+const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
+    icon: Code2,
     skills: ['Python', 'C++', 'SQL', 'Go', 'Scala', 'JavaScript', 'Node.js'],
   },
   {
-    title: 'ML Tools & Frameworks',
+    title: 'ML Frameworks',
+    icon: Brain,
     skills: [
-      'PyTorch',
-      'TensorFlow',
-      'Langchain',
-      'HuggingFace',
-      'scikit-learn',
-      'OpenCV',
-      'ONNX',
-      'MLflow',
-      'CoreML',
-      'Open3D',
-      'WandB',
+      'PyTorch', 'TensorFlow', 'Keras', 'Transformers', 'HuggingFace',
+      'LangChain', 'LangGraph', 'Ray', 'OpenCV', 'CLIP', 'LoRA',
+      'SAM', 'LoFTR', 'CoreML', 'ONNX', 'Scikit-Learn',
     ],
   },
   {
-    title: 'Infrastructure & Cloud',
+    title: 'MLOps & Cloud',
+    icon: Cloud,
     skills: [
-      'Docker',
-      'Kubernetes',
-      'AWS',
-      'Azure',
-      'Ray',
-      'Elasticsearch',
-      'PostgreSQL',
-      'Redis',
-      'Airflow',
-      'Apache Spark',
+      'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes',
+      'Ray Serve', 'MLflow', 'WandB', 'Airflow', 'Triton', 'CI/CD',
     ],
   },
   {
-    title: 'Specializations',
+    title: 'Data & Tools',
+    icon: Database,
     skills: [
-      'Computer Vision',
-      'Large Language Models',
-      'MLOps',
-      'Model Optimization',
-      'Agentic RAG',
-      'Deep Learning',
-      'Data Science',
-      'Reinforcement Learning',
-      'Federated Learning'
+      'Redis', 'Elasticsearch', 'FAISS', 'Pinecone', 'MongoDB',
+      'PostgreSQL', 'Apache Spark', 'Pandas', 'Git', 'Blender', 'Open3D', 'AirSim',
     ],
   },
-];
-
-const softSkills = [
-  'Team Leadership',
-  'Cross-functional Collaboration',
-  'Technical Communication',
-  'Problem Solving',
-  'Mentoring',
-  'Agile Development',
-  'Research & Innovation',
-  'Project Management',
 ];
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
-      <div className="container mx-auto max-w-6xl">
-        {/* Technical Skills */}
-        <div className="mb-12">
-          <h2 className="text-4xl font-bold mb-6 text-center">
-            <span className="gradient-text">Technical Skills</span>
+    <section id="skills" className="py-24 px-6 lg:px-12 relative">
+      <div className="absolute inset-0 chart-lines opacity-30" />
+
+      <div className="container mx-auto max-w-6xl relative">
+        {/* Section Header */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="text-sm font-mono text-primary mb-2 block">04</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Technical Skills
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {skillCategories.map((category, index) => (
-              <Card key={index} className="p-6">
-                <h4 className="text-lg font-bold mb-4 text-muted-foreground">
-                  {category.title}
-                </h4>
+          <p className="text-muted-foreground max-w-lg">
+            Tools and technologies I use to build production ML systems
+          </p>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <div className="grid md:grid-cols-2 gap-6">
+          {skillCategories.map((category, categoryIndex) => {
+            const Icon = category.icon;
+            return (
+              <motion.div
+                key={category.title}
+                className="p-6 bg-card/50 rounded-xl border border-border/50 card-hover"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: categoryIndex * 0.1 }}
+              >
+                {/* Category Header */}
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground">
+                    {category.title}
+                  </h3>
+                  <span className="ml-auto text-xs font-mono text-muted-foreground">
+                    {category.skills.length} skills
+                  </span>
+                </div>
+
+                {/* Skills */}
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="relative text-sm px-3 py-1.5 rounded-full bg-background/50 text-muted-foreground hover:scale-105 transition-transform"
-                      style={{
-                        border: '1px solid transparent',
-                        backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
-                        backgroundOrigin: 'border-box',
-                        backgroundClip: 'padding-box, border-box',
-                      }}
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.span
+                      key={skill}
+                      className="tag"
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.02 }}
+                      whileHover={{ scale: 1.05 }}
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Soft Skills */}
-        <div>
-          <h2 className="text-4xl font-bold mb-6 text-center">
-            <span className="gradient-text">Soft Skills</span>
-          </h2>
-          <Card className="p-6">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {softSkills.map((skill, i) => (
-                <span
-                  key={i}
-                  className="relative text-sm px-3 py-1.5 rounded-full bg-background/50 text-muted-foreground hover:scale-105 transition-transform"
-                  style={{
-                    border: '1px solid transparent',
-                    backgroundImage: 'linear-gradient(hsl(222 47% 11%), hsl(222 47% 11%)), linear-gradient(135deg, hsl(163, 64%, 60%) 0%, hsl(220, 74%, 39%) 100%)',
-                    backgroundOrigin: 'border-box',
-                    backgroundClip: 'padding-box, border-box',
-                  }}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </Card>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
