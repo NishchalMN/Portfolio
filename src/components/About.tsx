@@ -21,7 +21,7 @@ const timeline = [
     period: '2024-2026',
     title: 'MS in ML',
     org: 'UMD',
-    description: 'Multimodal models & robotics',
+    description: 'Multimodal models & ML systems',
   },
 ];
 
@@ -60,7 +60,7 @@ const About = () => {
             <p className="text-muted-foreground leading-relaxed mb-8">
               From authenticating luxury goods at scale to building recommendation engines,
               I focus on taking models from research to production. Currently exploring
-              agentic RAG systems, multimodal foundation models, and real-time robotics.
+              agentic RAG systems, multimodal foundation models, and scalable ML infrastructure.
             </p>
 
             {/* Currently exploring */}
@@ -69,7 +69,7 @@ const About = () => {
                 <span className="text-sm font-medium text-foreground">Currently Exploring</span>
               </div>
               <div className="flex flex-wrap gap-2">
-                {['Agentic RAG', 'Multimodal LLMs', 'Real-time Robotics'].map((topic) => (
+                {['Agentic RAG', 'Multimodal LLMs', 'MLOps & Infrastructure'].map((topic) => (
                   <span key={topic} className="tag">{topic}</span>
                 ))}
               </div>
@@ -129,7 +129,7 @@ const About = () => {
           viewport={{ once: true }}
         >
           <p className="text-sm text-muted-foreground font-mono">
-            Outside of work: basketball · cooking · keeping up with AI drops
+            Outside of work: basketball · singing · cooking · keeping up with AI drops
           </p>
         </motion.div>
       </div>

@@ -124,23 +124,23 @@ const Hero = () => {
 
               {/* Rotating specialization */}
               <motion.div
-                className="h-10 mb-8 overflow-hidden"
+                className="flex items-center gap-3 mb-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="text-sm font-mono text-muted-foreground mr-2">Focus:</span>
-                <div className="inline-block relative h-8">
+                <span className="text-sm font-mono text-muted-foreground">Focus:</span>
+                <div className="relative h-8 w-48">
                   {words.map((word, index) => (
                     <motion.span
                       key={word}
-                      className="absolute left-0 text-lg font-semibold text-primary whitespace-nowrap"
-                      initial={{ opacity: 0, y: 20 }}
+                      className="absolute left-0 top-0 text-lg font-semibold text-primary whitespace-nowrap"
+                      initial={false}
                       animate={{
                         opacity: currentWord === index ? 1 : 0,
-                        y: currentWord === index ? 0 : -20,
+                        y: currentWord === index ? 0 : currentWord > index ? -20 : 20,
                       }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
                     >
                       {word}
                     </motion.span>
@@ -168,11 +168,15 @@ const Hero = () => {
               >
                 <motion.a
                   href="#experience"
-                  className="px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
+                  className="group relative px-6 py-3 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium rounded-lg overflow-hidden"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  View Experience
+                  <span className="relative z-10 flex items-center gap-2">
+                    View Experience
+                    <TrendingUp size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
                 </motion.a>
                 <motion.a
                   href="/Nishchal_resume.pdf"
@@ -188,7 +192,7 @@ const Hero = () => {
 
               {/* Quick links */}
               <motion.div
-                className="flex gap-6 mt-10 pt-8 border-t border-border/50"
+                className="flex gap-4 mt-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}

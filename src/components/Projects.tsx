@@ -158,7 +158,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       </h3>
 
       {/* Description */}
-      <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">
+      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
         {project.description}
       </p>
 

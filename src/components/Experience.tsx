@@ -81,6 +81,9 @@ const experiences: Experience[] = [
     website: 'https://slksoftware.com/',
     location: 'Bangalore, India',
     period: 'May 2020 - Jul 2020',
+    metrics: [
+      { value: '10+', label: 'hrs/week saved' },
+    ],
     achievements: [
       'Saved developers 10+ hours weekly by building centralized log aggregation using ELK Stack and Filebeat',
       'Built Node.js APIs for log retrieval across 5+ distributed components with automated aggregation',
@@ -144,8 +147,8 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
         <div className="flex-grow">
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="font-semibold text-foreground">{exp.title}</h3>
-              <p className="text-sm text-muted-foreground">{exp.company}</p>
+              <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
+              <p className="text-base text-muted-foreground">{exp.company}</p>
             </div>
             {exp.featured && (
               <span className="px-2 py-0.5 text-xs font-mono bg-primary/10 text-primary rounded">
@@ -153,13 +156,13 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
               </span>
             )}
           </div>
-          <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+          <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-muted-foreground">
             <span className="flex items-center gap-1">
-              <MapPin size={12} />
+              <MapPin size={14} />
               {exp.location}
             </span>
             <span className="flex items-center gap-1">
-              <Calendar size={12} />
+              <Calendar size={14} />
               {exp.period}
             </span>
           </div>
