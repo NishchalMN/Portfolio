@@ -23,12 +23,13 @@ const experiences: Experience[] = [
     location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
     metrics: [
-      { value: '96%', label: 'TPR' },
+      { value: '$1M+', label: 'Monthly Savings' },
       { value: '50K+', label: 'Items/mo' },
-      { value: '2x', label: 'Speedup' },
+      { value: '96%', label: 'TPR' },
     ],
     achievements: [
-      'Built end-to-end luxury authentication system achieving 96% TPR at 5% FPR, processing 50K+ items monthly in production',
+      'Built AI system to authenticate luxury goods (handbags, sneakers) for resale marketplaces, replacing 2-3 hr manual expert review with sub-minute inference, saving $1M+/month in labor costs across 200+ enterprise clients over 90 countries',
+      'Achieved 96% TPR at 5% FPR on authentication models processing 50K+ items monthly, enabling Entrupy to scale to $1.4B in annual authenticated inventory',
       'Developed 3D document unwarping pipeline with DenseNet, boosting OCR accuracy by 23% and achieving 0.84 SSIM',
       'Optimized on-device CoreML inference with dynamic overlays, delivering 2x faster real-time processing',
       'Reduced cloud infrastructure costs by 40% through automated monitoring and alerts to shut down idle GPU resources',
@@ -101,7 +102,7 @@ const experiences: Experience[] = [
       { value: '1.3px', label: 'Error Rate' },
     ],
     achievements: [
-      'Developed real-time CNN-based gaze tracking using transposed convolutions and Gaussian heatmap regression',
+      'Developed real-time CNN-based gaze tracking for driver drowsiness detection using transposed convolutions and Gaussian heatmap regression',
       'Achieved mean error rate of 1.3px across diverse lighting and occlusion scenarios',
     ],
     featured: false,
@@ -148,7 +149,14 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
           <div className="flex items-start justify-between">
             <div>
               <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
-              <p className="text-base text-muted-foreground">{exp.company}</p>
+              <a
+                href={exp.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base text-muted-foreground hover:text-primary transition-colors"
+              >
+                {exp.company}
+              </a>
             </div>
             {exp.featured && (
               <span className="px-2 py-0.5 text-xs font-mono bg-primary/10 text-primary rounded">

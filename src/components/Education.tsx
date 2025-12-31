@@ -8,7 +8,7 @@ const education = [
     school: 'University of Maryland, College Park',
     location: 'Maryland, USA',
     period: 'Aug 2024 - May 2026',
-    gpa: '3.7/4.0',
+    gpa: '3.8/4.0',
     logo: '/umd.svg',
     website: 'https://www.umd.edu',
     details: [
