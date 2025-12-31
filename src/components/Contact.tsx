@@ -57,7 +57,7 @@ const Contact = () => {
         >
           {/* Intro */}
           <p className="text-lg text-muted-foreground max-w-xl mb-8">
-            I'm always interested in discussing new opportunities, collaborating on ML projects,
+            I am always interested in discussing new opportunities, collaborating on ML projects,
             or just connecting with fellow engineers and researchers.
           </p>
 
