@@ -93,7 +93,7 @@ npm run preview
 
 ## 📧 Contact
 
-- **Email**: nmarur21@umd.edu
+- **Email**: nmarur21@terpmail.umd.edu
 - **LinkedIn**: [linkedin.com/in/nishchal-mn](https://linkedin.com/in/nishchal-mn)
 - **GitHub**: [github.com/NishchalMN](https://github.com/NishchalMN)
 

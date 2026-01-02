@@ -7,7 +7,7 @@ const Footer = () => {
   const socialLinks = [
     { href: 'https://github.com/NishchalMN', icon: Github, label: 'GitHub' },
     { href: 'https://linkedin.com/in/nishchal-mn', icon: Linkedin, label: 'LinkedIn' },
-    { href: 'mailto:nmarur21@umd.edu', icon: Mail, label: 'Email' },
+    { href: 'mailto:nmarur21@terpmail.umd.edu', icon: Mail, label: 'Email' },
   ];
 
   return (
@@ -17,8 +17,8 @@ const Footer = () => {
           {/* Logo & Tagline */}
           <motion.div
             className="text-center md:text-left"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0}}
             viewport={{ once: true }}
           >
             <a href="#hero" className="text-lg font-semibold text-foreground hover:text-primary transition-colors">
@@ -32,8 +32,8 @@ const Footer = () => {
           {/* Social Links */}
           <motion.div
             className="flex items-center gap-3"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0}}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >

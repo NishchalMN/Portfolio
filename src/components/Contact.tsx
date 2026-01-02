@@ -4,9 +4,9 @@ import { Mail, Github, Linkedin, Phone, Send, Calendar, MapPin } from 'lucide-re
 const socialLinks = [
   {
     name: 'Email',
-    href: 'mailto:nmarur21@umd.edu',
+    href: 'mailto:nmarur21@terpmail.umd.edu',
     icon: Mail,
-    label: 'nmarur21@umd.edu',
+    label: 'nmarur21@terpmail.umd.edu',
   },
   {
     name: 'LinkedIn',
@@ -37,8 +37,8 @@ const Contact = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">05</span>
@@ -50,8 +50,8 @@ const Contact = () => {
         {/* Main Card */}
         <motion.div
           className="p-8 md:p-10 bg-card/50 rounded-2xl border border-border/50"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
@@ -79,7 +79,7 @@ const Contact = () => {
           {/* CTA Button */}
           <div className="flex justify-start mb-10">
             <motion.a
-              href="mailto:nmarur21@umd.edu"
+              href="mailto:nmarur21@terpmail.umd.edu"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -104,7 +104,7 @@ const Contact = () => {
                   rel={link.name !== 'Email' && link.name !== 'Phone' ? 'noopener noreferrer' : undefined}
                   className="group flex items-center gap-4 p-4 bg-muted/20 border border-border/30 rounded-xl transition-all hover:border-primary/30 hover:bg-muted/30"
                   initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0}}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + index * 0.1 }}
                   whileHover={{ x: 4 }}
