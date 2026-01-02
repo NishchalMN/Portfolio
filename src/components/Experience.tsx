@@ -209,7 +209,7 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ delay: i * 0.03 }}
             >
-              <span className="text-primary mt-1.5 flex-shrink-0">•</span>
+              <span className="text-primary flex-shrink-0">•</span>
               <span>{achievement}</span>
             </motion.li>
           ))}
