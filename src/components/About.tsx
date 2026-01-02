@@ -35,8 +35,8 @@ const About = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">01</span>
@@ -94,8 +94,8 @@ const About = () => {
                     <motion.div
                       key={item.period}
                       className="relative pl-12"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0}}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 * index }}
                     >

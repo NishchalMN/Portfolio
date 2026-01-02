@@ -23,12 +23,12 @@ const experiences: Experience[] = [
     location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
     metrics: [
-      { value: '$1M+', label: 'Monthly Savings' },
+      { value: '$1M+', label: 'Revenue growth' },
       { value: '50K+', label: 'Items/mo' },
       { value: '96%', label: 'TPR' },
     ],
     achievements: [
-      'Built AI system to authenticate luxury goods (handbags, sneakers) for resale marketplaces, replacing 2-3 hr manual expert review with sub-minute inference, saving $1M+/month in labor costs across 200+ enterprise clients over 90 countries',
+      'Built ML Pipelines for sneaker authentication in luxury resale marketplaces, reducing manual expert reviews with sub-minute AI inference, across 200+ enterprise clients over 90 countries',
       'Achieved 96% TPR at 5% FPR on authentication models processing 50K+ items monthly, enabling Entrupy to scale to $1.4B in annual authenticated inventory',
       'Developed 3D document unwarping pipeline with DenseNet, boosting OCR accuracy by 23% and achieving 0.84 SSIM',
       'Optimized on-device CoreML inference with dynamic overlays, delivering 2x faster real-time processing',
@@ -41,11 +41,11 @@ const experiences: Experience[] = [
     featured: true,
   },
   {
-    title: 'AI Intern',
-    company: 'Connyct',
+    title: 'AI Engineer Intern',
+    company: 'Connyct Inc.',
     logo: '/connyct.jpeg',
     website: 'https://www.connyct.com',
-    location: 'New York, NY (Remote)',
+    location: 'New York, NY',
     period: 'Jun 2025 - Aug 2025',
     metrics: [
       { value: '<42ms', label: 'Latency' },
@@ -121,8 +121,8 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
           ? 'bg-card border-primary/20 glow-primary'
           : 'bg-card/50 border-border/50 hover:border-border'
       }`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0}}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
@@ -244,8 +244,8 @@ const Experience = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">02</span>

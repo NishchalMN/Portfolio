@@ -28,7 +28,7 @@ const categoryConfig: Record<ProjectCategory, { label: string; color: string }> 
 const allProjects: Project[] = [
   {
     title: 'CAFBrain: Multimodal LLM Platform',
-    shortTitle: 'CAFBrain',
+    shortTitle: 'CAFBrain: Multimodal LLM Platform',
     description: 'LangGraph-based Agentic RAG workflow handling 5000+ multimodal documents (PDFs, Videos) via FAISS, reducing grant proposal creation time from hours to under a minute.',
     metric: { value: 'Top 3', label: 'Hackathon Winner' },
     tech: ['LangGraph', 'RAG', 'FAISS', 'FastAPI', 'AWS'],
@@ -39,7 +39,7 @@ const allProjects: Project[] = [
   },
   {
     title: 'Temporal Change Retrieval',
-    shortTitle: 'Change Detection',
+    shortTitle: 'Temporal Change Retrieval',
     description: 'Achieved 64% Recall@10 on satellite imagery by adapting RemoteCLIP with LoRA, multi-scale frequency analysis, and difference attention mechanisms for vision-language alignment.',
     metric: { value: '64%', label: 'Recall@10' },
     tech: ['RemoteCLIP', 'LoRA', 'PyTorch', 'Satellite Imagery'],
@@ -50,7 +50,7 @@ const allProjects: Project[] = [
   },
   {
     title: 'In-Context Learning for Drone Racing',
-    shortTitle: 'Drone Racing AI',
+    shortTitle: 'In-Context Learning for Drone Racing',
     description: 'Transformer-based In-Context Learning policy with cross-attention enabling zero-shot drone adaptation to new tracks using only 3 demonstrations, achieving 0.118 MSE at 60Hz real-time inference.',
     metric: { value: '60Hz', label: 'Real-time' },
     tech: ['Transformers', 'RL', 'AirSim', 'PyTorch'],
@@ -61,21 +61,21 @@ const allProjects: Project[] = [
   },
   {
     title: 'FedMedVision: Privacy-Preserving Medical Platform',
-    shortTitle: 'FedMedVision',
+    shortTitle: 'FedMedVision: Privacy-Preserving Medical Platform',
     description: 'Improved global F1 score by 12-15% on class-skewed X-ray data by developing a federated learning system training across 4+ client nodes using MLflow and Docker.',
     metric: { value: '+15%', label: 'F1 Score' },
     tech: ['Federated Learning', 'PyTorch', 'MLflow', 'Docker'],
     github: 'https://github.com/NishchalMN/FedMedVision',
     featured: false,
-    category: 'cv',
+    category: 'systems',
     icon: Brain,
   },
   {
-    title: 'HyDE Retrieval System',
-    shortTitle: 'HyDE RAG',
+    title: 'Generative Query Expansion Engine',
+    shortTitle: 'Generative Query Expansion Engine',
     description: 'Achieved 13.6% improvement in mean retrieval rate over dense baselines by implementing Hypothetical Document Embeddings using Mistral-7B for zero-shot retrieval on MS MARCO.',
     metric: { value: '+13.6%', label: 'Retrieval' },
-    tech: ['Mistral-7B', 'HyDE', 'MS MARCO', 'Embeddings'],
+    tech: ['Advanced RAG', 'HyDE', 'Mistral-7B', 'Embeddings'],
     github: 'https://github.com/NishchalMN/hyde-retrieval',
     featured: false,
     category: 'nlp',
@@ -83,7 +83,7 @@ const allProjects: Project[] = [
   },
   {
     title: 'Magic Filler: Image Inpainting',
-    shortTitle: 'Magic Filler',
+    shortTitle: 'Magic Filler: Image Inpainting',
     description: 'Restored complex image occlusions with realistic textures by developing a U-Net based inpainting model with transposed convolutions that reached 0.92 SSIM.',
     metric: { value: '0.92', label: 'SSIM' },
     tech: ['U-Net', 'TensorFlow', 'Image Processing'],
@@ -94,7 +94,7 @@ const allProjects: Project[] = [
   },
   {
     title: 'Scalable DBaaS for RideShare',
-    shortTitle: 'DBaaS',
+    shortTitle: 'Scalable DBaaS for RideShare',
     description: 'Designed fault-tolerant Database-as-a-Service on AWS EC2 using RabbitMQ RPC queues with custom orchestrator for read/write routing, multi-node replication, and leader election.',
     tech: ['AWS EC2', 'RabbitMQ', 'Docker', 'PostgreSQL'],
     github: 'https://github.com/NishchalMN/Rideshare-Application',
@@ -104,9 +104,9 @@ const allProjects: Project[] = [
   },
   {
     title: 'Voice Cloning System',
-    shortTitle: 'Voice Clone',
+    shortTitle: 'Few-shot Voice Cloning',
     description: 'Developed a few-shot voice cloning system using GE2E speaker embeddings and Tacotron 2, optimizing inference with a fine-tuned WaveNet vocoder.',
-    tech: ['GE2E', 'Tacotron 2', 'WaveNet', 'PyTorch'],
+    tech: ['Spectrogram', 'Tacotron 2', 'WaveNet', 'PyTorch'],
     github: 'https://github.com/NishchalMN/Voice-Cloning-Using-Deep-Learning',
     featured: false,
     category: 'audio',
@@ -128,8 +128,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           ? 'bg-card border-primary/20'
           : 'bg-card/50 border-border/50'
       }`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0}}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05 }}
     >
@@ -196,8 +196,8 @@ const Projects = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">03</span>

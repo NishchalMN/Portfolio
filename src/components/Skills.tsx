@@ -18,7 +18,7 @@ const skillCategories: SkillCategory[] = [
     icon: Brain,
     skills: [
       'PyTorch', 'TensorFlow', 'Keras', 'Transformers', 'HuggingFace',
-      'LangChain', 'LangGraph', 'Ray', 'OpenCV', 'CLIP', 'LoRA',
+      'LangChain', 'LangGraph', 'OpenCV', 'Librosa', 'CUDA', 'CLIP', 'LoRA',
       'SAM', 'LoFTR', 'CoreML', 'ONNX', 'Scikit-Learn',
     ],
   },
@@ -27,7 +27,7 @@ const skillCategories: SkillCategory[] = [
     icon: Cloud,
     skills: [
       'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes',
-      'Ray Serve', 'MLflow', 'WandB', 'Airflow', 'Triton', 'CI/CD',
+      'Ray', 'MLflow', 'WandB', 'Airflow', 'Triton', 'CI/CD',
     ],
   },
   {
@@ -49,8 +49,8 @@ const Skills = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0}}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">04</span>
@@ -70,8 +70,8 @@ const Skills = () => {
               <motion.div
                 key={category.title}
                 className="p-6 bg-card/50 rounded-xl border border-border/50 card-hover"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0}}
                 viewport={{ once: true }}
                 transition={{ delay: categoryIndex * 0.1 }}
               >

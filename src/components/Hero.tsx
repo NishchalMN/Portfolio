@@ -84,7 +84,7 @@ const Hero = () => {
           {/* Top row - status */}
           <motion.div
             className="flex items-center gap-4 mb-12"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
@@ -115,7 +115,7 @@ const Hero = () => {
 
               <motion.p
                 className="text-xl text-muted-foreground mb-4"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
@@ -151,7 +151,7 @@ const Hero = () => {
               {/* Description */}
               <motion.p
                 className="text-muted-foreground text-lg leading-relaxed max-w-lg mb-10"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
@@ -162,7 +162,7 @@ const Hero = () => {
               {/* CTA Buttons */}
               <motion.div
                 className="flex flex-wrap gap-4"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
@@ -200,7 +200,7 @@ const Hero = () => {
                 {[
                   { href: 'https://github.com/NishchalMN', label: 'GitHub' },
                   { href: 'https://linkedin.com/in/nishchal-mn', label: 'LinkedIn' },
-                  { href: 'mailto:nmarur21@umd.edu', label: 'Email' },
+                  { href: 'mailto:nmarur21@terpmail.umd.edu', label: 'Email' },
                 ].map((link) => (
                   <a
                     key={link.label}
