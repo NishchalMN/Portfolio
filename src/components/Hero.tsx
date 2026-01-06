@@ -155,8 +155,8 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                Building production ML systems that scale. Currently pursuing MS in Machine Learning
-                at University of Maryland, previously at Entrupy authenticating luxury goods at scale.
+                Building production ML systems that scale. Currently completing my MS in ML
+                at University of Maryland, previously at Entrupy authenticating luxury goods worldwide.
               </motion.p>
 
               {/* CTA Buttons */}
