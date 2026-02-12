@@ -46,7 +46,7 @@ const experiences: Experience[] = [
     logo: '/connyct.jpeg',
     website: 'https://www.connyct.com',
     location: 'New York, NY',
-    period: 'Jun 2025 - Aug 2025',
+    period: 'Nov 2025 - Jan 2026',
     metrics: [
       { value: '<42ms', label: 'Latency' },
       { value: '50+', label: 'RPS' },

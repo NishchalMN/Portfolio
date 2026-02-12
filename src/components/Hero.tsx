@@ -56,7 +56,7 @@ const Hero = () => {
 
   const metrics = [
     { value: '96%', label: 'TPR Achieved', sub: 'Luxury Authentication', icon: TrendingUp, color: 'primary' },
-    { value: '50K+', label: 'Items/Month', sub: 'Production Scale', icon: BarChart3, color: 'secondary' },
+    { value: '50K+', label: 'Luxury Items/Month', sub: 'Production Scale', icon: BarChart3, color: 'secondary' },
     { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent' },
   ];
 
@@ -90,12 +90,16 @@ const Hero = () => {
           >
             <div className="status-active">
               <span className="text-sm font-mono text-muted-foreground">
-                Available May 2026
+                Open to Full-time roles
               </span>
             </div>
-            <span className="text-muted-foreground/30">|</span>
+            {/* <span className="text-muted-foreground/30">|</span>
             <span className="text-sm font-mono text-muted-foreground">
               College Park, MD
+            </span> */}
+            <span className="text-muted-foreground/30">|</span>
+            <span className="text-sm font-mono text-muted-foreground">
+              US Work Authorization (OPT/STEM till 2029)
             </span>
           </motion.div>
 
@@ -200,7 +204,7 @@ const Hero = () => {
                 {[
                   { href: 'https://github.com/NishchalMN', label: 'GitHub' },
                   { href: 'https://linkedin.com/in/nishchal-mn', label: 'LinkedIn' },
-                  { href: 'mailto:nmarur21@terpmail.umd.edu', label: 'Email' },
+                  { href: 'mailto:nishchal.marur@gmail.com', label: 'Email' },
                 ].map((link) => (
                   <a
                     key={link.label}

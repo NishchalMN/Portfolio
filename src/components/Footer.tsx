@@ -7,7 +7,7 @@ const Footer = () => {
   const socialLinks = [
     { href: 'https://github.com/NishchalMN', icon: Github, label: 'GitHub' },
     { href: 'https://linkedin.com/in/nishchal-mn', icon: Linkedin, label: 'LinkedIn' },
-    { href: 'mailto:nmarur21@terpmail.umd.edu', icon: Mail, label: 'Email' },
+    { href: 'mailto:nishchal.marur@gmail.com', icon: Mail, label: 'Email' },
   ];
 
   return (

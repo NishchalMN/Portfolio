@@ -4,9 +4,9 @@ import { Mail, Github, Linkedin, Phone, Send, Calendar, MapPin } from 'lucide-re
 const socialLinks = [
   {
     name: 'Email',
-    href: 'mailto:nmarur21@terpmail.umd.edu',
+    href: 'mailto:nishchal.marur@gmail.com',
     icon: Mail,
-    label: 'nmarur21@terpmail.umd.edu',
+    label: 'nishchal.marur@gmail.com',
   },
   {
     name: 'LinkedIn',
@@ -64,7 +64,7 @@ const Contact = () => {
           {/* Status Badges */}
           <div className="flex flex-wrap gap-3 mb-10">
             <div className="status-active px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30">
-              <span className="text-sm font-medium text-emerald-400">Open to Opportunities</span>
+              <span className="text-sm font-medium text-emerald-400">Open to Relocate</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted/30 border border-border/50">
               <Calendar size={14} className="text-muted-foreground" />
@@ -79,7 +79,7 @@ const Contact = () => {
           {/* CTA Button */}
           <div className="flex justify-start mb-10">
             <motion.a
-              href="mailto:nmarur21@terpmail.umd.edu"
+              href="mailto:nishchal.marur@gmail.com"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
