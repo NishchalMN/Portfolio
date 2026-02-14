@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, TrendingUp, Activity, BarChart3 } from 'lucide-react';
+import { ArrowDown, TrendingUp, Activity, BarChart3, TrendingDown } from 'lucide-react';
 
 // Mini bar chart decoration
 const MiniChart = ({ values, color = 'primary' }: { values: number[]; color?: string }) => {
@@ -56,8 +56,8 @@ const Hero = () => {
 
   const metrics = [
     { value: '96%', label: 'TPR Achieved', sub: 'Luxury Authentication', icon: TrendingUp, color: 'primary' },
-    { value: '50K+', label: 'Luxury Items/Month', sub: 'Production Scale', icon: BarChart3, color: 'secondary' },
     { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent' },
+    { value: '40%', label: 'Cost Reduction', sub: 'Cloud Infrastructure', icon: TrendingDown, color: 'secondary' },
   ];
 
   return (
@@ -90,7 +90,7 @@ const Hero = () => {
           >
             <div className="status-active">
               <span className="text-sm font-mono text-muted-foreground">
-                Open to Full-time roles
+                Open to relocate
               </span>
             </div>
             {/* <span className="text-muted-foreground/30">|</span>
@@ -112,7 +112,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <span className="text-foreground">Nishchal</span>
+                <span className="gradient-text">Nishchal</span>
                 <br />
                 <span className="gradient-text">Marur</span>
               </motion.h1>

@@ -16,6 +16,41 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
+    title: 'AI Engineer Intern',
+    company: 'Connyct Inc.',
+    logo: '/connyct.jpeg',
+    website: 'https://www.connyct.com',
+    location: 'New York, NY',
+    period: 'Nov 2025 - Jan 2026',
+    metrics: [
+      { value: '<42ms', label: 'Latency' },
+      { value: '50+', label: 'RPS' },
+    ],
+    achievements: [
+      'Built Two-Tower hybrid recommendation engine combining sentence transformers and Elasticsearch with multi-signal user profiling, achieving Recall@10 of 0.85 at <40ms latency',
+      'Implemented location-aware reranking with composite relevance scoring and Redis caching, supporting 50+ RPS with A/B testing framework to optimize CTR',
+      'Integrated system as MCP tool for LLM orchestrator, enabling adaptive querying and real-time semantic scoring',
+    ],
+    featured: false,
+  },
+  {
+    title: 'Research Assistant',
+    company: 'PRG Lab (PI: Cornelia Fermuller)',
+    logo: '/prg-lab.png',
+    website: 'https://prg.cs.umd.edu',
+    location: 'College Park, Maryland',
+    period: 'Jun 2025 - Aug 2025',
+    metrics: [
+      { value: '3', label: 'Modalities' },
+      { value: '30', label: 'FPS Pose Input' },
+    ],
+    achievements: [
+      'Developed a cross-modal generation pipeline converting performer pose sequences to violin audio using DDSP, Transformer autoencoder-based MIDI synthesis, enabling audio generation directly from motion capture',
+      'Implemented calibrated multi-view reprojection of 3D pose data, validating extrinsic conventions (world to camera transforms, camera center parameterization) to maintain metric and orientation consistency across views.'
+    ],
+    featured: false,
+  },
+  {
     title: 'Machine Learning Engineer II',
     company: 'Entrupy Inc.',
     logo: '/entrupy-icon.webp',
@@ -31,32 +66,14 @@ const experiences: Experience[] = [
       'Built ML Pipelines for sneaker authentication in luxury resale marketplaces, reducing manual expert reviews with sub-minute AI inference, across 200+ enterprise clients over 90 countries',
       'Achieved 96% TPR at 5% FPR on authentication models processing 50K+ items monthly, enabling Entrupy to scale to $1.4B in annual authenticated inventory',
       'Developed 3D document unwarping pipeline with DenseNet, boosting OCR accuracy by 23% and achieving 0.84 SSIM',
-      'Optimized on-device CoreML inference with dynamic overlays, delivering 2x faster real-time processing',
-      'Reduced cloud infrastructure costs by 40% through automated monitoring and alerts to shut down idle GPU resources',
-      'Improved macro fingerprinting TPR by 15% for return fraud detection using patch embedding similarity',
+      'Improved on-device segmentation IoU from 87% to 96% using SAM-HQ, trained a compact EfficientNet for CoreML deployment with 10x model compression via FP16 quantization for real-time auto-capture on iOS',
+      'Reduced cloud infrastructure costs by 40% by implementing automated monitoring and alerts on DataCrunch to identify and shut down idle GPU resources',
+      'Optimized macro fingerprinting pipeline using patch embedding similarity, boosting TPR by 15% and reducing authentication latency from 25s to under 15s with Ray parallel processing',
       'Built pose-estimation models for sneaker pre-alignment, increasing LoFTR+RANSAC inlier ratio by 18%',
       'Trained monocular depth estimation and semantic segmentation models using SAM for automated quality inspection',
-      'Built synthetic data pipelines using Blender Python simulating camera intrinsics, lighting, and material textures',
+      'Built synthetic data pipelines using Blender Python and Stable Diffusion inpainting to simulate camera intrinsics, lighting, and material textures, reducing time-to-production for new models from weeks to days',
     ],
     featured: true,
-  },
-  {
-    title: 'AI Engineer Intern',
-    company: 'Connyct Inc.',
-    logo: '/connyct.jpeg',
-    website: 'https://www.connyct.com',
-    location: 'New York, NY',
-    period: 'Nov 2025 - Jan 2026',
-    metrics: [
-      { value: '<42ms', label: 'Latency' },
-      { value: '50+', label: 'RPS' },
-    ],
-    achievements: [
-      'Built Two-Tower hybrid recommendation system using sentence transformers, achieving Recall@10 of 0.85 at <40ms latency',
-      'Implemented multi-factor reranking with Redis caching, supporting 50+ RPS with A/B testing framework',
-      'Integrated system as MCP tool for LLM orchestrator, enabling adaptive querying and real-time semantic scoring',
-    ],
-    featured: false,
   },
   {
     title: 'MLOps Intern',
@@ -69,7 +86,7 @@ const experiences: Experience[] = [
       { value: '15ms', label: 'Latency Drop' },
     ],
     achievements: [
-      'Reduced inference latency by 15ms in IBM Watson Cloud by optimizing batch prediction pipelines using Go concurrency',
+      'Reduced inference latency by 15ms in IBM Watson Cloud deployments by optimizing batch prediction pipelines using Go concurrency and chunked downloads on Kubernetes',
       'Benchmarked TensorFlow, PyTorch, and ONNX runtimes to evaluate performance trade-offs for production migration',
       'Contributed to the design of a new internal ML serving architecture based on benchmark findings',
     ],
@@ -253,7 +270,7 @@ const Experience = () => {
             Work Experience
           </h2>
           <p className="text-muted-foreground max-w-lg">
-            4+ years building production ML systems across computer vision, NLP, and MLOps
+            4+ years building production ML systems across Computer Vision, LLMs, and MLOps
           </p>
         </motion.div>
 

@@ -35,7 +35,7 @@ const skillCategories: SkillCategory[] = [
     icon: Database,
     skills: [
       'Redis', 'Elasticsearch', 'FAISS', 'Pinecone', 'MongoDB',
-      'PostgreSQL', 'Apache Spark', 'Pandas', 'Git', 'Blender', 'Open3D', 'AirSim',
+      'PostgreSQL', 'FastAPI', 'Flask', 'Apache Spark', 'Kafka', 'Pandas', 'Git', 'Blender', 'Open3D', 'AirSim',
     ],
   },
 ];
