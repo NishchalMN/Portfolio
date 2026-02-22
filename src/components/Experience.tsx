@@ -60,7 +60,7 @@ const experiences: Experience[] = [
     metrics: [
       { value: '$1M+', label: 'Revenue growth' },
       { value: '50K+', label: 'Items/mo' },
-      { value: '96%', label: 'TPR' },
+      { value: '95%', label: 'Automation Rate' },
     ],
     achievements: [
       'Built ML Pipelines for sneaker authentication in luxury resale marketplaces, reducing manual expert reviews with sub-minute AI inference, across 200+ enterprise clients over 90 countries',

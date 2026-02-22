@@ -55,9 +55,9 @@ const Hero = () => {
   }, []);
 
   const metrics = [
-    { value: '96%', label: 'TPR Achieved', sub: 'Luxury Authentication', icon: TrendingUp, color: 'primary' },
-    { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent' },
-    { value: '40%', label: 'Cost Reduction', sub: 'Cloud Infrastructure', icon: TrendingDown, color: 'secondary' },
+    { value: '96%', label: 'TPR Achieved', sub: 'Luxury Authentication', icon: TrendingUp, color: 'primary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
+    { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
+    { value: '40%', label: 'Reduction', sub: 'Cloud Infrastructure Cost', icon: TrendingDown, color: 'secondary', chartValues: [100, 85, 95, 70, 90, 55, 80, 45, 65, 40] },
   ];
 
   return (
@@ -172,13 +172,13 @@ const Hero = () => {
               >
                 <motion.a
                   href="#experience"
-                  className="group relative px-6 py-3 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium rounded-lg overflow-hidden"
+                  className="group relative px-6 py-3 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium rounded-lg overflow-hidden hover:from-[hsl(260, 74%, 56%)] hover:to-[hsl(240,50%,55%)] transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <span className="relative z-10 flex items-center gap-2">
                     View Experience
-                    <TrendingUp size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                    <TrendingUp size={16} className="group-hover:translate-y-0.5 transition-transform" />
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
                 </motion.a>
@@ -240,7 +240,7 @@ const Hero = () => {
                       <div className="flex flex-col items-end gap-2">
                         <Icon className="w-5 h-5 text-muted-foreground" />
                         <MiniChart
-                          values={[40, 65, 45, 80, 55, 90, 70, 95, 85, 100]}
+                          values={metric.chartValues}
                           color={metric.color}
                         />
                       </div>

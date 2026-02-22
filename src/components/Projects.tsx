@@ -188,7 +188,7 @@ const Projects = () => {
   const [showAll, setShowAll] = useState(false);
   const featuredProjects = allProjects.filter(p => p.featured);
   const otherProjects = allProjects.filter(p => !p.featured);
-  const displayedOther = showAll ? otherProjects : otherProjects.slice(0, 2);
+  const displayedOther = showAll ? otherProjects : otherProjects.slice(0, 3);
 
   return (
     <section id="projects" className="py-24 px-6 lg:px-12 relative">
@@ -235,7 +235,7 @@ const Projects = () => {
         </AnimatePresence>
 
         {/* Show More Button */}
-        {otherProjects.length > 2 && (
+        {otherProjects.length > 3 && (
           <motion.div
             className="flex justify-center mt-10"
             initial={{ opacity: 0 }}
@@ -246,7 +246,7 @@ const Projects = () => {
               onClick={() => setShowAll(!showAll)}
               className="flex items-center gap-2 px-5 py-2.5 font-mono text-sm text-muted-foreground border border-border/50 rounded-lg hover:border-primary/50 hover:text-primary transition-all"
             >
-              {showAll ? 'Show Less' : `View ${otherProjects.length - 2} More`}
+              {showAll ? 'Show Less' : `View ${otherProjects.length - 3} More`}
               <motion.span
                 animate={{ rotate: showAll ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
