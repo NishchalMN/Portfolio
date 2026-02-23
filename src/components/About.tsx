@@ -13,14 +13,14 @@ const timeline = [
     icon: Briefcase,
     period: '2021-2024',
     title: 'ML Engineer II',
-    org: 'Entrupy',
+    org: 'Entrupy Inc.',
     description: '3 years building production ML',
   },
   {
     icon: Rocket,
     period: '2024-2026',
     title: 'MS in ML',
-    org: 'UMD',
+    org: 'University of Maryland',
     description: 'Multimodal models & ML systems',
   },
 ];
@@ -35,8 +35,8 @@ const About = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0}}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">01</span>
@@ -48,8 +48,8 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left - Bio */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
@@ -78,8 +78,8 @@ const About = () => {
 
           {/* Right - Timeline */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
@@ -94,8 +94,8 @@ const About = () => {
                     <motion.div
                       key={item.period}
                       className="relative pl-12"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0}}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 * index }}
                     >

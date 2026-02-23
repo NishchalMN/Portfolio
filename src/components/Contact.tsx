@@ -37,8 +37,8 @@ const Contact = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0}}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">05</span>
@@ -50,8 +50,8 @@ const Contact = () => {
         {/* Main Card */}
         <motion.div
           className="p-8 md:p-10 bg-card/50 rounded-2xl border border-border/50"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0}}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
@@ -103,8 +103,8 @@ const Contact = () => {
                   target={link.name !== 'Email' && link.name !== 'Phone' ? '_blank' : undefined}
                   rel={link.name !== 'Email' && link.name !== 'Phone' ? 'noopener noreferrer' : undefined}
                   className="group flex items-center gap-4 p-4 bg-muted/20 border border-border/30 rounded-xl transition-all hover:border-primary/30 hover:bg-muted/30"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0}}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + index * 0.1 }}
                   whileHover={{ x: 4 }}

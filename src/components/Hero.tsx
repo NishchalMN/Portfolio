@@ -64,7 +64,7 @@ const Hero = () => {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 md:pt-0"
     >
       {/* Dot grid background */}
       <div className="absolute inset-0 dot-grid" />
@@ -83,7 +83,7 @@ const Hero = () => {
         <div className="max-w-6xl mx-auto">
           {/* Top row - status */}
           <motion.div
-            className="flex items-center gap-4 mb-12"
+            className="flex flex-wrap items-center gap-2 md:gap-4 mb-8 md:mb-12"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}

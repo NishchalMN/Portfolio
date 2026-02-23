@@ -49,8 +49,8 @@ const Skills = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0}}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">04</span>
@@ -70,8 +70,8 @@ const Skills = () => {
               <motion.div
                 key={category.title}
                 className="p-6 bg-card/50 rounded-xl border border-border/50 card-hover"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0}}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: categoryIndex * 0.1 }}
               >
@@ -94,8 +94,8 @@ const Skills = () => {
                     <motion.span
                       key={skill}
                       className="tag"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ delay: categoryIndex * 0.1 + skillIndex * 0.02 }}
                       whileHover={{ scale: 1.05 }}

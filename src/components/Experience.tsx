@@ -138,8 +138,8 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
           ? 'bg-card border-primary/20 glow-primary'
           : 'bg-card/50 border-border/50 hover:border-border'
       }`}
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0}}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
     >
@@ -201,8 +201,8 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
             <motion.div
               key={i}
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/5 border border-primary/20"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 + i * 0.1 }}
             >
@@ -261,8 +261,8 @@ const Experience = () => {
         {/* Section Header */}
         <motion.div
           className="mb-16"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0}}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
           <span className="text-sm font-mono text-primary mb-2 block">02</span>
