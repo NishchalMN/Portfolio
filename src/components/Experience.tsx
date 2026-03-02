@@ -59,12 +59,12 @@ const experiences: Experience[] = [
     period: 'Aug 2021 - Aug 2024',
     metrics: [
       { value: '$1M+', label: 'Revenue growth' },
-      { value: '50K+', label: 'Items/mo' },
+      { value: '150K+', label: 'Luxury Items/mo' },
       { value: '95%', label: 'Automation Rate' },
     ],
     achievements: [
       'Built ML Pipelines for sneaker authentication in luxury resale marketplaces, reducing manual expert reviews with sub-minute AI inference, across 200+ enterprise clients over 90 countries',
-      'Achieved 96% TPR at 5% FPR on authentication models processing 50K+ items monthly, enabling Entrupy to scale to $1.4B in annual authenticated inventory',
+      'Achieved 96% TPR at 5% FPR on authentication models processing 150K+ luxury items monthly, enabling Entrupy to scale to $1.4B in annual authenticated inventory',
       'Developed 3D document unwarping pipeline with DenseNet, boosting OCR accuracy by 23% and achieving 0.84 SSIM',
       'Improved on-device segmentation IoU from 87% to 96% using SAM-HQ, trained a compact EfficientNet for CoreML deployment with 10x model compression via FP16 quantization for real-time auto-capture on iOS',
       'Reduced cloud infrastructure costs by 40% by implementing automated monitoring and alerts on DataCrunch to identify and shut down idle GPU resources',
@@ -221,9 +221,9 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
             <motion.li
               key={i}
               className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ delay: i * 0.03 }}
             >
               <span className="text-primary flex-shrink-0">•</span>

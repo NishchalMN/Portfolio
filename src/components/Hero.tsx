@@ -57,7 +57,7 @@ const Hero = () => {
   const metrics = [
     { value: '96%', label: 'TPR Achieved', sub: 'Luxury Authentication', icon: TrendingUp, color: 'primary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
     { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
-    { value: '40%', label: 'Reduction', sub: 'Cloud Infrastructure Cost', icon: TrendingDown, color: 'secondary', chartValues: [100, 85, 95, 70, 90, 55, 80, 45, 65, 40] },
+    { value: '150K+', label: 'Luxury Items/mo', sub: 'Authenticated Inventory', icon: TrendingUp, color: 'secondary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
   ];
 
   return (
