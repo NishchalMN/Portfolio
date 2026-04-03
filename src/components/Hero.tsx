@@ -45,7 +45,7 @@ const Hero = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const words = ['Multimodal LLMs', 'Computer Vision', 'Production ML', 'MLOps'];
+  const words = ['Multimodal LLMs', 'Computer Vision', 'Generative AI', 'Recommender Systems', 'MLOps'];
 
   useEffect(() => {
     const interval = setInterval(() => {
