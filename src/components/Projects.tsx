@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, ChevronDown, Trophy, Cpu, Brain, Database, Mic, Satellite, Plane, Search, TrendingUp } from 'lucide-react';
+import { Github, ChevronDown, Trophy, Brain, Database, Satellite, Plane, Search, TrendingUp, HeartPulse, Cpu, Mic } from 'lucide-react';
 
 type ProjectCategory = 'llm' | 'cv' | 'systems' | 'audio' | 'robotics' | 'nlp';
 
@@ -29,8 +29,8 @@ const allProjects: Project[] = [
   {
     title: 'CAFBrain: Multimodal LLM Platform',
     shortTitle: 'CAFBrain: Multimodal LLM Platform',
-    description: 'LangGraph-based Agentic RAG workflow handling 5000+ multimodal documents (PDFs, Videos) via FAISS, reducing grant proposal creation time from hours to under a minute.',
-    metric: { value: 'Top 3', label: 'Hackathon Winner' },
+    description: 'Built an agentic RAG system that reduced grant proposal creation time from hours to under a minute, using LangChain and LangGraph with multi-step tool routing across 5000+ multimodal documents using FAISS.',
+    metric: { value: '5000+', label: 'Documents' },
     tech: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'FastAPI', 'AWS'],
     github: 'https://github.com/CAFBrain-Project/CAFBrain',
     featured: true,
@@ -38,8 +38,8 @@ const allProjects: Project[] = [
     icon: Trophy,
   },
   {
-    title: 'Temporal Change Retrieval',
-    shortTitle: 'Temporal Change Retrieval',
+    title: 'FSTChangeNet: Temporal Change Retrieval',
+    shortTitle: 'FSTChangeNet: Temporal Change Retrieval',
     description: 'Designed a dual-encoder architecture with custom frequency-spatial-temporal attention module and LoRA fine-tuned RemoteCLIP for vision-language alignment, achieving 64% Recall@10 on natural-language change queries for satellite images.',
     metric: { value: '64%', label: 'Recall@10' },
     tech: ['RemoteCLIP', 'LoRA', 'PyTorch', 'Satellite Imagery'],
@@ -49,33 +49,33 @@ const allProjects: Project[] = [
     icon: Satellite,
   },
   {
-    title: 'In-Context Learning for Drone Racing',
-    shortTitle: 'In-Context Learning for Drone Racing',
-    description: 'Transformer-based In-Context Learning policy with cross-attention over context embeddings enabling zero-retraining adaptation to unseen drone racing environments from just 3 demos, achieving 42% lower MSE than PPO baselines at 30Hz real-time inference across 100+ procedurally generated tracks.',
-    metric: { value: '30Hz', label: 'Real-time' },
-    tech: ['Transformers', 'RL', 'AirSim', 'PyTorch'],
-    github: 'https://github.com/NishchalMN/In-Context-Learning-for-Autonomous-Drone-Racing',
+    title: 'FedMedVision: Privacy-Preserving Medical Platform',
+    shortTitle: 'FedMedVision: Privacy-Preserving Medical Platform',
+    description: 'Developed a federated learning platform for X-ray classification across 4 non-IID hospital clients, improving global F1 by 14% over centralized baselines using FedProx aggregation and class-balanced local sampling.',
+    metric: { value: '+14%', label: 'Global F1' },
+    tech: ['Federated Learning', 'Healthcare', 'PyTorch', 'MLflow'],
+    github: 'https://github.com/NishchalMN/FedMedVision',
     featured: true,
+    category: 'cv',
+    icon: HeartPulse,
+  },
+  {
+    title: 'In-Context Learning for Autonomous Drone Racing',
+    shortTitle: 'In-Context Learning for Autonomous Drone Racing',
+    description: 'Enabled zero-retraining adaptation to unseen drone racing environments from just 3 demos via cross-attention over context embeddings, achieving 42% lower MSE than PPO baselines at 30Hz real-time inference across 100+ procedurally generated tracks.',
+    metric: { value: '-42%', label: 'MSE vs PPO' },
+    tech: ['Transformers', 'Robotics', 'Reinforcement Learning', 'PyTorch'],
+    github: 'https://github.com/NishchalMN/In-Context-Learning-for-Autonomous-Drone-Racing',
+    featured: false,
     category: 'robotics',
     icon: Plane,
   },
   {
-    title: 'FedMedVision: Privacy-Preserving Medical Platform',
-    shortTitle: 'FedMedVision: Privacy-Preserving Medical Platform',
-    description: 'Developed a federated learning platform for X-ray classification across 4 non-IID hospital clients, improving global F1 by 14% over centralized baselines using FedProx aggregation and class-balanced local sampling.',
-    metric: { value: '+14%', label: 'F1 Score' },
-    tech: ['Federated Learning', 'PyTorch', 'MLflow'],
-    github: 'https://github.com/NishchalMN/FedMedVision',
-    featured: false,
-    category: 'systems',
-    icon: Brain,
-  },
-  {
-    title: 'Generative Query Expansion Engine',
-    shortTitle: 'Generative Query Expansion Engine',
+    title: 'HyDE Generative Query Expansion Engine',
+    shortTitle: 'HyDE Generative Query Expansion Engine',
     description: 'Improved NDCG@10 by 13.6% over dense retrieval baselines on MS MARCO by generating hypothetical answer documents via Mistral-7B, enabling zero-shot dense retrieval without supervised fine-tuning.',
-    metric: { value: '+13.6%', label: 'Retrieval' },
-    tech: ['Advanced RAG', 'HyDE', 'Mistral-7B', 'Embeddings'],
+    metric: { value: '+13.6%', label: 'NDCG@10' },
+    tech: ['RAG', 'HyDE', 'Mistral-7B', 'Dense Retrieval'],
     github: 'https://github.com/NishchalMN/HyDE-Generative-Query-Expansion-Engine',
     featured: false,
     category: 'nlp',
@@ -103,7 +103,6 @@ const allProjects: Project[] = [
     category: 'cv',
     icon: Cpu,
   },
-  
   {
     title: 'Voice Cloning System',
     shortTitle: 'Few-shot Voice Cloning',

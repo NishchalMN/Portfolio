@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Brain, Cloud, Database, Sparkles, Layers, ChevronDown } from 'lucide-react';
+import { Code2, Brain, Cloud, Sparkles, Layers, ChevronDown } from 'lucide-react';
 
 interface SkillCategory {
   title: string;
@@ -18,24 +18,27 @@ const skillCategories: SkillCategory[] = [
     title: 'ML Frameworks',
     icon: Brain,
     skills: [
-      'PyTorch', 'TensorFlow', 'Keras', 'Transformers', 'HuggingFace',
-      'LangChain', 'LangGraph', 'OpenCV', 'Librosa', 'CUDA', 'CLIP', 'LoRA',
-      'SAM', 'LoFTR', 'CoreML', 'ONNX', 'TensorRT', 'Scikit-Learn', 'Pandas', 'NumPy',
-    ],
-  },
-  {
-    title: 'MLOps & Cloud',
-    icon: Cloud,
-    skills: [
-      'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes',
-      'Ray', 'Kubeflow', 'MLflow', 'WandB', 'Airflow', 'Triton', 'CI/CD',
+      'PyTorch', 'TensorFlow', 'HuggingFace', 'OpenCV', 'TensorRT', 'ONNX',
+      'Keras', 'Scikit-Learn', 'Pandas', 'NumPy', 'Open3D', 'CLIP', 'SAM',
+      'CoreML', 'Transformers', 'LoFTR', 'Librosa',
     ],
   },
   {
     title: 'GenAI & Retrieval',
     icon: Sparkles,
     skills: [
-      'LlamaIndex', 'vLLM', 'LoRA/Fine-Tuning', 'MCP', 'Stable Diffusion',
+      'LangChain', 'LangGraph', 'LlamaIndex', 'vLLM', 'LoRA/Fine-Tuning',
+      'MCP', 'Stable Diffusion', 'Elasticsearch', 'Pinecone', 'FAISS',
+    ],
+  },
+  {
+    title: 'Cloud & Infrastructure',
+    icon: Cloud,
+    skills: [
+      'AWS', 'Docker', 'Kubernetes', 'Ray', 'Kubeflow', 'MLflow', 'Redis',
+      'Triton', 'CUDA', 'PostgreSQL', 'MongoDB', 'ChromaDB', 'Spark', 'Kafka',
+      'Databricks', 'Azure', 'GCP', 'Airflow', 'Flask', 'FastAPI', 'Git',
+      'Blender', 'CI/CD', 'DynamoDB', 'WandB',
     ],
   },
   {
@@ -44,16 +47,8 @@ const skillCategories: SkillCategory[] = [
     skills: [
       'Computer Vision', 'Multimodal AI', 'Large Language Models', 'Recommendation Systems',
       'Edge AI', 'Model Optimization', 'Agentic RAG', 'Reinforcement Learning',
-      'Synthetic Data Generation', 'Generative AI', 'Information Retrieval',
-      'Federated Learning', 'Vision Language Models',
-    ],
-  },
-  {
-    title: 'Data & Tools',
-    icon: Database,
-    skills: [
-      'Redis', 'Elasticsearch', 'FAISS', 'Pinecone', 'ChromaDB', 'MongoDB',
-      'PostgreSQL', 'FastAPI', 'Flask', 'PySpark', 'Kafka', 'Git', 'Blender', 'Open3D', 'AirSim',
+      'Generative AI', 'Information Retrieval', 'Semantic Search', 'AI Agents',
+      'Vision Language Models', 'Federated Learning', 'Synthetic Data Generation',
     ],
   },
 ];
