@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, ChevronDown, Trophy, Brain, Database, Satellite, Plane, Search, TrendingUp, HeartPulse, Cpu, Mic } from 'lucide-react';
 
-type ProjectCategory = 'llm' | 'cv' | 'systems' | 'audio' | 'robotics' | 'nlp';
+type ProjectCategory = 'llm' | 'cv' | 'mm' | 'systems' | 'audio' | 'robotics' | 'nlp';
 
 interface Project {
   title: string;
   shortTitle?: string;
   description: string;
+  image: string;
   metric?: { value: string; label: string };
   tech: string[];
   github: string;
@@ -19,8 +20,9 @@ interface Project {
 const categoryConfig: Record<ProjectCategory, { label: string; color: string }> = {
   llm: { label: 'LLM/RAG', color: 'text-primary' },
   cv: { label: 'Computer Vision', color: 'text-secondary' },
+  mm: { label: 'Multimodal', color: 'text-green-400' },
   systems: { label: 'Systems', color: 'text-accent' },
-  audio: { label: 'Audio', color: 'text-purple-400' },
+  audio: { label: 'Audio', color: 'text-yellow-400' },
   robotics: { label: 'Robotics', color: 'text-red-400' },
   nlp: { label: 'NLP', color: 'text-cyan-400' },
 };
@@ -30,8 +32,9 @@ const allProjects: Project[] = [
     title: 'CAFBrain: Multimodal LLM Platform',
     shortTitle: 'CAFBrain: Multimodal LLM Platform',
     description: 'Built an agentic RAG system that reduced grant proposal creation time from hours to under a minute, using LangChain and LangGraph with multi-step tool routing across 5000+ multimodal documents using FAISS.',
-    metric: { value: '5000+', label: 'Documents' },
-    tech: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'FastAPI', 'AWS'],
+    image: '/cafbrain.png',
+    metric: { value: '4+', label: 'Hours Saved' },
+    tech: ['LangChain', 'LangGraph', 'RAG', 'FAISS', 'AWS'],
     github: 'https://github.com/CAFBrain-Project/CAFBrain',
     featured: true,
     category: 'llm',
@@ -41,17 +44,19 @@ const allProjects: Project[] = [
     title: 'FSTChangeNet: Temporal Change Retrieval',
     shortTitle: 'FSTChangeNet: Temporal Change Retrieval',
     description: 'Designed a dual-encoder architecture with custom frequency-spatial-temporal attention module and LoRA fine-tuned RemoteCLIP for vision-language alignment, achieving 64% Recall@10 on natural-language change queries for satellite images.',
+    image: '/fst_changenet.png',
     metric: { value: '64%', label: 'Recall@10' },
     tech: ['RemoteCLIP', 'LoRA', 'PyTorch', 'Satellite Imagery'],
     github: 'https://github.com/NishchalMN/Temporal-Change-Retrieval',
     featured: true,
-    category: 'cv',
+    category: 'mm',
     icon: Satellite,
   },
   {
     title: 'FedMedVision: Privacy-Preserving Medical Platform',
     shortTitle: 'FedMedVision: Privacy-Preserving Medical Platform',
     description: 'Developed a federated learning platform for X-ray classification across 4 non-IID hospital clients, improving global F1 by 14% over centralized baselines using FedProx aggregation and class-balanced local sampling.',
+    image: '/fedmed.png',
     metric: { value: '+14%', label: 'Global F1' },
     tech: ['Federated Learning', 'Healthcare', 'PyTorch', 'MLflow'],
     github: 'https://github.com/NishchalMN/FedMedVision',
@@ -63,6 +68,7 @@ const allProjects: Project[] = [
     title: 'In-Context Learning for Autonomous Drone Racing',
     shortTitle: 'In-Context Learning for Autonomous Drone Racing',
     description: 'Enabled zero-retraining adaptation to unseen drone racing environments from just 3 demos via cross-attention over context embeddings, achieving 42% lower MSE than PPO baselines at 30Hz real-time inference across 100+ procedurally generated tracks.',
+    image: '/drone_racing.png',
     metric: { value: '-42%', label: 'MSE vs PPO' },
     tech: ['Transformers', 'Robotics', 'Reinforcement Learning', 'PyTorch'],
     github: 'https://github.com/NishchalMN/In-Context-Learning-for-Autonomous-Drone-Racing',
@@ -74,6 +80,7 @@ const allProjects: Project[] = [
     title: 'HyDE Generative Query Expansion Engine',
     shortTitle: 'HyDE Generative Query Expansion Engine',
     description: 'Improved NDCG@10 by 13.6% over dense retrieval baselines on MS MARCO by generating hypothetical answer documents via Mistral-7B, enabling zero-shot dense retrieval without supervised fine-tuning.',
+    image: '/HyDE.png',
     metric: { value: '+13.6%', label: 'NDCG@10' },
     tech: ['RAG', 'HyDE', 'Mistral-7B', 'Dense Retrieval'],
     github: 'https://github.com/NishchalMN/HyDE-Generative-Query-Expansion-Engine',
@@ -85,6 +92,7 @@ const allProjects: Project[] = [
     title: 'Scalable DBaaS for RideShare',
     shortTitle: 'Scalable DBaaS for RideShare',
     description: 'Deployed a fault-tolerant Database-as-a-Service on AWS supporting 2000+ RPS with Zookeeper-based leader election, automatic failover, and read/write routing via RabbitMQ RPC, achieving zero-downtime recovery under node failure.',
+    image: '/dbaas.png',
     metric: { value: '2000+', label: 'RPS' },
     tech: ['AWS EC2', 'RabbitMQ', 'Docker', 'PostgreSQL'],
     github: 'https://github.com/NishchalMN/Rideshare-Application',
@@ -96,6 +104,7 @@ const allProjects: Project[] = [
     title: 'Magic Filler: Image Inpainting',
     shortTitle: 'Magic Filler: Image Inpainting',
     description: 'Restored complex image occlusions with realistic textures by developing a U-Net based inpainting model with transposed convolutions that reached 0.92 SSIM.',
+    image: '/image_inpainting.png',
     metric: { value: '0.92', label: 'SSIM' },
     tech: ['U-Net', 'TensorFlow', 'Image Processing'],
     github: 'https://github.com/NishchalMN/Image-Inpainting',
@@ -107,6 +116,7 @@ const allProjects: Project[] = [
     title: 'Voice Cloning System',
     shortTitle: 'Few-shot Voice Cloning',
     description: 'Developed a few-shot voice cloning system using GE2E speaker embeddings and Tacotron 2, optimizing inference with a fine-tuned WaveNet vocoder.',
+    image: '/voice_cloning.png',
     tech: ['Spectrogram', 'Tacotron 2', 'WaveNet', 'PyTorch'],
     github: 'https://github.com/NishchalMN/Voice-Cloning-Using-Deep-Learning',
     featured: false,
@@ -124,7 +134,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       href={project.github}
       target="_blank"
       rel="noopener noreferrer"
-      className={`group block p-5 rounded-xl border transition-all duration-300 card-hover ${
+      className={`group block overflow-hidden rounded-xl border transition-all duration-300 card-hover ${
         project.featured
           ? 'bg-card border-primary/20'
           : 'bg-card/50 border-border/50'
@@ -134,16 +144,28 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       viewport={{ once: true }}
       transition={{ delay: index * 0.05 }}
     >
-      {/* Top row */}
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className={`w-8 h-8 rounded-lg bg-muted/50 flex items-center justify-center ${categoryInfo.color}`}>
+      <div className="relative aspect-[16/9] overflow-hidden bg-muted/30 border-b border-border/50">
+        <img
+          src={project.image}
+          alt={`${project.shortTitle || project.title} preview`}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/75 via-background/5 to-transparent" />
+        <div className="absolute bottom-3 left-3 flex items-center gap-2">
+          <div className={`w-8 h-8 rounded-lg bg-background/80 border border-border/50 backdrop-blur flex items-center justify-center ${categoryInfo.color}`}>
             <Icon size={16} />
           </div>
-          <span className={`text-xs font-mono ${categoryInfo.color}`}>
+          <span className={`text-xs font-mono px-2 py-1 rounded bg-background/80 border border-border/50 backdrop-blur ${categoryInfo.color}`}>
             {categoryInfo.label}
           </span>
         </div>
+      </div>
+
+      <div className="p-5">
+      {/* Top row */}
+      <div className="flex items-start justify-between mb-3">
+        <span className="text-xs font-mono text-muted-foreground">Project</span>
         {project.metric && (
           <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-primary/5 border border-primary/20">
             <TrendingUp size={10} className="text-primary" />
@@ -178,6 +200,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         <Github size={14} />
         <span>View on GitHub</span>
         <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+      </div>
       </div>
     </motion.a>
   );
@@ -221,7 +244,7 @@ const Projects = () => {
         <AnimatePresence mode="sync">
           {displayedOther.length > 0 && (
             <motion.div
-              className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}

@@ -12,15 +12,15 @@ const skillCategories: SkillCategory[] = [
   {
     title: 'Languages',
     icon: Code2,
-    skills: ['Python', 'C++', 'Go', 'SQL', 'Scala', 'Node.js', 'Bash', 'JavaScript'],
+    skills: ['Python', 'C++', 'Go', 'SQL', 'Scala', 'Node.js', 'Bash'],
   },
   {
     title: 'ML Frameworks',
     icon: Brain,
     skills: [
       'PyTorch', 'TensorFlow', 'HuggingFace', 'OpenCV', 'TensorRT', 'ONNX',
-      'Keras', 'Scikit-Learn', 'Pandas', 'NumPy', 'Open3D', 'CLIP', 'SAM',
-      'CoreML', 'Transformers', 'LoFTR', 'Librosa',
+      'Scikit-Learn', 'Pandas', 'NumPy', 'CLIP', 'SAM', 'CoreML',
+      'Transformers', 'LoFTR',
     ],
   },
   {
@@ -37,8 +37,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       'AWS', 'Docker', 'Kubernetes', 'Ray', 'Kubeflow', 'MLflow', 'Redis',
       'Triton', 'CUDA', 'PostgreSQL', 'MongoDB', 'ChromaDB', 'Spark', 'Kafka',
-      'Databricks', 'Azure', 'GCP', 'Airflow', 'Flask', 'FastAPI', 'Git',
-      'Blender', 'CI/CD', 'DynamoDB', 'WandB',
+      'Databricks', 'Airflow', 'FastAPI', 'Git', 'Blender', 'CI/CD',
     ],
   },
   {

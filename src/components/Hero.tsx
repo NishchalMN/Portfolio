@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, TrendingUp, Activity, BarChart3, TrendingDown } from 'lucide-react';
+import { ArrowDown, TrendingUp, Activity, TrendingDown, Github, Linkedin, Mail } from 'lucide-react';
 
 // Mini bar chart decoration
 const MiniChart = ({ values, color = 'primary' }: { values: number[]; color?: string }) => {
@@ -55,16 +55,16 @@ const Hero = () => {
   }, []);
 
   const metrics = [
-    { value: '96%', label: 'TPR Achieved', sub: 'Luxury Authentication', icon: TrendingUp, color: 'primary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
+    { value: '96%', label: 'TPR at 5% FPR', sub: 'Luxury Authentication at scale', icon: TrendingUp, color: 'primary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
+    { value: '40ms', label: 'p95 Retrieval', sub: 'Personalized Recommendations', icon: TrendingDown, color: 'secondary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
     { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
-    { value: '150K+', label: 'Luxury Items/mo', sub: 'Authenticated Inventory', icon: TrendingUp, color: 'secondary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
   ];
 
   return (
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 md:pt-0"
+      className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-24 pb-16"
     >
       {/* Dot grid background */}
       <div className="absolute inset-0 dot-grid" />
@@ -83,7 +83,7 @@ const Hero = () => {
         <div className="max-w-6xl mx-auto">
           {/* Top row - status */}
           <motion.div
-            className="flex flex-wrap items-center gap-2 md:gap-4 mb-8 md:mb-12"
+            className="flex flex-wrap items-center gap-2 md:gap-4 mb-6 md:mb-8"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -118,17 +118,27 @@ const Hero = () => {
               </motion.h1>
 
               <motion.p
-                className="text-xl text-muted-foreground mb-4"
+                className="text-lg md:text-xl text-muted-foreground mb-1"
+                
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                Machine Learning Engineer II
+                Machine Learning Engineer - II
+              </motion.p>
+
+              <motion.p
+                className="text-xl text-muted-foreground mb-4"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+              >
+                I build ML systems that can see, reason, and scale.
               </motion.p>
 
               {/* Rotating specialization */}
               <motion.div
-                className="flex items-center gap-3 mb-8"
+                className="flex items-center gap-3 mb-5"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -154,13 +164,12 @@ const Hero = () => {
 
               {/* Description */}
               <motion.p
-                className="text-muted-foreground text-lg leading-relaxed max-w-lg mb-10"
+                className="text-muted-foreground text-lg leading-relaxed max-w-lg mb-9"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                Building production ML systems that scale. Currently completing my MS in ML
-                at University of Maryland, previously at Entrupy authenticating luxury goods worldwide.
+                Spanning the full ML lifecycle, from research prototypes and model training to deployment, monitoring, and measurable product impact.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -196,26 +205,32 @@ const Hero = () => {
 
               {/* Quick links */}
               <motion.div
-                className="flex gap-4 mt-8"
+                className="flex gap-3 mt-8"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
+                <div className="flex gap-2">
                 {[
-                  { href: 'https://github.com/NishchalMN', label: 'GitHub' },
-                  { href: 'https://linkedin.com/in/nishchal-mn', label: 'LinkedIn' },
-                  { href: 'mailto:nishchal.marur@gmail.com', label: 'Email' },
+                  { href: 'https://github.com/NishchalMN', label: 'GitHub', icon: Github, color: 'text-foreground' },
+                  { href: 'https://linkedin.com/in/nishchal-mn', label: 'LinkedIn', icon: Linkedin, color: 'text-[#0A66C2]' },
+                  { href: 'mailto:nishchal.marur@gmail.com', label: 'Email', icon: Mail, color: 'text-[#EA4335]' },
                 ].map((link) => (
-                  <a
+                  <motion.a
                     key={link.label}
                     href={link.href}
                     target={link.label !== 'Email' ? '_blank' : undefined}
                     rel={link.label !== 'Email' ? 'noopener noreferrer' : undefined}
-                    className="text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
+                    aria-label={link.label}
+                    title={link.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-border/50 bg-card/40 transition-colors hover:border-primary/40 hover:bg-card/70"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.96 }}
                   >
-                    {link.label}
-                  </a>
+                    <link.icon size={18} className={link.color} />
+                  </motion.a>
                 ))}
+                </div>
               </motion.div>
             </div>
 

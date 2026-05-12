@@ -7,24 +7,28 @@ const socialLinks = [
     href: 'mailto:nishchal.marur@gmail.com',
     icon: Mail,
     label: 'nishchal.marur@gmail.com',
+    color: 'text-[#EA4335]',
   },
   {
     name: 'LinkedIn',
     href: 'https://linkedin.com/in/nishchal-mn',
     icon: Linkedin,
     label: '/in/nishchal-mn',
+    color: 'text-[#0A66C2]',
   },
   {
     name: 'GitHub',
     href: 'https://github.com/NishchalMN',
     icon: Github,
     label: 'NishchalMN',
+    color: 'text-foreground',
   },
   {
     name: 'Phone',
     href: 'tel:+12404381916',
     icon: Phone,
     label: '(240) 438-1916',
+    color: 'text-emerald-400',
   },
 ];
 
@@ -66,13 +70,13 @@ const Contact = () => {
             <div className="status-active px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30">
               <span className="text-sm font-medium text-emerald-400">Open to Relocate</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted/30 border border-border/50">
-              <Calendar size={14} className="text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Available May 2026</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/30">
+              <Calendar size={14} className="text-sky-400" />
+              <span className="text-sm text-sky-300">Available May 2026</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted/30 border border-border/50">
-              <MapPin size={14} className="text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">College Park, MD</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30">
+              <MapPin size={14} className="text-amber-400" />
+              <span className="text-sm text-amber-300">College Park, MD</span>
             </div>
           </div>
 
@@ -109,8 +113,8 @@ const Contact = () => {
                   transition={{ delay: 0.2 + index * 0.1 }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-                    <Icon size={20} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  <div className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center group-hover:bg-card/70 transition-colors">
+                    <Icon size={20} className={`${link.color} transition-colors`} />
                   </div>
                   <div className="flex-grow">
                     <span className="text-xs font-mono text-muted-foreground block">{link.name}</span>

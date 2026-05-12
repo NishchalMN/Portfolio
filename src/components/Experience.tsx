@@ -11,6 +11,7 @@ interface Experience {
   period: string;
   achievements: string[];
   featured: boolean;
+  previewCount?: number;
   metrics?: { value: string; label: string }[];
 }
 
@@ -31,6 +32,7 @@ const experiences: Experience[] = [
       'Deployed location-aware reranking and A/B testing frameworks for an LLM orchestrator with MCP tools, directly optimizing CTR and search relevance through composite scoring and Redis caching',
     ],
     featured: false,
+    previewCount: 2,
   },
   {
     title: 'Research Assistant',
@@ -48,6 +50,7 @@ const experiences: Experience[] = [
       'Implemented calibrated multi-view reprojection of 3D pose data, validating extrinsic conventions to maintain metric and orientation consistency across views',
     ],
     featured: false,
+    previewCount: 1,
   },
   {
     title: 'Machine Learning Engineer II',
@@ -75,6 +78,7 @@ const experiences: Experience[] = [
       'Built pose-estimation models for sneaker pre-alignment, increasing LoFTR+RANSAC inlier ratio by 18%',
     ],
     featured: true,
+    previewCount: 4,
   },
   {
     title: 'MLOps Intern',
@@ -91,6 +95,7 @@ const experiences: Experience[] = [
       'Evaluated performance trade-offs across TensorFlow, PyTorch and ONNX runtimes to drive the design of a new internal inference architecture for enterprise-scale deployments',
     ],
     featured: false,
+    previewCount: 1,
   },
   {
     title: 'Software Engineering Intern',
@@ -106,6 +111,7 @@ const experiences: Experience[] = [
       'Eliminated 10+ hours of weekly debugging time by building a centralized log aggregation system using ELK Stack, Filebeat, and Node.js across distributed components',
     ],
     featured: false,
+    previewCount: 1,
   },
   {
     title: 'Machine Learning Intern',
@@ -121,13 +127,16 @@ const experiences: Experience[] = [
       'Developed a real-time CNN-based gaze tracking system for driver drowsiness detection using transposed convolutions and Gaussian heatmap regression, achieving 1.3px mean error across diverse lighting and occlusion conditions',
     ],
     featured: false,
+    previewCount: 1,
   },
 ];
 
 const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const visibleAchievements = isExpanded ? exp.achievements : exp.achievements.slice(0, 3);
-  const hasMore = exp.achievements.length > 3;
+  const previewCount = Math.min(exp.previewCount ?? 2, exp.achievements.length);
+  const hiddenCount = exp.achievements.length - previewCount;
+  const visibleAchievements = isExpanded ? exp.achievements : exp.achievements.slice(0, previewCount);
+  const hasMore = hiddenCount > 0;
 
   return (
     <motion.div
@@ -237,7 +246,7 @@ const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
           onClick={() => setIsExpanded(!isExpanded)}
           className="mt-4 flex items-center gap-1 text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
         >
-          {isExpanded ? 'Show less' : `+${exp.achievements.length - 3} more`}
+          {isExpanded ? 'Show less' : exp.featured ? `View full impact (+${hiddenCount})` : `Show ${hiddenCount} more`}
           <motion.span
             animate={{ rotate: isExpanded ? 180 : 0 }}
             transition={{ duration: 0.2 }}
