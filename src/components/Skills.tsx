@@ -20,7 +20,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       'PyTorch', 'TensorFlow', 'HuggingFace', 'OpenCV', 'TensorRT', 'ONNX',
       'Scikit-Learn', 'Pandas', 'NumPy', 'CLIP', 'SAM', 'CoreML',
-      'Transformers', 'LoFTR',
+      'Transformers', 'LoFTR', 'Open3D', 'XGBoost',
     ],
   },
   {
@@ -29,6 +29,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       'LangChain', 'LangGraph', 'LlamaIndex', 'vLLM', 'LoRA/Fine-Tuning',
       'MCP', 'Stable Diffusion', 'Elasticsearch', 'Pinecone', 'FAISS',
+      'Prompt-Based Segmentation', 'Generative Inpainting',
     ],
   },
   {
@@ -48,6 +49,7 @@ const skillCategories: SkillCategory[] = [
       'Edge AI', 'Model Optimization', 'Agentic RAG', 'Reinforcement Learning',
       'Generative AI', 'Information Retrieval', 'Semantic Search', 'AI Agents',
       'Vision Language Models', 'Federated Learning', 'Synthetic Data Generation',
+      '3D Scene Editing', 'Neural Rendering',
     ],
   },
 ];

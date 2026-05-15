@@ -1,0 +1,37 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#090B12"/>
+  <rect width="1280" height="720" fill="url(#grid)" opacity="0.28"/>
+  <g filter="url(#blur)">
+    <ellipse cx="452" cy="326" rx="258" ry="178" fill="#7C3AED" fill-opacity="0.34"/>
+    <ellipse cx="765" cy="376" rx="278" ry="190" fill="#22D3EE" fill-opacity="0.22"/>
+    <ellipse cx="694" cy="226" rx="172" ry="116" fill="#F59E0B" fill-opacity="0.18"/>
+  </g>
+  <path d="M388 488C461 524 568 546 684 546C809 546 922 520 994 478" stroke="#E5E7EB" stroke-opacity="0.2" stroke-width="2"/>
+  <path d="M436 443C496 468 585 483 682 483C786 483 881 465 941 435" stroke="#E5E7EB" stroke-opacity="0.18" stroke-width="2"/>
+  <g opacity="0.9">
+    <circle cx="514" cy="310" r="5" fill="#F8FAFC"/>
+    <circle cx="556" cy="286" r="3.5" fill="#C4B5FD"/>
+    <circle cx="612" cy="332" r="4" fill="#67E8F9"/>
+    <circle cx="675" cy="279" r="5" fill="#F8FAFC"/>
+    <circle cx="724" cy="342" r="3.5" fill="#C4B5FD"/>
+    <circle cx="781" cy="304" r="4.5" fill="#67E8F9"/>
+    <circle cx="833" cy="376" r="3.5" fill="#F8FAFC"/>
+    <circle cx="583" cy="404" r="4" fill="#F8FAFC"/>
+    <circle cx="701" cy="421" r="5" fill="#C4B5FD"/>
+    <circle cx="792" cy="444" r="4" fill="#67E8F9"/>
+  </g>
+  <path d="M514 310L556 286L612 332L675 279L724 342L781 304L833 376L792 444L701 421L583 404L514 310Z" stroke="#F8FAFC" stroke-opacity="0.3" stroke-width="2"/>
+  <rect x="478" y="232" width="340" height="242" rx="22" stroke="#F8FAFC" stroke-opacity="0.18" stroke-width="2"/>
+  <rect x="512" y="266" width="272" height="174" rx="14" fill="#090B12" fill-opacity="0.45" stroke="#F8FAFC" stroke-opacity="0.16"/>
+  <path d="M634 316L704 353L634 390V316Z" fill="#F8FAFC" fill-opacity="0.86"/>
+  <text x="64" y="610" fill="#F8FAFC" fill-opacity="0.9" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="40" font-weight="700">Latent Void</text>
+  <text x="64" y="656" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24">3D generative scene editing demo</text>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="#CBD5E1" stroke-opacity="0.22"/>
+    </pattern>
+    <filter id="blur" x="94" y="-6" width="1228" height="772" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="70"/>
+    </filter>
+  </defs>
+</svg>

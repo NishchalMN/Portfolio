@@ -70,13 +70,13 @@ const Contact = () => {
             <div className="status-active px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30">
               <span className="text-sm font-medium text-emerald-400">Open to Relocate</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/30">
-              <Calendar size={14} className="text-sky-400" />
-              <span className="text-sm text-sky-300">Available May 2026</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30">
+              <Calendar size={14} className="text-blue-400" />
+              <span className="text-sm text-blue-300">Available May 2026</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30">
-              <MapPin size={14} className="text-amber-400" />
-              <span className="text-sm text-amber-300">College Park, MD</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-sage-500/10 border border-sage-500/30">
+              <MapPin size={14} className="text-sage-400" />
+              <span className="text-sm text-sage-300">College Park, MD</span>
             </div>
           </div>
 
