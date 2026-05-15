@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, Phone, Send, Calendar, MapPin } from 'lucide-react';
+import { Mail, Github, Linkedin, Phone, Send, Calendar, MapPin, Clock } from 'lucide-react';
 
 const socialLinks = [
   {
@@ -81,7 +81,7 @@ const Contact = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="flex justify-start mb-10">
+          <div className="flex flex-wrap justify-start gap-3 mb-10">
             <motion.a
               href="mailto:nishchal.marur@gmail.com"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
@@ -90,6 +90,17 @@ const Contact = () => {
             >
               <Send size={16} />
               Get In Touch
+            </motion.a>
+            <motion.a
+              href="https://calendly.com/nishchal-marur/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border/50 text-foreground font-medium rounded-lg hover:border-primary/50 hover:text-primary transition-colors"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Clock size={16} />
+              Schedule 15 min
             </motion.a>
           </div>
 

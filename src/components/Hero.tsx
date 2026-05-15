@@ -90,16 +90,16 @@ const Hero = () => {
           >
             <div className="status-active">
               <span className="text-sm font-mono text-muted-foreground">
-                Open to relocate
+                Open to ML roles
               </span>
             </div>
-            {/* <span className="text-muted-foreground/30">|</span>
-            <span className="text-sm font-mono text-muted-foreground">
-              College Park, MD
-            </span> */}
             <span className="text-muted-foreground/30">|</span>
             <span className="text-sm font-mono text-muted-foreground">
-              US Work Authorization (OPT/STEM till 2029)
+              Relocation flexible
+            </span>
+            <span className="text-muted-foreground/30">|</span>
+            <span className="text-sm font-mono text-muted-foreground">
+              US Work Authorization
             </span>
           </motion.div>
 
@@ -180,26 +180,24 @@ const Hero = () => {
                 transition={{ delay: 0.5 }}
               >
                 <motion.a
-                  href="#experience"
+                  href="#projects"
                   className="group relative px-6 py-3 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium rounded-lg overflow-hidden hover:from-[hsl(260, 74%, 56%)] hover:to-[hsl(240,50%,55%)] transition-all duration-300"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    View Experience
+                    View Projects
                     <TrendingUp size={16} className="group-hover:translate-y-0.5 transition-transform" />
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
                 </motion.a>
                 <motion.a
-                  href="/Nishchal_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#contact"
                   className="px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:border-primary/50 hover:text-primary transition-colors"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Resume
+                  Get In Touch
                 </motion.a>
               </motion.div>
 
