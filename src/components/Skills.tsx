@@ -101,9 +101,6 @@ const Skills = () => {
                     <h3 className="text-lg font-semibold text-foreground">
                       {category.title}
                     </h3>
-                    <span className="ml-auto text-xs font-mono text-muted-foreground">
-                      {category.skills.length} skills
-                    </span>
                   </div>
 
                   {/* Skills */}

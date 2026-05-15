@@ -53,7 +53,7 @@ const Contact = () => {
 
         {/* Main Card */}
         <motion.div
-          className="p-8 md:p-10 bg-card/50 rounded-2xl border border-border/50"
+          className="p-6 sm:p-8 md:p-10 bg-card/50 rounded-2xl border border-border/50"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -108,7 +108,7 @@ const Contact = () => {
           <div className="section-divider mb-10" />
 
           {/* Social Links Grid */}
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid min-w-0 sm:grid-cols-2 gap-4">
             {socialLinks.map((link, index) => {
               const Icon = link.icon;
               return (
@@ -117,23 +117,23 @@ const Contact = () => {
                   href={link.href}
                   target={link.name !== 'Email' && link.name !== 'Phone' ? '_blank' : undefined}
                   rel={link.name !== 'Email' && link.name !== 'Phone' ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center gap-4 p-4 bg-muted/20 border border-border/30 rounded-xl transition-all hover:border-primary/30 hover:bg-muted/30"
+                  className="group flex min-w-0 w-full items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-muted/20 border border-border/30 rounded-xl transition-all hover:border-primary/30 hover:bg-muted/30"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 + index * 0.1 }}
                   whileHover={{ x: 4 }}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center group-hover:bg-card/70 transition-colors">
+                  <div className="w-10 h-10 shrink-0 rounded-lg bg-muted/50 flex items-center justify-center group-hover:bg-card/70 transition-colors">
                     <Icon size={20} className={`${link.color} transition-colors`} />
                   </div>
-                  <div className="flex-grow">
+                  <div className="min-w-0 flex-1">
                     <span className="text-xs font-mono text-muted-foreground block">{link.name}</span>
-                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                    <span className="block text-sm font-medium text-foreground group-hover:text-primary transition-colors [overflow-wrap:anywhere]">
                       {link.label}
                     </span>
                   </div>
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground">
+                  <span className="shrink-0 opacity-0 group-hover:opacity-100 transition-opacity text-muted-foreground">
                     →
                   </span>
                 </motion.a>

@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, TrendingUp, Activity, TrendingDown, Github, Linkedin, Mail } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Mini bar chart decoration
 const MiniChart = ({ values, color = 'primary' }: { values: number[]; color?: string }) => {
@@ -36,6 +37,7 @@ const TrendLine = () => (
 
 const Hero = () => {
   const [currentWord, setCurrentWord] = useState(0);
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -78,7 +80,7 @@ const Hero = () => {
       {/* Main content */}
       <motion.div
         className="container mx-auto px-6 lg:px-12 relative z-10"
-        style={{ y, opacity }}
+        style={{ y: isMobile ? 0 : y, opacity: isMobile ? 1 : opacity }}
       >
         <div className="max-w-6xl mx-auto">
           {/* Top row - status */}
