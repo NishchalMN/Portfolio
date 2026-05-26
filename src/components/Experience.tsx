@@ -24,12 +24,13 @@ const experiences: Experience[] = [
     location: 'New York, NY',
     period: 'Nov 2025 - Jan 2026',
     metrics: [
-      { value: '40ms', label: 'p95 Latency' },
+      { value: 'sub-150ms', label: 'p95 Retrieval Latency' },
       { value: '0.85', label: 'Recall@10' },
     ],
     achievements: [
-      'Built a two-tower recommendation engine and hybrid RAG retrieval pipeline on AWS Lambda using Elasticsearch BM25 and dense vector kNN retrieval, achieving Recall@10 of 0.85 and <40ms p95 latency for personalized college events recommendations',
+      'Built a two-tower recommendation engine and hybrid RAG retrieval pipeline on AWS Lambda using Elasticsearch BM25 and dense vector kNN retrieval, achieving 0.85 Recall@10 and sub-150ms p95 retrieval latency for personalized college event suggestions',
       'Deployed location-aware reranking and A/B testing frameworks for an LLM orchestrator with MCP tools, directly optimizing CTR and search relevance through composite scoring and Redis caching',
+      'Built DeepEval-based evaluation workflows for MCP tool-calling and LLM-orchestrated search, validating retrieval relevance, tool-call correctness, and response quality across personalized event-search scenarios',
     ],
     featured: false,
     previewCount: 2,

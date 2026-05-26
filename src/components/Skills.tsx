@@ -27,9 +27,9 @@ const skillCategories: SkillCategory[] = [
     title: 'GenAI & Retrieval',
     icon: Sparkles,
     skills: [
-      'LangChain', 'LangGraph', 'LlamaIndex', 'vLLM', 'LoRA/Fine-Tuning',
+      'LangChain', 'LangGraph', 'LangSmith', 'LlamaIndex', 'vLLM', 'DeepEval', 'LoRA/Fine-Tuning',
       'MCP', 'Stable Diffusion', 'Elasticsearch', 'Pinecone', 'FAISS',
-      'Prompt-Based Segmentation', 'Generative Inpainting',
+      'OCR', 'Generative Inpainting',
     ],
   },
   {
@@ -38,7 +38,7 @@ const skillCategories: SkillCategory[] = [
     skills: [
       'AWS', 'Docker', 'Kubernetes', 'Ray', 'Kubeflow', 'MLflow', 'Redis',
       'Triton', 'CUDA', 'PostgreSQL', 'MongoDB', 'ChromaDB', 'Spark', 'Kafka',
-      'Databricks', 'Airflow', 'FastAPI', 'Git', 'Blender', 'CI/CD',
+      'Databricks', 'GCP', 'Airflow', 'FastAPI', 'Git', 'Blender', 'CI/CD',
     ],
   },
   {
@@ -48,6 +48,7 @@ const skillCategories: SkillCategory[] = [
       'Computer Vision', 'Multimodal AI', 'Large Language Models', 'Recommendation Systems',
       'Edge AI', 'Model Optimization', 'Agentic RAG', 'Reinforcement Learning',
       'Generative AI', 'Information Retrieval', 'Semantic Search', 'AI Agents',
+      'Model Monitoring', 'Model Evaluation', 'Data Ingestion',
       'Vision Language Models', 'Federated Learning', 'Synthetic Data Generation',
       '3D Scene Editing', 'Neural Rendering',
     ],

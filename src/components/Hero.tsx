@@ -47,7 +47,7 @@ const Hero = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const words = ['Multimodal LLMs', 'Computer Vision', 'Generative AI', 'Recommender Systems', 'MLOps'];
+  const words = ['Multimodal LLMs', 'Computer Vision', 'Agentic RAG', 'MLOps'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,7 +58,7 @@ const Hero = () => {
 
   const metrics = [
     { value: '96%', label: 'TPR at 5% FPR', sub: 'Luxury Authentication at scale', icon: TrendingUp, color: 'primary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
-    { value: '40ms', label: 'p95 Retrieval', sub: 'Personalized Recommendations', icon: TrendingDown, color: 'secondary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
+    { value: '<150ms', label: 'p95 latency', sub: 'Hybrid Retrieval', icon: TrendingDown, color: 'secondary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
     { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
   ];
 
@@ -92,7 +92,7 @@ const Hero = () => {
           >
             <div className="status-active">
               <span className="text-sm font-mono text-muted-foreground">
-                Open to ML roles
+                Open to AI/ML roles
               </span>
             </div>
             <span className="text-muted-foreground/30">|</span>
