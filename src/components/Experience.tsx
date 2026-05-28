@@ -28,9 +28,10 @@ const experiences: Experience[] = [
       { value: '0.85', label: 'Recall@10' },
     ],
     achievements: [
-      'Built a two-tower recommendation engine and hybrid RAG retrieval pipeline on AWS Lambda using Elasticsearch BM25 and dense vector kNN retrieval, achieving 0.85 Recall@10 and sub-150ms p95 retrieval latency for personalized college event suggestions',
-      'Deployed location-aware reranking and A/B testing frameworks for an LLM orchestrator with MCP tools, directly optimizing CTR and search relevance through composite scoring and Redis caching',
-      'Built DeepEval-based evaluation workflows for MCP tool-calling and LLM-orchestrated search, validating retrieval relevance, tool-call correctness, and response quality across personalized event-search scenarios',
+      'Engineered a production hybrid RAG pipeline on AWS Lambda for personalized events, combining Elasticsearch BM25, dense-vector retrieval, and relevance reranking to achieve 0.85 Recall@10 and sub-150ms p95 retrieval latency.',
+      'Implemented MCP tool servers for the LLM-orchestrated search system, integrating location-aware retrieval, profile-based scoring, and redis caching to improve relevance.',
+      'Built DeepEval-based evaluation workflows measuring 83% tool-call correctness and 95% answer completeness across retrieval relevance, context grounding, and response quality.',
+      'Designed event ingestion pipelines across 5+ sources with deterministic deduplication, LLM-based classification, rule-based fallbacks, and weighted embeddings for reliable retrieval.'
     ],
     featured: false,
     previewCount: 2,

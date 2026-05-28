@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, Phone, Send, Calendar, MapPin, Clock } from 'lucide-react';
+import { Mail, Github, Linkedin, Calendar, MapPin, Clock } from 'lucide-react';
 
 const socialLinks = [
   {
@@ -24,11 +24,11 @@ const socialLinks = [
     color: 'text-foreground',
   },
   {
-    name: 'Phone',
-    href: 'tel:+12404381916',
-    icon: Phone,
-    label: '(240) 438-1916',
-    color: 'text-emerald-400',
+    name: 'Schedule',
+    href: 'https://calendly.com/nishchal-marur/15min',
+    icon: Clock,
+    label: '15-minute call',
+    color: 'text-blue-400',
   },
 ];
 
@@ -80,33 +80,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* CTA Button */}
-          <div className="flex flex-wrap justify-start gap-3 mb-10">
-            <motion.a
-              href="mailto:nishchal.marur@gmail.com"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Send size={16} />
-              Get In Touch
-            </motion.a>
-            <motion.a
-              href="https://calendly.com/nishchal-marur/15min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-border/50 text-foreground font-medium rounded-lg hover:border-primary/50 hover:text-primary transition-colors"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Clock size={16} />
-              Schedule 15 min
-            </motion.a>
-          </div>
-
-          {/* Divider */}
-          <div className="section-divider mb-10" />
-
           {/* Social Links Grid */}
           <div className="grid min-w-0 sm:grid-cols-2 gap-4">
             {socialLinks.map((link, index) => {
@@ -115,8 +88,8 @@ const Contact = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  target={link.name !== 'Email' && link.name !== 'Phone' ? '_blank' : undefined}
-                  rel={link.name !== 'Email' && link.name !== 'Phone' ? 'noopener noreferrer' : undefined}
+                  target={link.name !== 'Email' ? '_blank' : undefined}
+                  rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
                   className="group flex min-w-0 w-full items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-muted/20 border border-border/30 rounded-xl transition-all hover:border-primary/30 hover:bg-muted/30"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}

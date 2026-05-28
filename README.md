@@ -42,10 +42,6 @@ src/
 
 ## 📝 Adding Your Content
 
-### Update Resume PDF
-1. Add your resume PDF to the `public/` folder as `resume.pdf`
-2. Links are already configured to point to `/resume.pdf`
-
 ### Add Project Images/Videos
 1. Place images in `src/assets/` folder
 2. Update image paths in `src/components/Projects.tsx`:
