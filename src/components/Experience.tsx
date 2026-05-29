@@ -62,9 +62,9 @@ const experiences: Experience[] = [
     location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
     metrics: [
-      { value: '$1M+', label: 'Revenue growth' },
       { value: '150K+', label: 'Luxury Items/mo' },
       { value: '95%', label: 'Automation Rate' },
+      { value: '$1M+', label: 'Business Impact' },
     ],
     achievements: [
       'Automated 95% of manual verification for 150K+ monthly luxury items by building a sneaker, box label, and size tag authentication pipeline leveraging SAM, Monocular Depth Estimation, LoFTR, and AutoEncoders, achieving 96% TPR at 5% FPR',

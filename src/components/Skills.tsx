@@ -1,152 +1,351 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Code2, Brain, Cloud, Sparkles, Layers, ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Brain, Cloud, Code2, Search } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 
-interface SkillCategory {
-  title: string;
-  icon: typeof Code2;
-  skills: string[];
+interface Tech {
+  name: string;
+  icon?: string;
+  initials?: string;
 }
 
-const skillCategories: SkillCategory[] = [
+interface SkillEvidence {
+  label: string;
+  detail: string;
+  href?: string;
+}
+
+interface SkillArea {
+  title: string;
+  icon: LucideIcon;
+  summary: string;
+  proof: string;
+  core: Tech[];
+  alsoUsed: Tech[];
+  evidence: SkillEvidence[];
+}
+
+const techInitials = (tech: Tech) =>
+  tech.initials ??
+  tech.name
+    .split(/[\s./+-]+/)
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 3)
+    .toUpperCase();
+
+const skillAreas: SkillArea[] = [
   {
-    title: 'Languages',
-    icon: Code2,
-    skills: ['Python', 'C++', 'Go', 'SQL', 'Scala', 'Node.js', 'Bash'],
+    title: 'LLM, Agents & Retrieval',
+    icon: Search,
+    summary: 'RAG systems, tool-calling agents, semantic search, and retrieval evaluation.',
+    proof: 'Built agentic and hybrid retrieval systems over multimodal data with measurable latency and ranking gains.',
+    core: [
+      { name: 'LangChain', icon: '/tech-icons/langchain.svg' },
+      { name: 'LangGraph', icon: '/tech-icons/langchain.svg', initials: 'LG' },
+      { name: 'Hugging Face', icon: '/tech-icons/huggingface.svg' },
+      { name: 'Elasticsearch', icon: '/tech-icons/elasticsearch.svg' },
+      { name: 'vLLM', icon: '/tech-icons/vllm.svg' },
+      { name: 'DeepEval', initials: 'DE' },
+    ],
+    alsoUsed: [
+      { name: 'LlamaIndex', icon: '/tech-icons/llamaindex.svg' },
+      { name: 'Pinecone', icon: '/tech-icons/pinecone.svg' },
+      { name: 'LoRA', initials: 'Lo' },
+      { name: 'LangSmith', icon: '/tech-icons/langchain.svg', initials: 'LS' },
+      { name: 'FAISS', initials: 'FA' },
+    ],
+    evidence: [
+      {
+        label: 'CAFBrain',
+        detail: 'agentic RAG across 5000+ multimodal documents',
+        href: 'https://github.com/CAFBrain-Project/CAFBrain',
+      },
+      {
+        label: 'HyDE Engine',
+        detail: '+13.6% NDCG@10 over dense retrieval baselines',
+        href: 'https://github.com/NishchalMN/HyDE-Generative-Query-Expansion-Engine',
+      },
+      {
+        label: 'Connyct',
+        detail: 'hybrid BM25 + vector retrieval at sub-150ms p95',
+      },
+    ],
   },
   {
-    title: 'ML Frameworks',
+    title: 'Computer Vision & Multimodal ML',
     icon: Brain,
-    skills: [
-      'PyTorch', 'TensorFlow', 'HuggingFace', 'OpenCV', 'TensorRT', 'ONNX',
-      'Scikit-Learn', 'Pandas', 'NumPy', 'CLIP', 'SAM', 'CoreML',
-      'Transformers', 'LoFTR', 'Open3D', 'XGBoost',
+    summary: 'Vision-language models, segmentation, retrieval, inpainting, and edge inference.',
+    proof: 'Shipped production CV systems and research pipelines spanning authentication, satellite change retrieval, and 3D scene editing.',
+    core: [
+      { name: 'PyTorch', icon: '/tech-icons/pytorch.svg' },
+      { name: 'OpenCV', icon: '/tech-icons/opencv.svg' },
+      { name: 'SAM', icon: '/tech-icons/meta.svg' },
+      { name: 'CLIP', icon: '/tech-icons/openai.svg' },
+      { name: 'TensorRT', icon: '/tech-icons/nvidia.svg' },
+      { name: 'Core ML', icon: '/tech-icons/apple.svg' },
+    ],
+    alsoUsed: [
+      { name: 'LoFTR', initials: 'LF' },
+      { name: 'ONNX', icon: '/tech-icons/onnx.svg' },
+      { name: 'TensorFlow', icon: '/tech-icons/tensorflow.svg' },
+      { name: 'Open3D', icon: '/tech-icons/open3d.svg' },
+      { name: 'Stable Diffusion', icon: '/tech-icons/stability-ai.svg' },
+      { name: 'Blender', icon: '/tech-icons/blender.svg' },
+    ],
+    evidence: [
+      {
+        label: 'Entrupy',
+        detail: '96% TPR at 5% FPR for luxury authentication',
+      },
+      {
+        label: 'FSTChangeNet',
+        detail: '64% Recall@10 for satellite change retrieval',
+        href: 'https://github.com/NishchalMN/Temporal-Change-Retrieval',
+      },
+      {
+        label: 'Latent Void',
+        detail: 'SAM + inpainting + 3D Gaussian Splatting',
+        href: 'https://github.com/NishchalMN/Latent-Void',
+      },
     ],
   },
   {
-    title: 'GenAI & Retrieval',
-    icon: Sparkles,
-    skills: [
-      'LangChain', 'LangGraph', 'LangSmith', 'LlamaIndex', 'vLLM', 'DeepEval', 'LoRA/Fine-Tuning',
-      'MCP', 'Stable Diffusion', 'Elasticsearch', 'Pinecone', 'FAISS',
-      'OCR', 'Generative Inpainting',
-    ],
-  },
-  {
-    title: 'Cloud & Infrastructure',
+    title: 'ML Systems & Infrastructure',
     icon: Cloud,
-    skills: [
-      'AWS', 'Docker', 'Kubernetes', 'Ray', 'Kubeflow', 'MLflow', 'Redis',
-      'Triton', 'CUDA', 'PostgreSQL', 'MongoDB', 'ChromaDB', 'Spark', 'Kafka',
-      'Databricks', 'GCP', 'Airflow', 'FastAPI', 'Git', 'Blender', 'CI/CD',
+    summary: 'Training, serving, orchestration, monitoring, and data systems for production ML.',
+    proof: 'Designed systems that scale inference, automate evaluation, and keep model pipelines observable.',
+    core: [
+      { name: 'AWS', icon: '/tech-icons/aws.svg' },
+      { name: 'Docker', icon: '/tech-icons/docker.svg' },
+      { name: 'Kubernetes', icon: '/tech-icons/kubernetes.svg' },
+      { name: 'Ray', icon: '/tech-icons/ray.svg' },
+      { name: 'MLflow', icon: '/tech-icons/mlflow.svg' },
+      { name: 'FastAPI', icon: '/tech-icons/fastapi.svg' },
+    ],
+    alsoUsed: [
+      { name: 'CUDA', icon: '/tech-icons/nvidia.svg' },
+      { name: 'Triton', icon: '/tech-icons/nvidia.svg' },
+      { name: 'Redis', icon: '/tech-icons/redis.svg' },
+      { name: 'PostgreSQL', icon: '/tech-icons/postgresql.svg' },
+      { name: 'Kafka', icon: '/tech-icons/kafka.svg' },
+      { name: 'Spark', icon: '/tech-icons/spark.svg' },
+    ],
+    evidence: [
+      {
+        label: 'Entrupy ML Serving',
+        detail: '150K+ monthly authentication requests on EKS/Ray',
+      },
+      {
+        label: 'RideShare DBaaS',
+        detail: '2000+ RPS with failover and read/write routing',
+        href: 'https://github.com/NishchalMN/Rideshare-Application',
+      },
+      {
+        label: 'FedMedVision',
+        detail: '+14% global F1 with federated MLflow workflows',
+        href: 'https://github.com/NishchalMN/FedMedVision',
+      },
     ],
   },
   {
-    title: 'ML Domains',
-    icon: Layers,
-    skills: [
-      'Computer Vision', 'Multimodal AI', 'Large Language Models', 'Recommendation Systems',
-      'Edge AI', 'Model Optimization', 'Agentic RAG', 'Reinforcement Learning',
-      'Generative AI', 'Information Retrieval', 'Semantic Search', 'AI Agents',
-      'Model Monitoring', 'Model Evaluation', 'Data Ingestion',
-      'Vision Language Models', 'Federated Learning', 'Synthetic Data Generation',
-      '3D Scene Editing', 'Neural Rendering',
+    title: 'Languages & Data Tooling',
+    icon: Code2,
+    summary: 'Implementation languages and data tooling used across modeling, services, and pipelines.',
+    proof: 'Kept only the languages and libraries that show up in shipped ML systems, research code, or scalable data work.',
+    core: [
+      { name: 'Python', icon: '/tech-icons/python.svg' },
+      { name: 'SQL', icon: '/tech-icons/postgresql.svg' },
+      { name: 'C++', icon: '/tech-icons/cplusplus.svg' },
+      { name: 'Go', icon: '/tech-icons/go.svg' },
+      { name: 'Pandas', icon: '/tech-icons/pandas.svg' },
+      { name: 'NumPy', icon: '/tech-icons/numpy.svg' },
+    ],
+    alsoUsed: [
+      { name: 'Scala', icon: '/tech-icons/scala.svg' },
+      { name: 'Node.js', icon: '/tech-icons/nodejs.svg' },
+      { name: 'Scikit-Learn', icon: '/tech-icons/scikitlearn.svg' },
+      { name: 'XGBoost', initials: 'XGB' },
+      { name: 'MongoDB', icon: '/tech-icons/mongodb.svg' },
+      { name: 'Airflow', icon: '/tech-icons/airflow.svg' },
+    ],
+    evidence: [
+      {
+        label: 'IBM Watson Cloud',
+        detail: 'Go concurrency for lower-latency batch prediction',
+      },
+      {
+        label: 'Model Pipelines',
+        detail: 'Python data workflows for training, evaluation, and monitoring',
+      },
+      {
+        label: 'DBaaS + Retrieval',
+        detail: 'SQL and service code across distributed data products',
+      },
     ],
   },
 ];
 
-const Skills = () => {
-  const [showAll, setShowAll] = useState(false);
-  const visibleCategories = showAll ? skillCategories : skillCategories.slice(0, 4);
+const TechIcon = ({ tech, size = 'md' }: { tech: Tech; size?: 'sm' | 'md' }) => {
+  const initials = techInitials(tech);
+  const [iconFailed, setIconFailed] = useState(false);
+  const isSmall = size === 'sm';
+  const iconSizeClass = isSmall ? 'h-4 w-4' : 'h-6 w-6';
+  const tileSizeClass = isSmall ? 'h-7 w-7 rounded-md' : 'h-9 w-9 rounded-lg';
+  const hasIcon = Boolean(tech.icon && !iconFailed);
 
   return (
-    <section id="skills" className="py-24 px-6 lg:px-12 relative">
+    <span
+      className={`relative flex flex-shrink-0 items-center justify-center border ${
+        hasIcon
+          ? `${tileSizeClass} border-white/10 bg-white shadow-sm`
+          : `${isSmall ? 'h-7 w-7 rounded-md' : 'h-9 w-9 rounded-lg'} border-border/60 bg-background/80`
+      }`}
+    >
+      {hasIcon ? (
+        <img
+          src={tech.icon}
+          aria-hidden="true"
+          alt=""
+          className={`${iconSizeClass} object-contain`}
+          loading="lazy"
+          onError={() => setIconFailed(true)}
+        />
+      ) : (
+        <span className={`${isSmall ? 'text-[9px]' : 'text-[10px]'} font-mono font-semibold text-primary`}>
+          {initials}
+        </span>
+      )}
+    </span>
+  );
+};
+
+const TechBadge = ({ tech, variant = 'core' }: { tech: Tech; variant?: 'core' | 'also' }) => (
+  <motion.span
+    className={`flex min-w-0 items-center gap-2 border transition-colors ${
+      variant === 'core'
+        ? 'min-h-[44px] rounded-lg border-border/60 bg-muted/30 px-3 py-2 text-sm text-foreground hover:border-primary/30'
+        : 'min-h-[34px] rounded-md border-border/40 bg-muted/20 px-2.5 py-1.5 text-xs text-muted-foreground hover:border-primary/20 hover:text-foreground'
+    }`}
+    whileHover={{ y: -2 }}
+  >
+    <TechIcon tech={tech} size={variant === 'also' ? 'sm' : 'md'} />
+    <span className="whitespace-nowrap">{tech.name}</span>
+  </motion.span>
+);
+
+const EvidenceItem = ({ item }: { item: SkillEvidence }) => {
+  const content = (
+    <>
+      <span className="block font-medium text-foreground transition-colors group-hover:text-primary">
+        {item.label}
+      </span>
+      <span className="block text-muted-foreground">{item.detail}</span>
+    </>
+  );
+
+  const className =
+    'group block border-l border-border/70 pl-3 text-xs leading-relaxed transition-colors hover:border-primary/60';
+
+  return item.href ? (
+    <a href={item.href} target="_blank" rel="noopener noreferrer" className={className}>
+      {content}
+    </a>
+  ) : (
+    <div className={className}>{content}</div>
+  );
+};
+
+const Skills = () => {
+  return (
+    <section id="skills" className="relative px-6 py-24 lg:px-12">
       <div className="absolute inset-0 chart-lines opacity-30" />
 
-      <div className="container mx-auto max-w-6xl relative">
-        {/* Section Header */}
+      <div className="relative mx-auto max-w-6xl">
         <motion.div
-          className="mb-16"
+          className="mb-14"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <span className="text-sm font-mono text-primary mb-2 block">04</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <span className="mb-2 block font-mono text-sm text-primary">04</span>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
             Technical Skills
           </h2>
-          <p className="text-muted-foreground max-w-lg">
-            Tools and technologies I use to build production ML systems
+          <p className="max-w-xl text-muted-foreground">
+            Core tools I use to build production ML systems, with supporting technologies tied to real projects.
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <AnimatePresence mode="sync">
-            {visibleCategories.map((category, categoryIndex) => {
-              const Icon = category.icon;
-              return (
-                <motion.div
-                  key={category.title}
-                  className="p-6 bg-card/50 rounded-xl border border-border/50 card-hover"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ delay: categoryIndex < 4 ? categoryIndex * 0.1 : (categoryIndex - 4) * 0.1 }}
-                >
-                  {/* Category Header */}
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                      <Icon size={20} className="text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {category.title}
-                    </h3>
-                  </div>
+        <div className="grid gap-5 lg:grid-cols-2">
+          {skillAreas.map((area, areaIndex) => {
+            const Icon = area.icon;
 
-                  {/* Skills */}
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, skillIndex) => (
-                      <motion.span
-                        key={skill}
-                        className="tag"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: (categoryIndex < 4 ? categoryIndex * 0.1 : (categoryIndex - 4) * 0.1) + skillIndex * 0.02 }}
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        {skill}
-                      </motion.span>
+            return (
+              <motion.article
+                key={area.title}
+                className="card-hover rounded-lg border border-border/50 bg-card/50 p-5"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: areaIndex * 0.08 }}
+              >
+                <div className="mb-5 flex items-start gap-3">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10">
+                    <Icon size={20} className="text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground">{area.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                      {area.summary}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mb-5 border-l border-primary/40 pl-3 text-sm leading-relaxed text-foreground/85">
+                  {area.proof}
+                </p>
+
+                <div>
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <span className="font-mono text-xs uppercase tracking-[0.16em] text-primary">
+                      Core
+                    </span>
+                    <span className="text-xs text-muted-foreground">primary working stack</span>
+                  </div>
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-2">
+                    {area.core.map((tech) => (
+                      <TechBadge key={tech.name} tech={tech} />
                     ))}
                   </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
+                </div>
 
-        {/* Show More Button */}
-        {skillCategories.length > 4 && (
-          <motion.div
-            className="flex justify-center mt-10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="flex items-center gap-2 px-5 py-2.5 font-mono text-sm text-muted-foreground border border-border/50 rounded-lg hover:border-primary/50 hover:text-primary transition-all"
-            >
-              {showAll ? 'Show Less' : `View ${skillCategories.length - 4} More Categories`}
-              <motion.span
-                animate={{ rotate: showAll ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <ChevronDown size={16} />
-              </motion.span>
-            </button>
-          </motion.div>
-        )}
+                <div className="mt-5">
+                  <span className="mb-3 block font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                    Also Used
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {area.alsoUsed.map((tech) => (
+                      <TechBadge key={tech.name} tech={tech} variant="also" />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-5 border-t border-border/40 pt-4">
+                  <span className="mb-3 block font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                    Used In
+                  </span>
+                  <div className="grid gap-2">
+                    {area.evidence.map((item) => (
+                      <EvidenceItem key={`${area.title}-${item.label}`} item={item} />
+                    ))}
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
