@@ -1,292 +1,484 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Calendar, ChevronDown, ExternalLink, TrendingUp } from 'lucide-react';
+import { Calendar, ChevronDown, ExternalLink, Layers3, MapPin, TrendingUp } from 'lucide-react';
+
+interface ImpactSignal {
+  area: string;
+  headline: string;
+  result: string;
+  tech: string[];
+}
 
 interface Experience {
+  id: string;
+  shortLabel: string;
   title: string;
   company: string;
   logo: string;
   website: string;
   location: string;
   period: string;
-  achievements: string[];
+  whyCare: string;
+  areas: string[];
+  metrics: { value: string; label: string }[];
+  impact: ImpactSignal[];
   featured: boolean;
   previewCount?: number;
-  metrics?: { value: string; label: string }[];
 }
+
+const summaryStats = [
+  { value: '4+', label: 'Years' },
+  { value: '150K+', label: 'Items/mo' },
+  { value: '95%', label: 'Automated' },
+  { value: 'sub-150ms', label: 'Retrieval p95' },
+];
 
 const experiences: Experience[] = [
   {
+    id: 'experience-connyct',
+    shortLabel: 'Connyct',
     title: 'AI Engineer Intern',
     company: 'Connyct Inc.',
     logo: '/connyct.jpeg',
     website: 'https://www.connyct.com',
     location: 'New York, NY',
     period: 'Nov 2025 - Jan 2026',
+    whyCare: 'Shows I can ship RAG as a product system: fast retrieval, tool routing, and measurable evaluation.',
+    areas: ['Agentic RAG', 'Hybrid Search', 'Evaluation'],
     metrics: [
-      { value: 'sub-150ms', label: 'p95 Retrieval Latency' },
+      { value: 'sub-150ms', label: 'p95 latency' },
       { value: '0.85', label: 'Recall@10' },
+      { value: '83%', label: 'tool correctness' },
     ],
-    achievements: [
-      'Engineered a production hybrid RAG pipeline on AWS Lambda for personalized events, combining Elasticsearch BM25, dense-vector retrieval, and relevance reranking to achieve 0.85 Recall@10 and sub-150ms p95 retrieval latency.',
-      'Implemented MCP tool servers for the LLM-orchestrated search system, integrating location-aware retrieval, profile-based scoring, and redis caching to improve relevance.',
-      'Built DeepEval-based evaluation workflows measuring 83% tool-call correctness and 95% answer completeness across retrieval relevance, context grounding, and response quality.',
-      'Designed event ingestion pipelines across 5+ sources with deterministic deduplication, LLM-based classification, rule-based fallbacks, and weighted embeddings for reliable retrieval.'
+    impact: [
+      {
+        area: 'Search Quality',
+        headline: 'Hybrid retrieval for personalized events',
+        result: 'Combined BM25, dense vectors, reranking, and Redis caching to reach 0.85 Recall@10 at sub-150ms p95.',
+        tech: ['Elasticsearch', 'Dense Retrieval', 'Redis', 'AWS Lambda'],
+      },
+      {
+        area: 'Quality',
+        headline: 'Evaluation harness for retrieval answers',
+        result: 'Built DeepEval workflows measuring 83% tool-call correctness and 95% answer completeness.',
+        tech: ['DeepEval', 'LangSmith', 'Grounding'],
+      },
+      {
+        area: 'LLM Systems',
+        headline: 'Tool-routed event search',
+        result: 'Implemented MCP tool servers for location-aware retrieval and profile-based scoring.',
+        tech: ['MCP', 'LLM Tools', 'RAG'],
+      },
     ],
     featured: false,
     previewCount: 2,
   },
   {
+    id: 'experience-prg',
+    shortLabel: 'PRG',
     title: 'Research Assistant',
     company: 'PRG Lab (PI: Cornelia Fermuller)',
     logo: '/prg-lab.png',
     website: 'https://prg.cs.umd.edu',
     location: 'College Park, Maryland',
     period: 'Jun 2025 - Aug 2025',
+    whyCare: 'Demonstrates research range across motion, audio, geometry, and multimodal generation.',
+    areas: ['Multimodal ML', 'Pose', 'Audio'],
     metrics: [
-      { value: '3', label: 'Modalities' },
-      { value: '30', label: 'FPS Pose Input' },
+      { value: '3', label: 'modalities' },
+      { value: '30', label: 'FPS pose input' },
     ],
-    achievements: [
-      'Developed a cross-modal generation pipeline converting performer pose sequences to violin audio using DDSP, Transformer encoders, and autoencoder-based MIDI synthesis, enabling audio generation directly from motion capture',
-      'Implemented calibrated multi-view reprojection of 3D pose data, validating extrinsic conventions to maintain metric and orientation consistency across views',
+    impact: [
+      {
+        area: 'Generation',
+        headline: 'Pose-to-audio modeling',
+        result: 'Converted performer pose sequences into violin audio using DDSP, Transformers, and MIDI synthesis.',
+        tech: ['DDSP', 'Transformers', 'MIDI'],
+      },
+      {
+        area: 'Geometry',
+        headline: 'Reliable multi-view pose data',
+        result: 'Validated calibrated reprojection and extrinsic conventions so downstream modeling used consistent 3D pose.',
+        tech: ['3D Pose', 'Calibration', 'Reprojection'],
+      },
     ],
     featured: false,
-    previewCount: 1,
+    previewCount: 2,
   },
   {
+    id: 'experience-entrupy',
+    shortLabel: 'Entrupy',
     title: 'Machine Learning Engineer II',
     company: 'Entrupy Inc.',
     logo: '/entrupy-icon.webp',
     website: 'https://www.entrupy.com',
     location: 'Bangalore, India',
     period: 'Aug 2021 - Aug 2024',
+    whyCare: 'Largest ownership: production CV and ML infrastructure with direct scale, automation, and business impact.',
+    areas: ['Computer Vision', 'Edge AI', 'MLOps', 'Search'],
     metrics: [
-      { value: '150K+', label: 'Luxury Items/mo' },
-      { value: '95%', label: 'Automation Rate' },
-      { value: '$1M+', label: 'Business Impact' },
+      { value: '150K+', label: 'items/mo' },
+      { value: '95%', label: 'automation' },
+      { value: '96%', label: 'TPR at 5% FPR' },
+      { value: '$1M+', label: 'impact' },
     ],
-    achievements: [
-      'Automated 95% of manual verification for 150K+ monthly luxury items by building a sneaker, box label, and size tag authentication pipeline leveraging SAM, Monocular Depth Estimation, LoFTR, and AutoEncoders, achieving 96% TPR at 5% FPR',
-      'Led R&D of a 3D document unwarping system using DenseNet with spatial attention mechanisms and synthetic data, outperforming SOTA benchmarks with a 23% increase in OCR accuracy and 0.84 SSIM for real-world documents',
-      'Deployed edge inference for real-time auto-capture on iOS by distilling SAM-HQ into a compact EfficientNet and applying FP16 quantization, achieving 10x model compression and 2x inference speedup through CoreML',
-      'Improved macro fingerprinting pipeline for luxury goods return fraud detection using patch embedding similarity, boosting TPR by 15% and reducing latency by 40% with Ray parallel processing',
-      'Reduced time-to-production for new models from weeks to days by designing synthetic data pipelines using Blender, Stable Diffusion and VLM-assisted annotation (LLaVA) to eliminate large-scale manual labeling',
-      'Reduced model drift response time from days to under 2 hours by designing automated monitoring with FP analysis, GradCAM interpretability checks, and DynamoDB-backed performance tracking, with Lambda and SQS triggers for real-time alerting',
-      'Built an end-to-end SKU identification pipeline using OCR on size tags and box labels, achieving 97% accuracy across 100K+ sneaker SKUs with template-based classification handling 50+ label variations',
-      'Implemented DINOv2-based similar image search with Pinecone vector indexing, enabling instant visual comparison across the authentication catalog',
-      'Reduced cloud infrastructure costs by 40% by implementing automated monitoring and alerts on DataCrunch to identify and shut down idle GPU resources across R&D training workloads',
-      'Architected auto-scaling ML serving infrastructure on AWS EKS and Ray Serve to process 150K+ monthly authentication requests, dynamically scaling inference pods based on CPU load and time-based policies with models versioned in S3',
-      'Built pose-estimation models for sneaker pre-alignment, increasing LoFTR+RANSAC inlier ratio by 18%',
+    impact: [
+      {
+        area: 'Product CV',
+        headline: 'Authentication automation at scale',
+        result: 'Automated 95% of manual review for 150K+ monthly luxury items, reaching 96% TPR at 5% FPR.',
+        tech: ['SAM', 'LoFTR', 'Depth', 'Autoencoders'],
+      },
+      {
+        area: 'Edge AI',
+        headline: 'Real-time iOS auto-capture',
+        result: 'Distilled and quantized segmentation models for 10x compression and 2x faster CoreML inference.',
+        tech: ['CoreML', 'EfficientNet', 'FP16'],
+      },
+      {
+        area: 'Document AI',
+        headline: 'Document unwarping for OCR',
+        result: 'Improved OCR accuracy by 23% with DenseNet, spatial attention, and synthetic data.',
+        tech: ['DenseNet', 'Attention', 'Synthetic Data'],
+      },
+      {
+        area: 'Fraud Detection',
+        headline: 'Faster visual fingerprinting',
+        result: 'Boosted return-fraud TPR by 15% while reducing latency by 40% using Ray-parallel similarity matching.',
+        tech: ['Ray', 'Embeddings', 'Similarity'],
+      },
+      {
+        area: 'Data Flywheel',
+        headline: 'Faster model production',
+        result: 'Reduced new-model delivery from weeks to days with Blender, Stable Diffusion, and VLM-assisted annotation.',
+        tech: ['Blender', 'Stable Diffusion', 'LLaVA'],
+      },
+      {
+        area: 'Monitoring',
+        headline: 'Model drift response',
+        result: 'Reduced drift response from days to under 2 hours with FP analysis, GradCAM checks, Lambda, and SQS.',
+        tech: ['GradCAM', 'Lambda', 'SQS'],
+      },
+      {
+        area: 'Visual Search',
+        headline: 'Instant catalog comparison',
+        result: 'Built DINOv2 + Pinecone similar-image search for authentication catalog review.',
+        tech: ['DINOv2', 'Pinecone', 'Vector Search'],
+      },
+      {
+        area: 'Serving',
+        headline: 'Autoscaling ML inference',
+        result: 'Architected EKS and Ray Serve infrastructure for 150K+ monthly authentication requests.',
+        tech: ['AWS EKS', 'Ray Serve', 'S3'],
+      },
     ],
     featured: true,
     previewCount: 4,
   },
   {
+    id: 'experience-ibm',
+    shortLabel: 'IBM',
     title: 'MLOps Intern',
     company: 'IBM',
     logo: '/ibm.webp',
     website: 'https://www.ibm.com',
     location: 'Bangalore, India',
     period: 'Jan 2021 - Jul 2021',
+    whyCare: 'Early production-inference experience in enterprise cloud deployment workflows.',
+    areas: ['MLOps', 'Inference', 'Kubernetes'],
     metrics: [
-      { value: '15ms', label: 'Latency Drop' },
+      { value: '15ms', label: 'latency drop' },
     ],
-    achievements: [
-      'Reduced inference latency by 15ms in IBM Watson Cloud deployments by optimizing batch prediction pipelines using Go concurrency and chunked downloads on Kubernetes',
-      'Evaluated performance trade-offs across TensorFlow, PyTorch and ONNX runtimes to drive the design of a new internal inference architecture for enterprise-scale deployments',
+    impact: [
+      {
+        area: 'Inference',
+        headline: 'Faster batch prediction',
+        result: 'Reduced Watson Cloud inference latency by 15ms using Go concurrency and chunked downloads on Kubernetes.',
+        tech: ['Go', 'Kubernetes', 'Batch Inference'],
+      },
+      {
+        area: 'Architecture',
+        headline: 'Runtime trade-off analysis',
+        result: 'Benchmarked TensorFlow, PyTorch, and ONNX to guide internal inference architecture decisions.',
+        tech: ['TensorFlow', 'PyTorch', 'ONNX'],
+      },
     ],
     featured: false,
-    previewCount: 1,
+    previewCount: 2,
   },
   {
+    id: 'experience-slk',
+    shortLabel: 'SLK',
     title: 'Software Engineering Intern',
     company: 'SLK Software',
     logo: '/slk.jpeg',
     website: 'https://slksoftware.com/',
     location: 'Bangalore, India',
     period: 'May 2020 - Jul 2020',
+    whyCare: 'Backend observability work that made distributed debugging faster and less manual.',
+    areas: ['Observability', 'Backend', 'Logs'],
     metrics: [
       { value: '10+', label: 'hrs/week saved' },
     ],
-    achievements: [
-      'Eliminated 10+ hours of weekly debugging time by building a centralized log aggregation system using ELK Stack, Filebeat, and Node.js across distributed components',
+    impact: [
+      {
+        area: 'Observability',
+        headline: 'Centralized log aggregation',
+        result: 'Saved 10+ debugging hours per week with ELK Stack, Filebeat, and Node.js log pipelines.',
+        tech: ['ELK Stack', 'Filebeat', 'Node.js'],
+      },
     ],
     featured: false,
     previewCount: 1,
   },
   {
+    id: 'experience-pathpartner',
+    shortLabel: 'PathPartner',
     title: 'Machine Learning Intern',
     company: 'PathPartner Technology',
     logo: '/pathpartner_logo.jpeg',
     website: 'https://www.linkedin.com/company/pathpartnertechnology',
     location: 'Bangalore, India',
     period: 'May 2019 - Jul 2019',
+    whyCare: 'First real-time CV system: precise perception under lighting and occlusion constraints.',
+    areas: ['Computer Vision', 'Driver Monitoring', 'Real-Time'],
     metrics: [
-      { value: '1.3px', label: 'Error Rate' },
+      { value: '1.3px', label: 'mean error' },
     ],
-    achievements: [
-      'Developed a real-time CNN-based gaze tracking system for driver drowsiness detection using transposed convolutions and Gaussian heatmap regression, achieving 1.3px mean error across diverse lighting and occlusion conditions',
+    impact: [
+      {
+        area: 'Real-Time CV',
+        headline: 'Driver gaze tracking',
+        result: 'Reached 1.3px mean error with CNN heatmap regression for drowsiness-detection gaze estimation.',
+        tech: ['CNNs', 'Heatmaps', 'Gaze Tracking'],
+      },
     ],
     featured: false,
     previewCount: 1,
   },
 ];
 
+const ImpactRow = ({ signal }: { signal: ImpactSignal }) => (
+  <motion.div
+    className="rounded-lg border border-border/45 bg-background/35 p-3"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <div>
+      <div>
+        <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
+          {signal.area}
+        </span>
+        <h4 className="mt-1 text-sm font-semibold text-foreground">{signal.headline}</h4>
+      </div>
+    </div>
+    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{signal.result}</p>
+    <div className="mt-2 hidden flex-wrap gap-1.5 sm:flex">
+      {signal.tech.slice(0, 4).map((tech) => (
+        <span key={tech} className="tag py-0.5 text-[10px]">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </motion.div>
+);
+
 const ExperienceCard = ({ exp, index }: { exp: Experience; index: number }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const previewCount = Math.min(exp.previewCount ?? 2, exp.achievements.length);
-  const hiddenCount = exp.achievements.length - previewCount;
-  const visibleAchievements = isExpanded ? exp.achievements : exp.achievements.slice(0, previewCount);
+  const previewCount = Math.min(exp.previewCount ?? 2, exp.impact.length);
+  const hiddenCount = exp.impact.length - previewCount;
+  const visibleImpact = isExpanded ? exp.impact : exp.impact.slice(0, previewCount);
   const hasMore = hiddenCount > 0;
 
   return (
-    <motion.div
-      className={`p-6 rounded-xl border transition-all duration-300 ${
+    <motion.article
+      id={exp.id}
+      className={`scroll-mt-36 rounded-lg border p-5 transition-all duration-300 ${
         exp.featured
-          ? 'bg-card border-primary/20 glow-primary'
-          : 'bg-card/50 border-border/50 hover:border-border'
+          ? 'border-primary/25 bg-card glow-primary'
+          : 'border-border/50 bg-card/50 hover:border-border'
       }`}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
+      transition={{ delay: index * 0.08 }}
     >
-      {/* Header */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-col gap-4 md:flex-row md:items-start">
         <motion.a
           href={exp.website}
           target="_blank"
           rel="noopener noreferrer"
-          className="relative flex-shrink-0 w-12 h-12 rounded-lg bg-muted/30 overflow-hidden group"
-          whileHover={{ scale: 1.05 }}
+          className="group relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg border border-border/50 bg-muted/30"
+          whileHover={{ scale: 1.04 }}
         >
           <img
             src={exp.logo}
             alt={`${exp.company} logo`}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span className="absolute inset-0 flex items-center justify-center bg-background/75 opacity-0 transition-opacity group-hover:opacity-100">
             <ExternalLink size={14} className="text-primary" />
-          </div>
+          </span>
         </motion.a>
 
-        <div className="flex-grow">
-          <div className="flex items-start justify-between">
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="text-lg font-semibold text-foreground">{exp.title}</h3>
+              </div>
               <a
                 href={exp.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base text-muted-foreground hover:text-primary transition-colors"
+                className="mt-1 inline-flex text-sm text-muted-foreground transition-colors hover:text-primary"
               >
                 {exp.company}
               </a>
             </div>
-            {exp.featured && (
-              <span className="px-2 py-0.5 text-xs font-mono bg-primary/10 text-primary rounded">
-                Featured
+
+            <div className="flex flex-wrap gap-3 text-sm text-muted-foreground lg:justify-end">
+              <span className="flex items-center gap-1">
+                <MapPin size={14} />
+                {exp.location}
               </span>
-            )}
+              <span className="flex items-center gap-1">
+                <Calendar size={14} />
+                {exp.period}
+              </span>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <MapPin size={14} />
-              {exp.location}
-            </span>
-            <span className="flex items-center gap-1">
-              <Calendar size={14} />
-              {exp.period}
-            </span>
+
+          <div className="mt-3 grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-start">
+            <div>
+              <p className="max-w-3xl text-sm leading-relaxed text-foreground/85">
+                {exp.whyCare}
+              </p>
+
+              <div className="mt-3 flex flex-wrap gap-2">
+                {exp.areas.map((area) => (
+                  <span
+                    key={area}
+                    className="inline-flex items-center gap-1.5 rounded-md border border-primary/15 bg-primary/5 px-2 py-1 font-mono text-[11px] text-primary"
+                  >
+                    <Layers3 size={11} />
+                    {area}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2 lg:max-w-[380px] lg:justify-end">
+              {exp.metrics.map((metric) => (
+                <span
+                  key={`${exp.company}-${metric.label}`}
+                  className="inline-flex items-center gap-1.5 rounded-md border border-primary/10 bg-primary/[0.03] px-2 py-1"
+                >
+                  <TrendingUp size={10} className="text-primary/80" />
+                  <span className="font-mono text-xs font-semibold text-primary">{metric.value}</span>
+                  <span className="text-[11px] text-muted-foreground">{metric.label}</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Metrics */}
-      {exp.metrics && exp.metrics.length > 0 && (
-        <div className="flex flex-wrap gap-3 mb-4">
-          {exp.metrics.map((metric, i) => (
-            <motion.div
-              key={i}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/5 border border-primary/20"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 + i * 0.1 }}
-            >
-              <TrendingUp size={12} className="text-primary" />
-              <span className="text-sm font-mono font-semibold text-primary">{metric.value}</span>
-              <span className="text-xs text-muted-foreground">{metric.label}</span>
-            </motion.div>
-          ))}
-        </div>
-      )}
-
-      {/* Achievements */}
-      <ul className="space-y-2">
+      <div className={`mt-4 grid gap-2.5 ${exp.featured ? 'lg:grid-cols-2' : ''}`}>
         <AnimatePresence mode="sync">
-          {visibleAchievements.map((achievement, i) => (
-            <motion.li
-              key={i}
-              className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: i * 0.03 }}
-            >
-              <span className="text-primary flex-shrink-0">•</span>
-              <span>{achievement}</span>
-            </motion.li>
+          {visibleImpact.map((signal) => (
+            <ImpactRow key={`${exp.company}-${signal.headline}`} signal={signal} />
           ))}
         </AnimatePresence>
-      </ul>
+      </div>
 
-      {/* Expand button */}
       {hasMore && (
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="mt-4 flex items-center gap-1 text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+          className="mt-4 flex items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-primary"
         >
-          {isExpanded ? 'Show less' : exp.featured ? `View full impact (+${hiddenCount})` : `Show ${hiddenCount} more`}
-          <motion.span
-            animate={{ rotate: isExpanded ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
+          {isExpanded
+            ? 'Show less'
+            : exp.featured
+              ? `Show ${hiddenCount} more impact signals`
+              : `Show ${hiddenCount} more`}
+          <motion.span animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
             <ChevronDown size={14} />
           </motion.span>
         </button>
       )}
-    </motion.div>
+    </motion.article>
   );
 };
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-24 px-6 lg:px-12 relative">
+    <section id="experience" className="relative px-6 py-24 lg:px-12">
       <div className="absolute inset-0 grid-overlay" />
 
-      <div className="container mx-auto max-w-4xl relative">
-        {/* Section Header */}
+      <div className="container relative mx-auto max-w-5xl">
         <motion.div
-          className="mb-16"
+          className="mb-10"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
         >
-          <span className="text-sm font-mono text-primary mb-2 block">02</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <span className="mb-2 block font-mono text-sm text-primary">02</span>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
             Work Experience
           </h2>
-          <p className="text-muted-foreground max-w-lg">
-            4+ years building production ML systems across Computer Vision, LLMs, and MLOps
+          <p className="max-w-xl text-muted-foreground">
+            Why each role matters, what area it maps to, and the measurable signal it produced.
           </p>
         </motion.div>
 
-        {/* Experience Cards */}
-        <div className="space-y-6">
+        <motion.div
+          className="mb-6 flex flex-wrap gap-2"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          {summaryStats.map((stat) => (
+            <span
+              key={stat.label}
+              className="inline-flex items-baseline gap-2 rounded-lg border border-border/50 bg-card/50 px-3 py-2"
+            >
+              <span className="font-mono text-lg font-semibold text-primary">{stat.value}</span>
+              <span className="text-xs text-muted-foreground">{stat.label}</span>
+            </span>
+          ))}
+        </motion.div>
+
+        <motion.nav
+          aria-label="Experience role index"
+          className="sticky top-16 z-20 mb-6 overflow-x-auto rounded-lg border border-border/50 bg-background/85 px-2 py-2 shadow-sm backdrop-blur md:top-20"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex min-w-max items-center">
+            {experiences.map((exp, index) => (
+              <div key={exp.id} className="flex items-center">
+                {index > 0 && (
+                  <span aria-hidden="true" className="mx-1 text-border/80">
+                    |
+                  </span>
+                )}
+                <a
+                  href={`#${exp.id}`}
+                  className="rounded-md px-2.5 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                >
+                  {exp.shortLabel}
+                </a>
+              </div>
+            ))}
+          </div>
+        </motion.nav>
+
+        <div className="space-y-4">
           {experiences.map((exp, index) => (
-            <ExperienceCard key={index} exp={exp} index={index} />
+            <ExperienceCard key={exp.company} exp={exp} index={index} />
           ))}
         </div>
       </div>
