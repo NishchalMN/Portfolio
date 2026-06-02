@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, TrendingUp, Activity, TrendingDown, Github, Linkedin, Mail } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -35,8 +35,11 @@ const TrendLine = () => (
   </svg>
 );
 
+const focusAreas = ['Computer Vision', 'LLMs & RAG', 'Multimodal AI', 'ML Systems'];
+
 const Hero = () => {
-  const [currentWord, setCurrentWord] = useState(0);
+  const [activeFocus, setActiveFocus] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -47,20 +50,21 @@ const Hero = () => {
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  const words = ['Multimodal LLMs', 'Computer Vision', 'Agentic RAG', 'MLOps'];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   const metrics = [
+    { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
     { value: '96%', label: 'TPR at 5% FPR', sub: 'Luxury Authentication at scale', icon: TrendingUp, color: 'primary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
     { value: '<150ms', label: 'p95 latency', sub: 'Hybrid Retrieval', icon: TrendingDown, color: 'secondary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
-    { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
   ];
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+
+    const interval = window.setInterval(() => {
+      setActiveFocus((current) => (current + 1) % focusAreas.length);
+    }, 2400);
+
+    return () => window.clearInterval(interval);
+  }, [shouldReduceMotion]);
 
   return (
     <section
@@ -138,28 +142,27 @@ const Hero = () => {
                 I build ML systems that can see, reason, and scale.
               </motion.p>
 
-              {/* Rotating specialization */}
               <motion.div
-                className="flex items-center gap-3 mb-5"
+                className="mb-5"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                <span className="text-sm font-mono text-muted-foreground">Focus:</span>
-                <div className="relative h-8 w-48">
-                  {words.map((word, index) => (
-                    <motion.span
-                      key={word}
-                      className="absolute left-0 top-0 text-lg font-semibold text-primary whitespace-nowrap"
-                      initial={false}
-                      animate={{
-                        opacity: currentWord === index ? 1 : 0,
-                        y: currentWord === index ? 0 : currentWord > index ? -20 : 20,
-                      }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground">
+                  Expertise
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {focusAreas.map((area, index) => (
+                    <span
+                      key={area}
+                      className={`rounded-md border px-2.5 py-1 font-mono text-sm ${
+                        index === activeFocus
+                          ? 'border-primary/35 bg-primary/10 text-primary'
+                          : 'border-border/60 bg-card/35 text-muted-foreground'
+                      } transition-colors duration-300`}
                     >
-                      {word}
-                    </motion.span>
+                      {area}
+                    </span>
                   ))}
                 </div>
               </motion.div>

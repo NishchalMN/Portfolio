@@ -43,7 +43,7 @@ const experiences: Experience[] = [
     website: 'https://www.connyct.com',
     location: 'New York, NY',
     period: 'Nov 2025 - Jan 2026',
-    whyCare: 'Shows I can ship RAG as a product system: fast retrieval, tool routing, and measurable evaluation.',
+    whyCare: 'Shipped a product-grade RAG system with low-latency retrieval, tool routing, and measurable evaluation.',
     areas: ['Agentic RAG', 'Hybrid Search', 'Evaluation'],
     metrics: [
       { value: 'sub-150ms', label: 'p95 latency' },
@@ -82,7 +82,7 @@ const experiences: Experience[] = [
     website: 'https://prg.cs.umd.edu',
     location: 'College Park, Maryland',
     period: 'Jun 2025 - Aug 2025',
-    whyCare: 'Demonstrates research range across motion, audio, geometry, and multimodal generation.',
+    whyCare: 'Built multimodal research pipelines spanning pose, audio generation, and multi-view geometry.',
     areas: ['Multimodal ML', 'Pose', 'Audio'],
     metrics: [
       { value: '3', label: 'modalities' },

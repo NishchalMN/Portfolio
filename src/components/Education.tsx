@@ -12,7 +12,7 @@ const education = [
     logo: '/umd.svg',
     website: 'https://www.umd.edu',
     details: [
-      'Specialization: Multimodal Models, Large Language Models, Computer Vision',
+      'Specialization: Multimodal Models, Large Language Models, Agentic RAG',
       'Relevant Coursework: Advanced ML, Multimodal Foundational Models, Computer Vision, Robotics, NLP, MLOps',
     ],
     featured: true,
@@ -73,9 +73,6 @@ const Education = () => {
                     <div className="mb-4 sm:mb-0">
                       <h3 className="text-2xl font-bold mb-2">
                         {edu.degree}
-                        {edu.featured && (
-                          <Badge className="ml-3 gradient-primary">Current</Badge>
-                        )}
                       </h3>
                       <div className="flex items-center gap-2 text-muted-foreground">
                         <GraduationCap size={16} />

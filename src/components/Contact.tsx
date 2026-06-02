@@ -34,7 +34,7 @@ const socialLinks = [
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 px-6 lg:px-12 relative">
+    <section id="contact" className="relative px-6 pb-20 pt-14 lg:px-12">
       <div className="absolute inset-0 dot-grid opacity-30" />
 
       <div className="container mx-auto max-w-4xl relative">
