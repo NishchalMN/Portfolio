@@ -33,7 +33,7 @@ const profileSignals: ProfileSignal[] = [
   {
     icon: ScanSearch,
     label: 'Evaluation-first AI',
-    title: 'Measure before you trust',
+    title: 'Measure before trust',
     detail: 'Retrieval metrics, DeepEval workflows, grounding checks, and monitoring.',
   },
   {
@@ -88,10 +88,8 @@ const About = () => {
                 I have worked across multiple waves of ML, with a focus on production constraints, careful evaluation, and measurable outcomes.
               </p>
               <p>
-                My work spans computer vision pipelines used on{' '}
-                <span className="font-semibold text-foreground">150K+ luxury items per month</span>,
-                edge inference, and hybrid retrieval systems running below{' '}
-                <span className="font-semibold text-foreground">150ms p95 latency</span>.
+                My work spans computer vision pipelines used on 150K+ luxury items per month,
+                edge inference, and hybrid retrieval systems running below 150ms p95 latency.
               </p>
               <p>
                 I am most interested in evaluation-driven AI: LLM agents, RAG, multimodal systems,

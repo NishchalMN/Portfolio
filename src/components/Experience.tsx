@@ -125,27 +125,27 @@ const experiences: Experience[] = [
     impact: [
       {
         area: 'Product CV',
-        headline: 'Authentication automation at scale',
-        result: 'Automated 95% of manual review for 150K+ monthly luxury items, reaching 96% TPR at 5% FPR.',
+        headline: 'Luxury authentication at scale',
+        result: 'Automated 95% of manual review for 150K+ monthly luxury items using multi-stage vision pipelines, reaching 96% TPR at 5% FPR.',
         tech: ['SAM', 'LoFTR', 'Depth', 'Autoencoders'],
       },
       {
         area: 'Edge AI',
         headline: 'Real-time iOS auto-capture',
-        result: 'Distilled and quantized segmentation models for 10x compression and 2x faster CoreML inference.',
+        result: 'Distilled and quantized segmentation models for 10x compression and double faster CoreML inference.',
         tech: ['CoreML', 'EfficientNet', 'FP16'],
       },
       {
         area: 'Document AI',
         headline: 'Document unwarping for OCR',
-        result: 'Improved OCR accuracy by 23% with DenseNet, spatial attention, and synthetic data.',
+        result: 'Led R&D efforts to improve OCR accuracy by 23% through 3D document unwarping using synthetic data.',
         tech: ['DenseNet', 'Attention', 'Synthetic Data'],
       },
       {
-        area: 'Fraud Detection',
-        headline: 'Faster visual fingerprinting',
-        result: 'Boosted return-fraud TPR by 15% while reducing latency by 40% using Ray-parallel similarity matching.',
-        tech: ['Ray', 'Embeddings', 'Similarity'],
+        area: 'Monitoring',
+        headline: 'Model drift response',
+        result: 'Reduced drift response from days to under 2 hours with FP analysis, GradCAM checks, Lambda, and SQS.',
+        tech: ['GradCAM', 'Lambda', 'SQS'],
       },
       {
         area: 'Data Flywheel',
@@ -154,10 +154,10 @@ const experiences: Experience[] = [
         tech: ['Blender', 'Stable Diffusion', 'LLaVA'],
       },
       {
-        area: 'Monitoring',
-        headline: 'Model drift response',
-        result: 'Reduced drift response from days to under 2 hours with FP analysis, GradCAM checks, Lambda, and SQS.',
-        tech: ['GradCAM', 'Lambda', 'SQS'],
+        area: 'Fraud Detection',
+        headline: 'Faster visual fingerprinting',
+        result: 'Boosted return-fraud TPR by 15% while reducing latency by 40% using Ray-parallel similarity matching.',
+        tech: ['Ray', 'Embeddings', 'Similarity'],
       },
       {
         area: 'Visual Search',
