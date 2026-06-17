@@ -27,8 +27,7 @@ interface Experience {
 }
 
 const summaryStats = [
-  { value: '4+', label: 'Years' },
-  { value: '150K+', label: 'Items/mo' },
+  { value: '5', label: 'Years' },
   { value: '95%', label: 'Automated' },
   { value: 'sub-150ms', label: 'Retrieval p95' },
 ];
@@ -81,7 +80,7 @@ const experiences: Experience[] = [
     logo: '/prg-lab.png',
     website: 'https://prg.cs.umd.edu',
     location: 'College Park, MD',
-    period: 'Jun 2025 - Aug 2025',
+    period: 'May 2025 - Oct 2025',
     whyCare: 'Research work linking monocular 3D pose understanding with pitch-accurate audio reconstruction.',
     areas: ['Multimodal ML', '3D Pose', 'Audio'],
     metrics: [
@@ -214,7 +213,7 @@ const experiences: Experience[] = [
     logo: '/slk.jpeg',
     website: 'https://slksoftware.com/',
     location: 'Bangalore, India',
-    period: 'May 2020 - Jul 2020',
+    period: 'May 2020 - Aug 2020',
     whyCare: 'Backend observability work that made distributed debugging faster and less manual.',
     areas: ['Observability', 'Backend', 'Logs'],
     metrics: [
@@ -239,7 +238,7 @@ const experiences: Experience[] = [
     logo: '/pathpartner_logo.jpeg',
     website: 'https://www.linkedin.com/company/pathpartnertechnology',
     location: 'Bangalore, India',
-    period: 'May 2019 - Jul 2019',
+    period: 'May 2019 - Aug 2019',
     whyCare: 'First real-time CV system: precise perception under lighting and occlusion constraints.',
     areas: ['Computer Vision', 'Driver Monitoring', 'Real-Time'],
     metrics: [

@@ -51,7 +51,7 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const metrics = [
-    { value: '4+', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
+    { value: '5', label: 'Years', sub: 'Industry Experience', icon: Activity, color: 'accent', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
     { value: '96%', label: 'TPR at 5% FPR', sub: 'Luxury Authentication at scale', icon: TrendingUp, color: 'primary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
     { value: '<150ms', label: 'p95 latency', sub: 'Hybrid Retrieval', icon: TrendingDown, color: 'secondary', chartValues: [40, 65, 45, 80, 55, 90, 70, 95, 85, 100] },
   ];
