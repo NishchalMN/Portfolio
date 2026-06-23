@@ -7,10 +7,12 @@ import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 import SectionReveal from '@/components/SectionReveal';
+import SiteBackground from '@/components/backgrounds/SiteBackground';
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <SiteBackground />
       <Navbar />
       <Hero />
       <SectionReveal><About /></SectionReveal>

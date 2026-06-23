@@ -72,9 +72,6 @@ const Hero = () => {
       ref={containerRef}
       className="relative min-h-screen flex items-center overflow-hidden pt-28 md:pt-24 pb-16"
     >
-      {/* Dot grid background */}
-      <div className="absolute inset-0 dot-grid" />
-
       {/* Subtle gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
 
