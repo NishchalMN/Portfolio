@@ -8,8 +8,11 @@ import Skills from '@/components/Skills';
 import Contact from '@/components/Contact';
 import SectionReveal from '@/components/SectionReveal';
 import SiteBackground from '@/components/backgrounds/SiteBackground';
+import { useMediaPreload } from '@/hooks/use-media-preload';
 
 const Index = () => {
+  useMediaPreload();
+
   return (
     <div className="min-h-screen">
       <SiteBackground />

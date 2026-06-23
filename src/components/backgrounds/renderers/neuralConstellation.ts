@@ -294,4 +294,22 @@ function frame(f: FXFrame, state: State): void {
   }
 }
 
-export const neuralConstellation: FXRenderer<State> = { setup, frame };
+/**
+ * Adapt the existing scene to a new canvas size without re-randomizing it.
+ * Node positions are scaled proportionally (and clamped), so a resize — e.g.
+ * the mobile address bar collapsing on scroll — shifts the mesh smoothly
+ * instead of snapping to a fresh layout. Only a full rebuild happens when the
+ * mobile/desktop breakpoint is crossed (the node-count target changes there).
+ */
+function resize(dims: FXDims, state: State, prev: FXDims): State {
+  if (prev.w < 768 !== dims.w < 768) return setup(dims);
+  const sx = prev.w > 0 ? dims.w / prev.w : 1;
+  const sy = prev.h > 0 ? dims.h / prev.h : 1;
+  for (const node of state.nodes) {
+    node.x = clamp(node.x * sx, 0, dims.w);
+    node.y = clamp(node.y * sy, 0, dims.h);
+  }
+  return state;
+}
+
+export const neuralConstellation: FXRenderer<State> = { setup, frame, resize };

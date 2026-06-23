@@ -38,6 +38,13 @@ export interface FXFrame {
 export interface FXRenderer<S = unknown> {
   setup: (dims: FXDims) => S;
   frame: (f: FXFrame, state: S) => void;
+  /**
+   * Optional: adapt existing state to new dimensions WITHOUT rebuilding it,
+   * so the effect stays continuous across resizes (e.g. the mobile address
+   * bar showing/hiding on scroll). Receives the previous dims. If omitted,
+   * the harness falls back to `setup` (a full rebuild).
+   */
+  resize?: (dims: FXDims, state: S, prev: FXDims) => S;
 }
 
 /** Brand palette resolved from CSS custom properties (HSL triplets). */

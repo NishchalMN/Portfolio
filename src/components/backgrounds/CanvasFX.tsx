@@ -47,17 +47,27 @@ function CanvasFX<S>({ renderer, className }: CanvasFXProps<S>) {
 
     const resize = () => {
       const rect = parent.getBoundingClientRect();
+      const prev: FXDims = { ...dims };
       dims.w = Math.max(1, Math.round(rect.width));
       dims.h = Math.max(1, Math.round(rect.height));
       dims.dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (dims.w === prev.w && dims.h === prev.h && dims.dpr === prev.dpr) return;
       canvas.width = Math.round(dims.w * dims.dpr);
       canvas.height = Math.round(dims.h * dims.dpr);
       canvas.style.width = `${dims.w}px`;
       canvas.style.height = `${dims.h}px`;
       ctx.setTransform(dims.dpr, 0, 0, dims.dpr, 0, 0);
-      // Rebuild state for the new size, then redraw a frame so a paused/reduced
-      // canvas never shows a stale or empty buffer.
-      state = rendererRef.current.setup(dims);
+      // Adapt state to the new size. On the first real measurement (prev was
+      // zero-size) there is nothing to adapt, so build fresh. Otherwise prefer
+      // the renderer's non-destructive resize so the effect stays continuous
+      // (mobile address-bar show/hide must NOT reshuffle the scene).
+      const renderer = rendererRef.current;
+      if (prev.w <= 1 || prev.h <= 1 || !renderer.resize) {
+        state = renderer.setup(dims);
+      } else {
+        state = renderer.resize(dims, state, prev);
+      }
+      // Redraw immediately so a paused/reduced canvas never shows a stale buffer.
       drawOnce(lastTs || performance.now());
     };
 
