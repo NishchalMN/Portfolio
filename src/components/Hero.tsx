@@ -35,7 +35,7 @@ const TrendLine = () => (
   </svg>
 );
 
-const focusAreas = ['Computer Vision', 'LLMs & RAG', 'Multimodal AI', 'ML Systems'];
+const focusAreas = ['Computer Vision', 'Multimodal AI', 'LLMs & RAG', 'ML Systems'];
 
 const Hero = () => {
   const [activeFocus, setActiveFocus] = useState(0);
